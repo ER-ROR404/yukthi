@@ -1,46 +1,58 @@
 {
+  "training_performance": {
+    "accuracy_pct": 93.56,
+    "mae": 8.4138,
+    "rmse": 11.8434,
+    "r2": 0.8547
+  },
   "canonical_cv": {
     "n_splits": 5,
-    "mean_mae": 9.89,
-    "mean_rmse": 14.1387,
-    "mean_r2": 0.7735,
+    "mean_accuracy_pct": 92.47,
+    "mean_mae": 9.8877,
+    "mean_rmse": 14.1368,
+    "mean_r2": 0.7734,
     "per_fold": [
       {
         "fold": 1,
-        "mae": 9.5922,
-        "rmse": 14.8186,
-        "r2": 0.7215,
+        "accuracy_pct": 92.51,
+        "mae": 9.6216,
+        "rmse": 14.8642,
+        "r2": 0.7198,
         "train_size": 4169,
         "val_size": 4165
       },
       {
         "fold": 2,
-        "mae": 9.8704,
-        "rmse": 13.6947,
-        "r2": 0.799,
+        "accuracy_pct": 92.45,
+        "mae": 9.8649,
+        "rmse": 13.6543,
+        "r2": 0.8002,
         "train_size": 8334,
         "val_size": 4165
       },
       {
         "fold": 3,
-        "mae": 12.9364,
-        "rmse": 18.2666,
+        "accuracy_pct": 90.27,
+        "mae": 12.9337,
+        "rmse": 18.2654,
         "r2": 0.6488,
         "train_size": 12499,
         "val_size": 4165
       },
       {
         "fold": 4,
-        "mae": 7.4639,
-        "rmse": 10.1647,
-        "r2": 0.9125,
+        "accuracy_pct": 94.52,
+        "mae": 7.4687,
+        "rmse": 10.1505,
+        "r2": 0.9128,
         "train_size": 16664,
         "val_size": 4165
       },
       {
         "fold": 5,
-        "mae": 9.5872,
-        "rmse": 13.7489,
+        "accuracy_pct": 92.58,
+        "mae": 9.5498,
+        "rmse": 13.7494,
         "r2": 0.7856,
         "train_size": 20829,
         "val_size": 4165
@@ -49,21 +61,24 @@
   },
   "per_equipment": {
     "CHILLER-01": {
-      "mae": 9.5879,
-      "rmse": 14.8142,
-      "r2": 0.7213,
+      "accuracy_pct": 92.52,
+      "mae": 9.617,
+      "rmse": 14.8592,
+      "r2": 0.7196,
       "samples": 4164
     },
     "CHILLER-02": {
-      "mae": 11.4085,
-      "rmse": 16.1434,
-      "r2": 0.7235,
+      "accuracy_pct": 91.35,
+      "mae": 11.4044,
+      "rmse": 16.1258,
+      "r2": 0.7241,
       "samples": 8340
     },
     "CHILLER-03": {
-      "mae": 8.5193,
-      "rmse": 12.0876,
-      "r2": 0.8605,
+      "accuracy_pct": 93.58,
+      "mae": 8.5031,
+      "rmse": 12.0821,
+      "r2": 0.8606,
       "samples": 8321
     }
   }

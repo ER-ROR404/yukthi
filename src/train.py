@@ -41,6 +41,7 @@ class FoldMetrics:
     mae: float
     rmse: float
     r2: float
+    accuracy: float
     train_size: int
     val_size: int
 
@@ -53,6 +54,7 @@ class EquipmentMetrics:
     mae: float
     rmse: float
     r2: float
+    accuracy: float
     sample_count: int
 
 
@@ -66,30 +68,35 @@ class TrainResult:
     mean_mae: float
     mean_rmse: float
     mean_r2: float
+    mean_accuracy: float
+    train_mae: float
+    train_rmse: float
+    train_r2: float
+    train_accuracy: float
     feature_importances: dict[str, float]
     best_iteration: int
 
     def summary(self) -> str:
-        """Return human-readable training summary."""
+        """Return human-readable training summary with explicit accuracy."""
         lines = [
             "=== Training Summary ===",
             f"CV Folds: {len(self.fold_metrics)}",
-            f"Mean MAE:  {self.mean_mae:.4f} kWh",
+            f"Training Accuracy:   {self.train_accuracy:.2f}% (100 - WAPE) | R²: {self.train_r2:.4f} | MAE: {self.train_mae:.2f} kWh",
+            f"Validation Accuracy: {self.mean_accuracy:.2f}% (100 - WAPE) | R²: {self.mean_r2:.4f} | MAE: {self.mean_mae:.2f} kWh",
             f"Mean RMSE: {self.mean_rmse:.4f} kWh",
-            f"Mean R²:   {self.mean_r2:.4f}",
             f"Best Iteration: {self.best_iteration}",
             "",
-            "Per-Fold Metrics:",
+            "Per-Fold Metrics (Chronological Validation):",
         ]
         for fm in self.fold_metrics:
             lines.append(
-                f"  Fold {fm.fold}: MAE={fm.mae:.4f}, RMSE={fm.rmse:.4f}, R²={fm.r2:.4f} (train={fm.train_size}, val={fm.val_size})"
+                f"  Fold {fm.fold}: Accuracy={fm.accuracy:.2f}%, MAE={fm.mae:.4f} kWh, RMSE={fm.rmse:.4f} kWh, R²={fm.r2:.4f} (train={fm.train_size}, val={fm.val_size})"
             )
         lines.append("")
         lines.append("Per-Equipment OOF Validation:")
         for em in self.equipment_metrics:
             lines.append(
-                f"  {em.equipment_id}: MAE={em.mae:.4f}, RMSE={em.rmse:.4f}, R²={em.r2:.4f} (n={em.sample_count})"
+                f"  {em.equipment_id}: Accuracy={em.accuracy:.2f}%, MAE={em.mae:.4f} kWh, RMSE={em.rmse:.4f} kWh, R²={em.r2:.4f} (n={em.sample_count})"
             )
         lines.append("")
         lines.append("Top 5 Feature Importances:")
@@ -136,15 +143,19 @@ def _evaluate_fold(
     train_size: int,
     val_size: int,
 ) -> FoldMetrics:
-    """Compute MAE, RMSE, R² for a single fold."""
+    """Compute MAE, RMSE, R², Accuracy (100 - WAPE) for a single fold."""
     mae = float(mean_absolute_error(y_true, y_pred))
     rmse = float(np.sqrt(mean_squared_error(y_true, y_pred)))
     r2 = float(r2_score(y_true, y_pred))
+    sum_y = float(np.sum(y_true))
+    wape = (float(np.sum(np.abs(y_true - y_pred))) / (sum_y if sum_y > 0 else 1.0)) * 100.0
+    accuracy = round(max(0.0, 100.0 - wape), 2)
     return FoldMetrics(
         fold=fold_idx,
         mae=mae,
         rmse=rmse,
         r2=r2,
+        accuracy=accuracy,
         train_size=train_size,
         val_size=val_size,
     )
@@ -198,8 +209,8 @@ def cross_validate(
         oof_records.append(oof_chunk)
 
         logger.info(
-            "Fold %d — MAE=%.4f, RMSE=%.4f, R²=%.4f",
-            fold_idx + 1, metrics.mae, metrics.rmse, metrics.r2,
+            "Fold %d — Accuracy=%.2f%%, MAE=%.4f, RMSE=%.4f, R²=%.4f",
+            fold_idx + 1, metrics.accuracy, metrics.mae, metrics.rmse, metrics.r2,
         )
 
     # Per-equipment evaluation across all out-of-fold validation sets
@@ -209,17 +220,21 @@ def cross_validate(
         eq_mae = float(mean_absolute_error(group["actual"], group["predicted"]))
         eq_rmse = float(np.sqrt(mean_squared_error(group["actual"], group["predicted"])))
         eq_r2 = float(r2_score(group["actual"], group["predicted"]))
+        sum_act = float(np.sum(group["actual"]))
+        eq_wape = (float(np.sum(np.abs(group["actual"] - group["predicted"]))) / (sum_act if sum_act > 0 else 1.0)) * 100.0
+        eq_acc = round(max(0.0, 100.0 - eq_wape), 2)
         eq_res = EquipmentMetrics(
             equipment_id=str(eq_id),
             mae=eq_mae,
             rmse=eq_rmse,
             r2=eq_r2,
+            accuracy=eq_acc,
             sample_count=len(group),
         )
         equipment_metrics.append(eq_res)
         logger.info(
-            "Equipment %s OOF — MAE=%.4f, RMSE=%.4f, R²=%.4f (n=%d)",
-            eq_id, eq_mae, eq_rmse, eq_r2, len(group),
+            "Equipment %s OOF — Accuracy=%.2f%%, MAE=%.4f, RMSE=%.4f, R²=%.4f (n=%d)",
+            eq_id, eq_acc, eq_mae, eq_rmse, eq_r2, len(group),
         )
 
     return fold_results, equipment_metrics
@@ -264,10 +279,11 @@ def train_model(
     mean_mae = float(np.mean([fm.mae for fm in fold_metrics]))
     mean_rmse = float(np.mean([fm.rmse for fm in fold_metrics]))
     mean_r2 = float(np.mean([fm.r2 for fm in fold_metrics]))
+    mean_accuracy = round(float(np.mean([fm.accuracy for fm in fold_metrics])), 2)
 
     logger.info(
-        "CV Summary — Mean MAE=%.4f, RMSE=%.4f, R²=%.4f",
-        mean_mae, mean_rmse, mean_r2,
+        "CV Summary — Validation Accuracy=%.2f%%, Mean MAE=%.4f, RMSE=%.4f, R²=%.4f",
+        mean_accuracy, mean_mae, mean_rmse, mean_r2,
     )
 
     # Save Operating Envelope computed strictly from the first 80% chronological split (train only)
@@ -287,6 +303,15 @@ def train_model(
     final_model.fit(full_pool, verbose=100)
 
     best_iteration = final_model.get_best_iteration() or CATBOOST_ITERATIONS
+
+    # Training set performance on full fit
+    train_preds = final_model.predict(x_full)
+    train_mae = float(mean_absolute_error(y_full, train_preds))
+    train_rmse = float(np.sqrt(mean_squared_error(y_full, train_preds)))
+    train_r2 = float(r2_score(y_full, train_preds))
+    sum_full = float(np.sum(y_full))
+    train_wape = (float(np.sum(np.abs(y_full - train_preds))) / (sum_full if sum_full > 0 else 1.0)) * 100.0
+    train_accuracy = round(max(0.0, 100.0 - train_wape), 2)
 
     # Feature importances
     importance_values = final_model.get_feature_importance()
@@ -315,14 +340,22 @@ def train_model(
     # Save Model Metrics
     metrics_path = model_output_path.parent / "model_metrics.json"
     metrics_payload = {
+        "training_performance": {
+            "accuracy_pct": train_accuracy,
+            "mae": round(train_mae, 4),
+            "rmse": round(train_rmse, 4),
+            "r2": round(train_r2, 4),
+        },
         "canonical_cv": {
             "n_splits": len(fold_metrics),
+            "mean_accuracy_pct": mean_accuracy,
             "mean_mae": round(mean_mae, 4),
             "mean_rmse": round(mean_rmse, 4),
             "mean_r2": round(mean_r2, 4),
             "per_fold": [
                 {
                     "fold": fm.fold,
+                    "accuracy_pct": fm.accuracy,
                     "mae": round(fm.mae, 4),
                     "rmse": round(fm.rmse, 4),
                     "r2": round(fm.r2, 4),
@@ -334,6 +367,7 @@ def train_model(
         },
         "per_equipment": {
             em.equipment_id: {
+                "accuracy_pct": em.accuracy,
                 "mae": round(em.mae, 4),
                 "rmse": round(em.rmse, 4),
                 "r2": round(em.r2, 4),
@@ -360,6 +394,8 @@ def train_model(
         "cv_splits": CV_SPLITS,
         "training_rows": len(df),
         "target_col": target_col,
+        "training_accuracy_pct": train_accuracy,
+        "validation_accuracy_pct": mean_accuracy,
     }
     with open(metadata_path, "w", encoding="utf-8") as f:
         json.dump(metadata_payload, f, indent=2)
@@ -372,6 +408,11 @@ def train_model(
         mean_mae=mean_mae,
         mean_rmse=mean_rmse,
         mean_r2=mean_r2,
+        mean_accuracy=mean_accuracy,
+        train_mae=train_mae,
+        train_rmse=train_rmse,
+        train_r2=train_r2,
+        train_accuracy=train_accuracy,
         feature_importances=feature_importances,
         best_iteration=best_iteration,
     )

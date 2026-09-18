@@ -1,7 +1,7 @@
 {
   "model_type": "CatBoostRegressor",
   "model_version": "1.0.0",
-  "trained_at_utc": "2026-09-18T22:54:26.349029+00:00",
+  "trained_at_utc": "2026-09-18T23:14:10.637984+00:00",
   "random_seed": 42,
   "iterations": 1500,
   "depth": 4,
@@ -9,5 +9,7 @@
   "l2_leaf_reg": 4.8153,
   "cv_splits": 5,
   "training_rows": 24994,
-  "target_col": "Chiller Energy Consumption (kWh)"
+  "target_col": "Chiller Energy Consumption (kWh)",
+  "training_accuracy_pct": 93.56,
+  "validation_accuracy_pct": 92.47
 }

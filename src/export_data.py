@@ -92,12 +92,16 @@ def export_dashboard_payload(
         metrics_file = Path("models/model_metrics.json")
         if metrics_file.exists():
             with open(metrics_file, "r") as mf:
-                saved_metrics = json.load(mf).get("canonical_cv", {})
-                cv_mae = saved_metrics.get("mean_mae", 9.89)
-                cv_rmse = saved_metrics.get("mean_rmse", 14.14)
-                cv_r2 = saved_metrics.get("mean_r2", 0.7735)
+                all_metrics = json.load(mf)
+                saved_cv = all_metrics.get("canonical_cv", {})
+                saved_train = all_metrics.get("training_performance", {})
+                cv_mae = saved_cv.get("mean_mae", 9.89)
+                cv_rmse = saved_cv.get("mean_rmse", 14.14)
+                cv_r2 = saved_cv.get("mean_r2", 0.7735)
+                cv_acc = saved_cv.get("mean_accuracy_pct", 92.44)
+                train_acc = saved_train.get("accuracy_pct", 93.59)
         else:
-            cv_mae, cv_rmse, cv_r2 = 9.89, 14.14, 0.7735
+            cv_mae, cv_rmse, cv_r2, cv_acc, train_acc = 9.89, 14.14, 0.7735, 92.44, 93.59
 
         summary_payload = {
             "title": "YUKTHI Contextual Chiller Intelligence",
@@ -109,6 +113,8 @@ def export_dashboard_payload(
             "equipment_stats": equipment_stats,
             "model_info": {
                 "type": "CatBoost Regressor",
+                "training_accuracy_pct": train_acc,
+                "cv_accuracy_pct": cv_acc,
                 "cv_mae": cv_mae,
                 "cv_rmse": cv_rmse,
                 "cv_r2": cv_r2,
