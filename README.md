@@ -61,13 +61,29 @@ print(result.summary())
 "
 ```
 
-### 4. Run Dashboard
+### 4. Run Modern Nuxt 3 Cockpit (Recommended)
+
+```bash
+cd frontend
+npm install
+npm run dev
+# Open http://localhost:3000 in your browser
+```
+
+Production build & preview:
+```bash
+cd frontend
+npm run build
+node .output/server/index.mjs
+```
+
+### 5. Run Streamlit Dashboard (Alternative)
 
 ```bash
 streamlit run app/dashboard.py
 ```
 
-### 5. Run Tests
+### 6. Run Tests
 
 ```bash
 pytest tests/ -v
