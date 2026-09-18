@@ -1,0 +1,75 @@
+{
+  "title": "YUKTHI Chiller Intelligence",
+  "total_records": 24994,
+  "total_anomalies": 4066,
+  "anomaly_rate_pct": 16.27,
+  "total_events": 3509,
+  "equipments": [
+    "CHILLER-01",
+    "CHILLER-02",
+    "CHILLER-03"
+  ],
+  "equipment_stats": {
+    "CHILLER-01": {
+      "total_records": 8333,
+      "date_start": "2019-08-18 00:00:00",
+      "date_end": "2020-06-01 13:00:00",
+      "avg_actual_kwh": 127.84,
+      "avg_expected_kwh": 127.85,
+      "avg_residual_kwh": -0.01,
+      "max_residual_kwh": 62.0,
+      "anomaly_count": 1396,
+      "anomaly_rate_pct": 16.75,
+      "event_count": 1187,
+      "avg_cop_approx": 14.3
+    },
+    "CHILLER-02": {
+      "total_records": 8340,
+      "date_start": "2019-09-28 17:30:00",
+      "date_end": "2020-06-01 13:00:00",
+      "avg_actual_kwh": 131.82,
+      "avg_expected_kwh": 130.98,
+      "avg_residual_kwh": 0.84,
+      "max_residual_kwh": 62.51,
+      "anomaly_count": 1344,
+      "anomaly_rate_pct": 16.12,
+      "event_count": 1169,
+      "avg_cop_approx": 13.84
+    },
+    "CHILLER-03": {
+      "total_records": 8321,
+      "date_start": "2019-08-18 00:00:00",
+      "date_end": "2020-06-01 13:00:00",
+      "avg_actual_kwh": 132.53,
+      "avg_expected_kwh": 132.56,
+      "avg_residual_kwh": -0.04,
+      "max_residual_kwh": 157.25,
+      "anomaly_count": 1326,
+      "anomaly_rate_pct": 15.94,
+      "event_count": 1153,
+      "avg_cop_approx": 14.04
+    }
+  },
+  "model_info": {
+    "type": "CatBoost Regressor",
+    "cv_mae": 9.92,
+    "cv_rmse": 14.27,
+    "cv_r2": 0.771,
+    "features": [
+      "equipment_id",
+      "Chilled Water Rate (L/sec)",
+      "Cooling Water Temperature (C)",
+      "Building Load (RT)",
+      "Outside Temperature (F)",
+      "Dew Point (F)",
+      "Humidity (%)",
+      "Wind Speed (mph)",
+      "Pressure (in)",
+      "hour_of_day",
+      "day_of_week",
+      "is_weekend",
+      "is_night",
+      "wet_bulb_temp_c"
+    ]
+  }
+}
