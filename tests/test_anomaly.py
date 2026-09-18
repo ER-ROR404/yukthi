@@ -5,15 +5,16 @@ import pytest
 
 from src.constants import (
     COL_ANOMALY_FLAG,
+    COL_ANOMALY_SCORE,
     COL_ENERGY,
     COL_EQUIPMENT_ID,
     COL_EVENT_ID,
     COL_EXPECTED_ENERGY,
     COL_RESIDUAL,
-    COL_ROLLING_MEAN_RESIDUAL,
-    COL_ROLLING_STD_RESIDUAL,
+    COL_ROLLING_MEDIAN_RESIDUAL,
+    COL_ROLLING_MAD_RESIDUAL,
+    COL_ROBUST_SCORE,
     COL_TIMESTAMP,
-    COL_Z_SCORE,
 )
 from src.anomaly import score_anomalies
 
@@ -73,9 +74,10 @@ def test_when_scored_expect_all_output_columns_present() -> None:
     result, _ = score_anomalies(df)
 
     expected_cols = [
-        COL_ROLLING_MEAN_RESIDUAL,
-        COL_ROLLING_STD_RESIDUAL,
-        COL_Z_SCORE,
+        COL_ROLLING_MEDIAN_RESIDUAL,
+        COL_ROLLING_MAD_RESIDUAL,
+        COL_ROBUST_SCORE,
+        COL_ANOMALY_SCORE,
         COL_ANOMALY_FLAG,
         COL_EVENT_ID,
     ]

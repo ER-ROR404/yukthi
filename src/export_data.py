@@ -20,8 +20,8 @@ from src.constants import (
     COL_HUMIDITY,
     COL_OUTSIDE_TEMP,
     COL_RESIDUAL,
+    COL_ROBUST_SCORE,
     COL_TIMESTAMP,
-    COL_Z_SCORE,
     FEATURE_COLS,
     FEAT_WET_BULB,
 )
@@ -113,7 +113,7 @@ def export_dashboard_payload(
             "duration_minutes": e.duration_minutes,
             "max_residual": round(e.max_residual, 2),
             "mean_residual": round(e.mean_residual, 2),
-            "max_z_score": round(e.max_z_score, 2),
+            "max_z_score": round(e.max_robust_score, 2),
             "observation_count": e.observation_count,
         }
         for e in events
@@ -133,7 +133,7 @@ def export_dashboard_payload(
                 "act": round(float(r[COL_ENERGY]), 1),
                 "exp": round(float(r[COL_EXPECTED_ENERGY]), 1),
                 "res": round(float(r[COL_RESIDUAL]), 1),
-                "z": round(float(r[COL_Z_SCORE]) if not pd.isna(r[COL_Z_SCORE]) else 0.0, 2),
+                "z": round(float(r[COL_ROBUST_SCORE]) if not pd.isna(r[COL_ROBUST_SCORE]) else 0.0, 2),
                 "anom": int(r[COL_ANOMALY_FLAG]),
                 "load": round(float(r[COL_BUILDING_LOAD]), 1) if not pd.isna(r[COL_BUILDING_LOAD]) else None,
                 "flow": round(float(r[COL_CHILLED_WATER_RATE]), 1) if not pd.isna(r[COL_CHILLED_WATER_RATE]) else None,
@@ -186,5 +186,5 @@ if __name__ == "__main__":
     export_dashboard_payload(
         csv_path=Path("data/raw/chiller_data.csv"),
         model_path=Path("models/catboost_expected_energy.cbm"),
-        output_dir=Path("data/processed/dashboard"),
+        output_dir=Path("frontend/server/data"),
     )

@@ -100,8 +100,9 @@ FFILL_BFILL_LIMIT: Final[int] = 6  # for slowly changing vars like pressure
 # ---------------------------------------------------------------------------
 # Anomaly detection
 # ---------------------------------------------------------------------------
-ANOMALY_Z_THRESHOLD: Final[float] = 2.5
 MIN_ROLLING_PERIODS: Final[int] = 4
+ISOLATION_FOREST_CONTAMINATION = "auto"
+ISOLATION_FOREST_RANDOM_STATE: Final[int] = 42
 
 # ---------------------------------------------------------------------------
 # CatBoost training defaults
@@ -118,9 +119,10 @@ CV_SPLITS: Final[int] = 5
 # ---------------------------------------------------------------------------
 COL_EXPECTED_ENERGY: Final[str] = "expected_energy"
 COL_RESIDUAL: Final[str] = "residual"
-COL_ROLLING_MEAN_RESIDUAL: Final[str] = "rolling_mean_residual"
-COL_ROLLING_STD_RESIDUAL: Final[str] = "rolling_std_residual"
-COL_Z_SCORE: Final[str] = "z_score"
+COL_ROLLING_MEDIAN_RESIDUAL: Final[str] = "rolling_median_residual"
+COL_ROLLING_MAD_RESIDUAL: Final[str] = "rolling_mad_residual"
+COL_ROBUST_SCORE: Final[str] = "robust_score"
+COL_ANOMALY_SCORE: Final[str] = "anomaly_score"
 COL_ANOMALY_FLAG: Final[str] = "anomaly_flag"
 COL_EVENT_ID: Final[str] = "event_id"
 COL_TIME_DIFF: Final[str] = "time_diff_minutes"

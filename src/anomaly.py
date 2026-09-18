@@ -1,8 +1,9 @@
-"""Anomaly detection via dynamic residual scoring and persistence grouping.
+"""Anomaly detection via robust residual scoring and Isolation Forest.
 
-Two-stage architecture:
-  Stage 1: Dynamic z-score on rolling residual (per equipment, time-based window)
-  Stage 2: Persistence grouping — consecutive anomaly flags become single events
+Three-stage architecture:
+  Stage 1: Robust Residual Score (Median + MAD)
+  Stage 2: Context/equipment-aware scoring using Isolation Forest
+  Stage 3: Persistence grouping — consecutive anomaly flags become single events
 
 Output is described as abnormal behaviour requiring investigation,
 NOT a confirmed mechanical fault.
@@ -12,26 +13,30 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
+from sklearn.ensemble import IsolationForest
+from sklearn.preprocessing import StandardScaler
 
 from src.constants import (
-    ANOMALY_Z_THRESHOLD,
     COL_ANOMALY_FLAG,
+    COL_ANOMALY_SCORE,
     COL_EQUIPMENT_ID,
     COL_EVENT_ID,
     COL_EXPECTED_ENERGY,
     COL_RESIDUAL,
-    COL_ROLLING_MEAN_RESIDUAL,
-    COL_ROLLING_STD_RESIDUAL,
+    COL_ROBUST_SCORE,
+    COL_ROLLING_MAD_RESIDUAL,
+    COL_ROLLING_MEDIAN_RESIDUAL,
     COL_TIMESTAMP,
-    COL_Z_SCORE,
+    ISOLATION_FOREST_CONTAMINATION,
+    ISOLATION_FOREST_RANDOM_STATE,
     MIN_ROLLING_PERIODS,
     ROLLING_WINDOW,
 )
 
 logger = logging.getLogger(__name__)
 
-# Minimum std to prevent division by zero in z-score
-_MIN_STD: float = 1e-6
+# Minimum MAD to prevent division by zero in robust score
+_MIN_MAD: float = 1e-6
 
 
 @dataclass(frozen=True)
@@ -45,7 +50,7 @@ class AnomalyEvent:
     duration_minutes: float
     max_residual: float
     mean_residual: float
-    max_z_score: float
+    max_robust_score: float
     observation_count: int
 
     def describe(self) -> str:
@@ -57,66 +62,111 @@ class AnomalyEvent:
             f"{self.observation_count} obs)\n"
             f"  Max deviation: {self.max_residual:+.1f} kWh, "
             f"Mean: {self.mean_residual:+.1f} kWh, "
-            f"Max |z|: {self.max_z_score:.2f}\n"
+            f"Max |robust|: {self.max_robust_score:.2f}\n"
             f"  Status: INVESTIGATE — "
             f"Repeated contextual energy deviation"
         )
 
 
-def _compute_rolling_residual_stats(df: pd.DataFrame) -> pd.DataFrame:
-    """Compute rolling mean/std of residuals per equipment (2h window).
+def _compute_robust_residual_stats(df: pd.DataFrame) -> pd.DataFrame:
+    """Compute rolling median and MAD of residuals per equipment.
 
     Uses time-based rolling window to handle irregular sampling correctly.
     """
     result = df.copy()
-    result[COL_ROLLING_MEAN_RESIDUAL] = np.nan
-    result[COL_ROLLING_STD_RESIDUAL] = np.nan
+    result[COL_ROLLING_MEDIAN_RESIDUAL] = np.nan
+    result[COL_ROLLING_MAD_RESIDUAL] = np.nan
+    result[COL_ROBUST_SCORE] = np.nan
 
     for _, group in result.groupby(COL_EQUIPMENT_ID):
         indexed = group.set_index(COL_TIMESTAMP)
-        rolling = indexed[COL_RESIDUAL].rolling(
-            ROLLING_WINDOW, min_periods=MIN_ROLLING_PERIODS,
-        )
-        # .shift(1) excludes current observation from its own baseline,
-        # preventing a spike from inflating its own rolling std
-        result.loc[group.index, COL_ROLLING_MEAN_RESIDUAL] = (
-            rolling.mean().shift(1).values
-        )
-        result.loc[group.index, COL_ROLLING_STD_RESIDUAL] = (
-            rolling.std().shift(1).values
-        )
+        
+        # Calculate rolling median
+        rolling_median = indexed[COL_RESIDUAL].rolling(
+            ROLLING_WINDOW, min_periods=MIN_ROLLING_PERIODS
+        ).median()
+        
+        # Calculate absolute deviations from the rolling median
+        abs_deviation = (indexed[COL_RESIDUAL] - rolling_median).abs()
+        
+        # Calculate rolling MAD
+        rolling_mad = abs_deviation.rolling(
+            ROLLING_WINDOW, min_periods=MIN_ROLLING_PERIODS
+        ).median()
+
+        # Shift to exclude current observation from its own baseline
+        shifted_median = rolling_median.shift(1).values
+        shifted_mad = rolling_mad.shift(1).values
+
+        result.loc[group.index, COL_ROLLING_MEDIAN_RESIDUAL] = shifted_median
+        result.loc[group.index, COL_ROLLING_MAD_RESIDUAL] = shifted_mad
+        
+        mad_safe = np.clip(shifted_mad, a_min=_MIN_MAD, a_max=None)
+        
+        # Calculate Robust Score: (x - median) / (1.4826 * mad)
+        robust_score = (group[COL_RESIDUAL] - shifted_median) / (1.4826 * mad_safe)
+        result.loc[group.index, COL_ROBUST_SCORE] = robust_score
 
     return result
 
 
-def _compute_z_scores(df: pd.DataFrame) -> pd.DataFrame:
-    """Compute z-score of residual relative to rolling statistics."""
+def _flag_anomalies_isolation_forest(df: pd.DataFrame) -> pd.DataFrame:
+    """Flag anomalies using Isolation Forest on contextual features."""
     result = df.copy()
-    std_safe = result[COL_ROLLING_STD_RESIDUAL].clip(lower=_MIN_STD)
-    result[COL_Z_SCORE] = (
-        (result[COL_RESIDUAL] - result[COL_ROLLING_MEAN_RESIDUAL])
-        / std_safe
+    
+    # Select features for Isolation Forest
+    features = [
+        COL_ROBUST_SCORE,
+        COL_RESIDUAL,
+        COL_EXPECTED_ENERGY,
+        COL_ROLLING_MEDIAN_RESIDUAL
+    ]
+    
+    # Drop rows with NaNs (from rolling windows)
+    valid_mask = result[features].notna().all(axis=1)
+    
+    # Default to non-anomalous
+    result[COL_ANOMALY_FLAG] = 0
+    result[COL_ANOMALY_SCORE] = 0.0
+    
+    if not valid_mask.any():
+        return result
+
+    X = result.loc[valid_mask, features].copy()
+    
+    # Add equipment ID as one-hot for context awareness
+    equip_dummies = pd.get_dummies(result.loc[valid_mask, COL_EQUIPMENT_ID], prefix='equip')
+    X = pd.concat([X, equip_dummies], axis=1)
+
+    # Scale numerical features
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    # Train Isolation Forest
+    clf = IsolationForest(
+        contamination=ISOLATION_FOREST_CONTAMINATION,
+        random_state=ISOLATION_FOREST_RANDOM_STATE,
+        n_jobs=-1
     )
-    return result
-
-
-def _flag_anomalies(
-    df: pd.DataFrame,
-    threshold: float = ANOMALY_Z_THRESHOLD,
-) -> pd.DataFrame:
-    """Flag observations where |z_score| exceeds threshold."""
-    result = df.copy()
-    result[COL_ANOMALY_FLAG] = (
-        result[COL_Z_SCORE].abs() > threshold
-    ).astype(int)
-
-    # NaN z-scores (insufficient rolling window data) → not anomalous
-    result.loc[result[COL_Z_SCORE].isna(), COL_ANOMALY_FLAG] = 0
+    
+    preds = clf.fit_predict(X_scaled)
+    scores = clf.decision_function(X_scaled)
+    
+    # IsolationForest returns -1 for outliers and 1 for inliers
+    is_outlier = (preds == -1)
+    
+    # Enforce a minimum robust score to prevent IF from flagging minor variance
+    # A robust score of 3.0 means the residual is 3 MADs away from median
+    is_significant = X[COL_ROBUST_SCORE].abs() > 3.0
+    
+    result.loc[valid_mask, COL_ANOMALY_FLAG] = (is_outlier & is_significant).astype(int)
+    # Convert scores to a positive anomaly score where higher = more anomalous
+    result.loc[valid_mask, COL_ANOMALY_SCORE] = -scores
 
     anomaly_count = result[COL_ANOMALY_FLAG].sum()
     total_count = len(result)
     logger.info(
-        "Anomaly flags: %d / %d (%.2f%%)",
+        "Isolation Forest Anomaly flags: %d / %d (%.2f%%)",
         anomaly_count, total_count,
         anomaly_count / max(total_count, 1) * 100,
     )
@@ -198,21 +248,17 @@ def _build_event(
         duration_minutes=duration,
         max_residual=float(event_rows[COL_RESIDUAL].max()),
         mean_residual=float(event_rows[COL_RESIDUAL].mean()),
-        max_z_score=float(event_rows[COL_Z_SCORE].abs().max()),
+        max_robust_score=float(event_rows[COL_ROBUST_SCORE].abs().max()),
         observation_count=len(event_rows),
     )
 
 
-def score_anomalies(
-    df: pd.DataFrame,
-    threshold: float = ANOMALY_Z_THRESHOLD,
-) -> tuple[pd.DataFrame, list[AnomalyEvent]]:
+def score_anomalies(df: pd.DataFrame) -> tuple[pd.DataFrame, list[AnomalyEvent]]:
     """Full anomaly scoring pipeline.
 
-    1. Compute rolling residual statistics per equipment
-    2. Compute z-scores
-    3. Flag anomalies above threshold
-    4. Group persistent anomalies into events
+    1. Compute robust rolling residual statistics (Median + MAD)
+    2. Score anomalies contextually using Isolation Forest
+    3. Group persistent anomalies into events
 
     Returns:
         Tuple of (DataFrame with anomaly columns, list of AnomalyEvents)
@@ -223,9 +269,8 @@ def score_anomalies(
             "Run predict_expected_energy first."
         )
 
-    result = _compute_rolling_residual_stats(df)
-    result = _compute_z_scores(result)
-    result = _flag_anomalies(result, threshold=threshold)
+    result = _compute_robust_residual_stats(df)
+    result = _flag_anomalies_isolation_forest(result)
     result, events = _group_persistent_events(result)
 
     return result, events
