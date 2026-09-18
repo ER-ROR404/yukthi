@@ -1,6 +1,6 @@
 """Automated Hyperparameter Optimization via Optuna.
 
-This script finds the absolute best model hyperparameters for CatBoost 
+This script evaluates candidate configurations to find the best model hyperparameters for CatBoost 
 using TimeSeriesSplit cross-validation to guarantee zero leakage.
 It makes the training process transparent to the user.
 """
@@ -169,7 +169,7 @@ def update_constants_file(best_params: dict):
         )
         
     constants_path.write_text(content)
-    logger.info("\n✅ Auto-updated src/constants.py with the absolute best parameters!")
+    logger.info("\n✅ Auto-updated src/constants.py with the best parameters among tested configurations!")
     
 if __name__ == "__main__":
     optimize_and_update_constants()

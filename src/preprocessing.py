@@ -21,8 +21,8 @@ from src.constants import (
     GAP_THRESHOLD_MINUTES,
     MAX_INTERPOLATION_GAP,
     OPERATIONAL_SENSOR_COLS,
-    SLOWLY_CHANGING_COLS,
-    WEATHER_COLS,
+    WEATHER_INTERPOLATE_COLS,
+    WEATHER_FFILL_COLS,
 )
 
 logger = logging.getLogger(__name__)
@@ -143,10 +143,10 @@ def _impute_operational_sensors(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _impute_weather(df: pd.DataFrame) -> pd.DataFrame:
-    """Time-aware interpolation for weather columns (shared environment)."""
+    """Time-aware interpolation for continuous weather columns."""
     logger.info("Imputing weather columns.")
     result = df.copy()
-    for col in WEATHER_COLS:
+    for col in WEATHER_INTERPOLATE_COLS:
         if col in result.columns:
             result[col] = result[col].interpolate(
                 method="time", limit=MAX_INTERPOLATION_GAP,
@@ -155,14 +155,11 @@ def _impute_weather(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _impute_slowly_changing(df: pd.DataFrame) -> pd.DataFrame:
-    """Interpolate then ffill/bfill for slowly changing variables."""
+    """Forward/backward fill for slowly changing weather variables."""
     logger.info("Imputing slowly changing columns.")
     result = df.copy()
-    for col in SLOWLY_CHANGING_COLS:
+    for col in WEATHER_FFILL_COLS:
         if col in result.columns:
-            result[col] = result[col].interpolate(
-                method="time", limit=MAX_INTERPOLATION_GAP,
-            )
             result[col] = result[col].ffill(
                 limit=FFILL_BFILL_LIMIT,
             ).bfill(limit=FFILL_BFILL_LIMIT)

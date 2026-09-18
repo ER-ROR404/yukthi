@@ -87,14 +87,14 @@ OPERATIONAL_SENSOR_COLS: Final[list[str]] = [
     COL_COOLING_WATER_TEMP,
 ]
 
-WEATHER_COLS: Final[list[str]] = [
+WEATHER_INTERPOLATE_COLS: Final[list[str]] = [
     COL_OUTSIDE_TEMP,
     COL_DEW_POINT,
     COL_HUMIDITY,
-    COL_WIND_SPEED,
 ]
 
-SLOWLY_CHANGING_COLS: Final[list[str]] = [
+WEATHER_FFILL_COLS: Final[list[str]] = [
+    COL_WIND_SPEED,
     COL_PRESSURE,
 ]
 
