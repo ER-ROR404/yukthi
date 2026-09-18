@@ -1,9 +1,9 @@
 {
   "title": "YUKTHI Chiller Intelligence",
   "total_records": 24994,
-  "total_anomalies": 1827,
-  "anomaly_rate_pct": 7.31,
-  "total_events": 1373,
+  "total_anomalies": 1881,
+  "anomaly_rate_pct": 7.53,
+  "total_events": 1363,
   "equipments": [
     "CHILLER-01",
     "CHILLER-02",
@@ -15,12 +15,12 @@
       "date_start": "2019-08-18 00:00:00",
       "date_end": "2020-06-01 13:00:00",
       "avg_actual_kwh": 127.84,
-      "avg_expected_kwh": 127.85,
-      "avg_residual_kwh": -0.01,
-      "max_residual_kwh": 62.0,
-      "anomaly_count": 509,
-      "anomaly_rate_pct": 6.11,
-      "event_count": 389,
+      "avg_expected_kwh": 127.81,
+      "avg_residual_kwh": 0.03,
+      "max_residual_kwh": 71.54,
+      "anomaly_count": 585,
+      "anomaly_rate_pct": 7.02,
+      "event_count": 411,
       "avg_cop_approx": 14.3
     },
     "CHILLER-02": {
@@ -28,12 +28,12 @@
       "date_start": "2019-09-28 17:30:00",
       "date_end": "2020-06-01 13:00:00",
       "avg_actual_kwh": 131.82,
-      "avg_expected_kwh": 130.98,
-      "avg_residual_kwh": 0.84,
-      "max_residual_kwh": 62.51,
-      "anomaly_count": 631,
-      "anomaly_rate_pct": 7.57,
-      "event_count": 470,
+      "avg_expected_kwh": 130.38,
+      "avg_residual_kwh": 1.45,
+      "max_residual_kwh": 81.65,
+      "anomaly_count": 681,
+      "anomaly_rate_pct": 8.17,
+      "event_count": 497,
       "avg_cop_approx": 13.84
     },
     "CHILLER-03": {
@@ -41,12 +41,12 @@
       "date_start": "2019-08-18 00:00:00",
       "date_end": "2020-06-01 13:00:00",
       "avg_actual_kwh": 132.53,
-      "avg_expected_kwh": 132.56,
-      "avg_residual_kwh": -0.04,
-      "max_residual_kwh": 157.25,
-      "anomaly_count": 687,
-      "anomaly_rate_pct": 8.26,
-      "event_count": 514,
+      "avg_expected_kwh": 132.69,
+      "avg_residual_kwh": -0.16,
+      "max_residual_kwh": 166.98,
+      "anomaly_count": 615,
+      "anomaly_rate_pct": 7.39,
+      "event_count": 455,
       "avg_cop_approx": 14.04
     }
   },
@@ -69,7 +69,12 @@
       "day_of_week",
       "is_weekend",
       "is_night",
-      "wet_bulb_temp_c"
+      "wet_bulb_temp_c",
+      "hour_sin",
+      "hour_cos",
+      "day_sin",
+      "day_cos",
+      "load_flow_ratio"
     ]
   }
 }

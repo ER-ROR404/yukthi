@@ -46,6 +46,11 @@ FEAT_DAY_OF_WEEK: Final[str] = "day_of_week"
 FEAT_IS_WEEKEND: Final[str] = "is_weekend"
 FEAT_IS_NIGHT: Final[str] = "is_night"
 FEAT_WET_BULB: Final[str] = "wet_bulb_temp_c"
+FEAT_HOUR_SIN: Final[str] = "hour_sin"
+FEAT_HOUR_COS: Final[str] = "hour_cos"
+FEAT_DAY_SIN: Final[str] = "day_sin"
+FEAT_DAY_COS: Final[str] = "day_cos"
+FEAT_LOAD_FLOW_RATIO: Final[str] = "load_flow_ratio"
 
 # ---------------------------------------------------------------------------
 # Feature columns (input to CatBoost — NO target-derived quantities)
@@ -65,6 +70,11 @@ FEATURE_COLS: Final[list[str]] = [
     FEAT_IS_WEEKEND,
     FEAT_IS_NIGHT,
     FEAT_WET_BULB,
+    FEAT_HOUR_SIN,
+    FEAT_HOUR_COS,
+    FEAT_DAY_SIN,
+    FEAT_DAY_COS,
+    FEAT_LOAD_FLOW_RATIO,
 ]
 
 CAT_FEATURES: Final[list[str]] = [COL_EQUIPMENT_ID]
@@ -107,9 +117,11 @@ ISOLATION_FOREST_RANDOM_STATE: Final[int] = 42
 # ---------------------------------------------------------------------------
 # CatBoost training defaults
 # ---------------------------------------------------------------------------
-CATBOOST_ITERATIONS: Final[int] = 1000
-CATBOOST_DEPTH: Final[int] = 7
-CATBOOST_LEARNING_RATE: Final[float] = 0.05
+CATBOOST_ITERATIONS: Final[int] = 1500
+CATBOOST_DEPTH: Final[int] = 4
+CATBOOST_LEARNING_RATE: Final[float] = 0.0131
+CATBOOST_L2_LEAF_REG: Final[float] = 4.8153
+CATBOOST_BAGGING_TEMPERATURE: Final[float] = 0.1528
 CATBOOST_EARLY_STOPPING: Final[int] = 50
 CATBOOST_RANDOM_SEED: Final[int] = 42
 CV_SPLITS: Final[int] = 5

@@ -66,7 +66,7 @@ def _compute_wet_bulb(
 
 
 def _add_temporal_features(df: pd.DataFrame) -> pd.DataFrame:
-    """Add hour_of_day, day_of_week, is_weekend, is_night."""
+    """Add hour_of_day, day_of_week, is_weekend, is_night, and cyclical encodings."""
     result = df.copy()
 
     result[FEAT_HOUR_OF_DAY] = result[COL_TIMESTAMP].dt.hour
@@ -81,6 +81,28 @@ def _add_temporal_features(df: pd.DataFrame) -> pd.DataFrame:
         | (result[FEAT_HOUR_OF_DAY] >= _NIGHT_START_HOUR)
     ).astype(int)
 
+    # Cyclical encodings for time (so 23:00 is next to 00:00)
+    result["hour_sin"] = np.sin(2 * np.pi * result[FEAT_HOUR_OF_DAY] / 24.0)
+    result["hour_cos"] = np.cos(2 * np.pi * result[FEAT_HOUR_OF_DAY] / 24.0)
+    
+    result["day_sin"] = np.sin(2 * np.pi * result[FEAT_DAY_OF_WEEK] / 7.0)
+    result["day_cos"] = np.cos(2 * np.pi * result[FEAT_DAY_OF_WEEK] / 7.0)
+
+    return result
+
+def _add_interaction_features(df: pd.DataFrame) -> pd.DataFrame:
+    """Add interaction features based on chiller physics."""
+    result = df.copy()
+    
+    # Delta T proxy: Load / Flow Rate
+    # Q = m * c * dT -> dT = Q / (m * c)
+    # This feature helps the model explicitly see the relationship between load and flow
+    from src.constants import COL_BUILDING_LOAD, COL_CHILLED_WATER_RATE, FEAT_LOAD_FLOW_RATIO
+    if COL_BUILDING_LOAD in result.columns and COL_CHILLED_WATER_RATE in result.columns:
+        result[FEAT_LOAD_FLOW_RATIO] = result[COL_BUILDING_LOAD] / (result[COL_CHILLED_WATER_RATE] + 1e-5)
+    else:
+        result[FEAT_LOAD_FLOW_RATIO] = np.nan
+        
     return result
 
 
@@ -118,13 +140,16 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
 
     result = _add_temporal_features(df)
     result = _add_wet_bulb(result)
+    result = _add_interaction_features(result)
 
     validate_no_target_leakage(result, list(result.columns))
 
+    from src.constants import FEAT_HOUR_SIN, FEAT_HOUR_COS, FEAT_DAY_SIN, FEAT_DAY_COS, FEAT_LOAD_FLOW_RATIO
     logger.info(
         "Feature engineering complete. New columns: %s",
         [FEAT_HOUR_OF_DAY, FEAT_DAY_OF_WEEK,
-         FEAT_IS_WEEKEND, FEAT_IS_NIGHT, FEAT_WET_BULB],
+         FEAT_IS_WEEKEND, FEAT_IS_NIGHT, FEAT_WET_BULB,
+         FEAT_HOUR_SIN, FEAT_HOUR_COS, FEAT_DAY_SIN, FEAT_DAY_COS, FEAT_LOAD_FLOW_RATIO],
     )
 
     return result
