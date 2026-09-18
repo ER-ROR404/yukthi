@@ -141,6 +141,8 @@ def export_dashboard_payload(
                 "res": round(float(r[COL_RESIDUAL]), 1),
                 "z": round(float(r[COL_ROBUST_SCORE]) if not pd.isna(r[COL_ROBUST_SCORE]) else 0.0, 2),
                 "anom": int(r[COL_ANOMALY_FLAG]),
+                "status": str(r.get("system_status", "NORMAL")),
+                "low_conf": int(r.get("low_confidence_flag", 0)) if not pd.isna(r.get("low_confidence_flag")) else 0,
                 "load": round(float(r[COL_BUILDING_LOAD]), 1) if not pd.isna(r[COL_BUILDING_LOAD]) else None,
                 "flow": round(float(r[COL_CHILLED_WATER_RATE]), 1) if not pd.isna(r[COL_CHILLED_WATER_RATE]) else None,
                 "cw_temp": round(float(r[COL_COOLING_WATER_TEMP]), 1) if not pd.isna(r[COL_COOLING_WATER_TEMP]) else None,

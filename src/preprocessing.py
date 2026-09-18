@@ -96,16 +96,34 @@ def _flag_missing_data(df: pd.DataFrame) -> pd.DataFrame:
     return result
 
 def _check_sensor_health(df: pd.DataFrame) -> pd.DataFrame:
-    """Flag suspicious sensor readings based on physical constraints."""
+    """Flag suspicious sensor readings based on physical constraints, rate of change, and stuck sensors."""
     result = df.copy()
     suspicious = pd.Series(False, index=result.index)
     
-    # Range checks
+    # 1. Range checks
     if COL_BUILDING_LOAD in result.columns:
         suspicious |= (result[COL_BUILDING_LOAD] < 0)
     if 'Humidity (%)' in result.columns:
         suspicious |= (result['Humidity (%)'] < 0) | (result['Humidity (%)'] > 100)
         
+    # Process per equipment for time-series checks
+    if COL_EQUIPMENT_ID in result.columns and COL_TIMESTAMP in result.columns:
+        result_sorted = result.sort_values(by=[COL_EQUIPMENT_ID, COL_TIMESTAMP])
+        
+        for eq_id, group in result_sorted.groupby(COL_EQUIPMENT_ID):
+            idx = group.index
+            
+            # 2. Rate of change (e.g., Flow shouldn't drop 80% in 30 mins)
+            if 'Chilled Water Rate (L/sec)' in group.columns:
+                flow_diff_pct = group['Chilled Water Rate (L/sec)'].pct_change(fill_method=None).abs()
+                # Flag if flow changes by more than 50% in one step (and wasn't near zero to begin with)
+                suspicious.loc[idx] |= (flow_diff_pct > 0.5) & (group['Chilled Water Rate (L/sec)'].shift(1) > 5)
+                
+            # 3. Stuck sensor (e.g., Temperature exactly the same for 10+ readings / 5 hours)
+            if 'Outside Temperature (F)' in group.columns:
+                rolling_std = group['Outside Temperature (F)'].rolling(window=10).std()
+                suspicious.loc[idx] |= (rolling_std == 0)
+                
     result['sensor_health_suspicious'] = suspicious.astype(int)
     return result
 

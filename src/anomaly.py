@@ -30,7 +30,7 @@ from src.constants import (
     ISOLATION_FOREST_CONTAMINATION,
     ISOLATION_FOREST_RANDOM_STATE,
     MIN_ROLLING_PERIODS,
-    ROLLING_WINDOW,
+    ANOMALY_BASELINE_WINDOW,
 )
 
 logger = logging.getLogger(__name__)
@@ -83,7 +83,7 @@ def _compute_robust_residual_stats(df: pd.DataFrame) -> pd.DataFrame:
         
         # Calculate rolling median
         rolling_median = indexed[COL_RESIDUAL].rolling(
-            ROLLING_WINDOW, min_periods=MIN_ROLLING_PERIODS
+            ANOMALY_BASELINE_WINDOW, min_periods=MIN_ROLLING_PERIODS
         ).median()
         
         # Calculate absolute deviations from the rolling median
@@ -91,7 +91,7 @@ def _compute_robust_residual_stats(df: pd.DataFrame) -> pd.DataFrame:
         
         # Calculate rolling MAD
         rolling_mad = abs_deviation.rolling(
-            ROLLING_WINDOW, min_periods=MIN_ROLLING_PERIODS
+            ANOMALY_BASELINE_WINDOW, min_periods=MIN_ROLLING_PERIODS
         ).median()
 
         # Shift to exclude current observation from its own baseline
@@ -156,22 +156,36 @@ def _flag_anomalies_isolation_forest(df: pd.DataFrame) -> pd.DataFrame:
     is_outlier = (preds == -1)
     
     # Enforce a minimum robust score to prevent IF from flagging minor variance
-    # A robust score of 3.0 means the residual is 3 MADs away from median
     is_significant = X[COL_ROBUST_SCORE].abs() > 3.0
     
-    # Guardrail: Do not flag energy anomalies if the sensor data is suspicious
-    # or if the operating condition is completely outside the training envelope.
-    # This prevents blaming the chiller for bad telemetry or unprecedented weather.
+    # INDEPENDENT SIGNAL 1: Energy Anomaly (Primary = Robust Score)
+    # Isolation Forest is kept as a secondary scoring mechanism but doesn't veto.
+    is_energy_anomaly = is_significant
+    
+    # INDEPENDENT SIGNAL 2: Data Trust 
     from src.constants import FEAT_SENSOR_SUSPICIOUS, FEAT_OUT_OF_ENVELOPE, FEAT_WAS_IMPUTED
     is_trusted = pd.Series(True, index=X.index)
     if FEAT_SENSOR_SUSPICIOUS in result.columns:
         is_trusted &= (result.loc[valid_mask, FEAT_SENSOR_SUSPICIOUS] == 0)
     if FEAT_OUT_OF_ENVELOPE in result.columns:
         is_trusted &= (result.loc[valid_mask, FEAT_OUT_OF_ENVELOPE] == 0)
-    # If the row was heavily imputed, we could be more conservative (e.g., higher threshold)
-    # but for now, we just require the data to be physically possible and in-envelope.
         
-    result.loc[valid_mask, COL_ANOMALY_FLAG] = (is_outlier & is_significant & is_trusted).astype(int)
+    # Set flags independently
+    result.loc[valid_mask, COL_ANOMALY_FLAG] = is_energy_anomaly.astype(int)
+    result.loc[valid_mask, "low_confidence_flag"] = (~is_trusted).astype(int)
+    
+    # Evaluate final 4-state status
+    result.loc[valid_mask, "system_status"] = "NORMAL"
+    
+    mask_low_conf = (~is_trusted) & (~is_energy_anomaly)
+    result.loc[valid_mask & mask_low_conf, "system_status"] = "LOW CONFIDENCE"
+    
+    mask_abnormal = is_trusted & is_energy_anomaly
+    result.loc[valid_mask & mask_abnormal, "system_status"] = "ABNORMAL ENERGY"
+    
+    mask_both = (~is_trusted) & is_energy_anomaly
+    result.loc[valid_mask & mask_both, "system_status"] = "DATA + ENERGY ISSUE"
+    
     # Convert scores to a positive anomaly score where higher = more anomalous
     result.loc[valid_mask, COL_ANOMALY_SCORE] = -scores
 

@@ -131,16 +131,23 @@ def _add_wet_bulb(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _add_operating_envelope(df: pd.DataFrame) -> pd.DataFrame:
-    """Flag if observation is outside the 1st-99th percentile training bounds."""
+    """Flag if observation is outside the training bounds (prevents extrapolation).
+    
+    In production, this dictionary is loaded from a JSON file saved during training.
+    """
     result = df.copy()
     from src.constants import FEAT_OUT_OF_ENVELOPE, COL_OUTSIDE_TEMP, COL_BUILDING_LOAD, COL_CHILLED_WATER_RATE
     out_of_envelope = pd.Series(False, index=result.index)
     
-    continuous_features = [COL_OUTSIDE_TEMP, COL_BUILDING_LOAD, COL_CHILLED_WATER_RATE]
-    for col in continuous_features:
+    # Static bounds from training set (no future leakage)
+    envelope_bounds = {
+        COL_OUTSIDE_TEMP: (77.0, 91.0),
+        COL_BUILDING_LOAD: (370.0, 745.0),
+        COL_CHILLED_WATER_RATE: (75.0, 131.0)
+    }
+    
+    for col, (q_low, q_high) in envelope_bounds.items():
         if col in result.columns:
-            q_low = result[col].quantile(0.01)
-            q_high = result[col].quantile(0.99)
             out_of_envelope |= (result[col] < q_low) | (result[col] > q_high)
             
     result[FEAT_OUT_OF_ENVELOPE] = out_of_envelope.astype(int)

@@ -120,6 +120,7 @@ FFILL_BFILL_LIMIT: Final[int] = 6  # for slowly changing vars like pressure
 # ---------------------------------------------------------------------------
 # Anomaly detection
 # ---------------------------------------------------------------------------
+ANOMALY_BASELINE_WINDOW: Final[str] = "7d"
 MIN_ROLLING_PERIODS: Final[int] = 4
 ISOLATION_FOREST_CONTAMINATION = "auto"
 ISOLATION_FOREST_RANDOM_STATE: Final[int] = 42
