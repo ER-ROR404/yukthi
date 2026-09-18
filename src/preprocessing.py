@@ -56,6 +56,9 @@ def preprocess(df: pd.DataFrame) -> tuple[pd.DataFrame, GapReport]:
 
     result = _handle_duplicates(result)
     gap_report = _detect_temporal_gaps(result)
+    
+    # Layer 1: Data Quality (Record what needs imputation)
+    result = _flag_missing_data(result)
 
     # Set timestamp as index for time-based interpolation
     result = result.set_index(COL_TIMESTAMP)
@@ -66,6 +69,9 @@ def preprocess(df: pd.DataFrame) -> tuple[pd.DataFrame, GapReport]:
     result = _impute_building_load(result)
 
     result = result.reset_index()
+
+    # Layer 2: Sensor Health (Range checks and rate-of-change)
+    result = _check_sensor_health(result)
 
     result = _drop_missing_target(result)
 
@@ -78,6 +84,30 @@ def preprocess(df: pd.DataFrame) -> tuple[pd.DataFrame, GapReport]:
     )
 
     return result, gap_report
+
+def _flag_missing_data(df: pd.DataFrame) -> pd.DataFrame:
+    """Flag rows where data was missing before imputation."""
+    result = df.copy()
+    check_cols = OPERATIONAL_SENSOR_COLS + WEATHER_INTERPOLATE_COLS + WEATHER_FFILL_COLS
+    available_cols = [c for c in check_cols if c in result.columns]
+    
+    # Flag if any of the key features are NaN
+    result['was_imputed'] = result[available_cols].isna().any(axis=1).astype(int)
+    return result
+
+def _check_sensor_health(df: pd.DataFrame) -> pd.DataFrame:
+    """Flag suspicious sensor readings based on physical constraints."""
+    result = df.copy()
+    suspicious = pd.Series(False, index=result.index)
+    
+    # Range checks
+    if COL_BUILDING_LOAD in result.columns:
+        suspicious |= (result[COL_BUILDING_LOAD] < 0)
+    if 'Humidity (%)' in result.columns:
+        suspicious |= (result['Humidity (%)'] < 0) | (result['Humidity (%)'] > 100)
+        
+    result['sensor_health_suspicious'] = suspicious.astype(int)
+    return result
 
 
 def _handle_duplicates(df: pd.DataFrame) -> pd.DataFrame:

@@ -1,9 +1,9 @@
 {
-  "title": "YUKTHI Chiller Intelligence",
+  "title": "YUKTHI Contextual Chiller Intelligence",
   "total_records": 24994,
-  "total_anomalies": 1972,
-  "anomaly_rate_pct": 7.89,
-  "total_events": 1439,
+  "total_anomalies": 1549,
+  "anomaly_rate_pct": 6.2,
+  "total_events": 1154,
   "equipments": [
     "CHILLER-01",
     "CHILLER-02",
@@ -15,46 +15,49 @@
       "date_start": "2019-08-18 00:00:00",
       "date_end": "2020-06-01 13:00:00",
       "avg_actual_kwh": 127.84,
-      "avg_expected_kwh": 127.78,
-      "avg_residual_kwh": 0.06,
-      "max_residual_kwh": 71.52,
-      "anomaly_count": 607,
-      "anomaly_rate_pct": 7.28,
-      "event_count": 436,
-      "avg_cop_approx": 14.3
+      "avg_expected_kwh": 127.79,
+      "avg_residual_kwh": 0.05,
+      "max_residual_kwh": 71.05,
+      "anomaly_count": 451,
+      "anomaly_rate_pct": 5.41,
+      "event_count": 325,
+      "avg_cop_approx": 14.3,
+      "recent_drift_kwh": 0.9
     },
     "CHILLER-02": {
       "total_records": 8340,
       "date_start": "2019-09-28 17:30:00",
       "date_end": "2020-06-01 13:00:00",
       "avg_actual_kwh": 131.82,
-      "avg_expected_kwh": 130.47,
-      "avg_residual_kwh": 1.36,
-      "max_residual_kwh": 81.63,
-      "anomaly_count": 734,
-      "anomaly_rate_pct": 8.8,
-      "event_count": 538,
-      "avg_cop_approx": 13.84
+      "avg_expected_kwh": 130.38,
+      "avg_residual_kwh": 1.44,
+      "max_residual_kwh": 78.09,
+      "anomaly_count": 568,
+      "anomaly_rate_pct": 6.81,
+      "event_count": 429,
+      "avg_cop_approx": 13.84,
+      "recent_drift_kwh": -0.6
     },
     "CHILLER-03": {
       "total_records": 8321,
       "date_start": "2019-08-18 00:00:00",
       "date_end": "2020-06-01 13:00:00",
       "avg_actual_kwh": 132.53,
-      "avg_expected_kwh": 132.68,
-      "avg_residual_kwh": -0.15,
-      "max_residual_kwh": 166.84,
-      "anomaly_count": 631,
-      "anomaly_rate_pct": 7.58,
-      "event_count": 465,
-      "avg_cop_approx": 14.04
+      "avg_expected_kwh": 132.63,
+      "avg_residual_kwh": -0.1,
+      "max_residual_kwh": 166.63,
+      "anomaly_count": 530,
+      "anomaly_rate_pct": 6.37,
+      "event_count": 400,
+      "avg_cop_approx": 14.04,
+      "recent_drift_kwh": -1.56
     }
   },
   "model_info": {
     "type": "CatBoost Regressor",
-    "cv_mae": 9.92,
-    "cv_rmse": 14.27,
-    "cv_r2": 0.771,
+    "cv_mae": 9.91,
+    "cv_rmse": 14.15,
+    "cv_r2": 0.7733,
     "features": [
       "equipment_id",
       "Chilled Water Rate (L/sec)",
@@ -74,7 +77,12 @@
       "hour_cos",
       "day_sin",
       "day_cos",
-      "load_flow_ratio"
+      "load_flow_ratio",
+      "out_of_envelope",
+      "load_lag_30m",
+      "load_rolling_2h_mean",
+      "was_imputed",
+      "sensor_health_suspicious"
     ]
   }
 }

@@ -81,9 +81,15 @@ def export_dashboard_payload(
                 2,
             ),
         }
+        
+        # Calculate Drift Monitoring (Last 30 days vs Overall)
+        last_30_days_mask = eq_df[COL_TIMESTAMP] >= (eq_df[COL_TIMESTAMP].max() - pd.Timedelta(days=30))
+        recent_median_residual = eq_df.loc[last_30_days_mask, COL_RESIDUAL].median()
+        overall_median_residual = eq_df[COL_RESIDUAL].median()
+        equipment_stats[eq]["recent_drift_kwh"] = round(float(recent_median_residual - overall_median_residual), 2)
 
     summary_payload = {
-        "title": "YUKTHI Chiller Intelligence",
+        "title": "YUKTHI Contextual Chiller Intelligence",
         "total_records": len(df),
         "total_anomalies": total_anomalies,
         "anomaly_rate_pct": round(float(total_anomalies / len(df) * 100), 2),
@@ -92,9 +98,9 @@ def export_dashboard_payload(
         "equipment_stats": equipment_stats,
         "model_info": {
             "type": "CatBoost Regressor",
-            "cv_mae": 9.92,
-            "cv_rmse": 14.27,
-            "cv_r2": 0.771,
+            "cv_mae": 9.91,
+            "cv_rmse": 14.15,
+            "cv_r2": 0.7733,
             "features": FEATURE_COLS,
         },
     }

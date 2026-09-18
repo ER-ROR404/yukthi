@@ -51,6 +51,11 @@ FEAT_HOUR_COS: Final[str] = "hour_cos"
 FEAT_DAY_SIN: Final[str] = "day_sin"
 FEAT_DAY_COS: Final[str] = "day_cos"
 FEAT_LOAD_FLOW_RATIO: Final[str] = "load_flow_ratio"
+FEAT_OUT_OF_ENVELOPE: Final[str] = "out_of_envelope"
+FEAT_LOAD_LAG_30M: Final[str] = "load_lag_30m"
+FEAT_LOAD_ROLLING_2H_MEAN: Final[str] = "load_rolling_2h_mean"
+FEAT_WAS_IMPUTED: Final[str] = "was_imputed"
+FEAT_SENSOR_SUSPICIOUS: Final[str] = "sensor_health_suspicious"
 
 # ---------------------------------------------------------------------------
 # Feature columns (input to CatBoost — NO target-derived quantities)
@@ -75,6 +80,11 @@ FEATURE_COLS: Final[list[str]] = [
     FEAT_DAY_SIN,
     FEAT_DAY_COS,
     FEAT_LOAD_FLOW_RATIO,
+    FEAT_OUT_OF_ENVELOPE,
+    FEAT_LOAD_LAG_30M,
+    FEAT_LOAD_ROLLING_2H_MEAN,
+    FEAT_WAS_IMPUTED,
+    FEAT_SENSOR_SUSPICIOUS,
 ]
 
 CAT_FEATURES: Final[list[str]] = [COL_EQUIPMENT_ID]

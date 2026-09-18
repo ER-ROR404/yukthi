@@ -54,11 +54,11 @@
       <div class="hidden lg:flex items-center space-x-4 border-l border-cockpit-800 pl-4 text-xs font-mono">
         <div>
           <span class="text-cockpit-300 block text-[10px] uppercase tracking-wider">Model R²</span>
-          <span class="text-status-emerald font-semibold">0.7727 (CV 5-fold)</span>
+          <span class="text-status-emerald font-semibold">0.7733 (CV 5-fold)</span>
         </div>
         <div>
           <span class="text-cockpit-300 block text-[10px] uppercase tracking-wider">CV MAE</span>
-          <span class="text-cockpit-100 font-semibold">9.92 kWh</span>
+          <span class="text-cockpit-100 font-semibold">9.91 kWh</span>
         </div>
       </div>
     </div>

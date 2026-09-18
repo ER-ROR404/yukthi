@@ -159,7 +159,19 @@ def _flag_anomalies_isolation_forest(df: pd.DataFrame) -> pd.DataFrame:
     # A robust score of 3.0 means the residual is 3 MADs away from median
     is_significant = X[COL_ROBUST_SCORE].abs() > 3.0
     
-    result.loc[valid_mask, COL_ANOMALY_FLAG] = (is_outlier & is_significant).astype(int)
+    # Guardrail: Do not flag energy anomalies if the sensor data is suspicious
+    # or if the operating condition is completely outside the training envelope.
+    # This prevents blaming the chiller for bad telemetry or unprecedented weather.
+    from src.constants import FEAT_SENSOR_SUSPICIOUS, FEAT_OUT_OF_ENVELOPE, FEAT_WAS_IMPUTED
+    is_trusted = pd.Series(True, index=X.index)
+    if FEAT_SENSOR_SUSPICIOUS in result.columns:
+        is_trusted &= (result.loc[valid_mask, FEAT_SENSOR_SUSPICIOUS] == 0)
+    if FEAT_OUT_OF_ENVELOPE in result.columns:
+        is_trusted &= (result.loc[valid_mask, FEAT_OUT_OF_ENVELOPE] == 0)
+    # If the row was heavily imputed, we could be more conservative (e.g., higher threshold)
+    # but for now, we just require the data to be physically possible and in-envelope.
+        
+    result.loc[valid_mask, COL_ANOMALY_FLAG] = (is_outlier & is_significant & is_trusted).astype(int)
     # Convert scores to a positive anomaly score where higher = more anomalous
     result.loc[valid_mask, COL_ANOMALY_SCORE] = -scores
 

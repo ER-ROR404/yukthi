@@ -1,80 +1,80 @@
 [
   {
-    "timestamp": "2020-05-03 14:30:00",
-    "equipment_id": "CHILLER-03",
-    "actual_energy": 289.4,
-    "expected_energy": 124.1,
-    "residual": 165.3,
-    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+4.9 kWh), Outside Temperature (F) (+1.7 kWh), wet_bulb_temp_c (+1.3 kWh). Factors decreasing expected energy: Building Load (RT) (-12.2 kWh), Chilled Water Rate (L/sec) (-1.6 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": -12.25,
-        "value": 470.2,
-        "direction": "decreased"
-      },
-      {
-        "feature": "Cooling Water Temperature (C)",
-        "shap": 4.9,
-        "value": 33.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "Outside Temperature (F)",
-        "shap": 1.71,
-        "value": 88.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": -1.63,
-        "value": 92.5,
-        "direction": "decreased"
-      },
-      {
-        "feature": "wet_bulb_temp_c",
-        "shap": 1.29,
-        "value": 26.63,
-        "direction": "increased"
-      }
-    ]
-  },
-  {
     "timestamp": "2020-05-03 13:30:00",
     "equipment_id": "CHILLER-03",
     "actual_energy": 289.4,
-    "expected_energy": 124.9,
-    "residual": 164.5,
-    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+4.3 kWh), wet_bulb_temp_c (+3.3 kWh), Outside Temperature (F) (+1.8 kWh). Factors decreasing expected energy: Building Load (RT) (-13.1 kWh), Chilled Water Rate (L/sec) (-1.4 kWh).",
+    "expected_energy": 124.3,
+    "residual": 165.1,
+    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+3.7 kWh), wet_bulb_temp_c (+3.0 kWh), Outside Temperature (F) (+1.6 kWh). Factors decreasing expected energy: Building Load (RT) (-10.8 kWh), load_rolling_2h_mean (-1.5 kWh).",
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
-        "shap": -13.08,
+        "shap": -10.85,
         "value": 457.6,
         "direction": "decreased"
       },
       {
         "feature": "Cooling Water Temperature (C)",
-        "shap": 4.32,
+        "shap": 3.73,
         "value": 32.6,
         "direction": "increased"
       },
       {
         "feature": "wet_bulb_temp_c",
-        "shap": 3.28,
+        "shap": 3.03,
         "value": 27.67,
         "direction": "increased"
       },
       {
         "feature": "Outside Temperature (F)",
-        "shap": 1.82,
+        "shap": 1.57,
         "value": 90.0,
         "direction": "increased"
       },
       {
+        "feature": "load_rolling_2h_mean",
+        "shap": -1.46,
+        "value": 449.8,
+        "direction": "decreased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-05-03 14:30:00",
+    "equipment_id": "CHILLER-03",
+    "actual_energy": 289.4,
+    "expected_energy": 124.6,
+    "residual": 164.8,
+    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+5.2 kWh), Outside Temperature (F) (+1.5 kWh). Factors decreasing expected energy: Building Load (RT) (-10.3 kWh), Chilled Water Rate (L/sec) (-1.5 kWh), load_rolling_2h_mean (-1.4 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Building Load (RT)",
+        "shap": -10.27,
+        "value": 470.2,
+        "direction": "decreased"
+      },
+      {
+        "feature": "Cooling Water Temperature (C)",
+        "shap": 5.15,
+        "value": 33.0,
+        "direction": "increased"
+      },
+      {
+        "feature": "Outside Temperature (F)",
+        "shap": 1.52,
+        "value": 88.0,
+        "direction": "increased"
+      },
+      {
         "feature": "Chilled Water Rate (L/sec)",
-        "shap": -1.39,
-        "value": 90.9,
+        "shap": -1.51,
+        "value": 92.5,
+        "direction": "decreased"
+      },
+      {
+        "feature": "load_rolling_2h_mean",
+        "shap": -1.38,
+        "value": 461.0,
         "direction": "decreased"
       }
     ]
@@ -83,158 +83,38 @@
     "timestamp": "2020-05-14 10:30:00",
     "equipment_id": "CHILLER-03",
     "actual_energy": 225.5,
-    "expected_energy": 141.7,
-    "residual": 83.8,
-    "narrative": "Factors increasing expected energy: Chilled Water Rate (L/sec) (+8.2 kWh), Cooling Water Temperature (C) (+3.4 kWh), Outside Temperature (F) (+1.8 kWh). Factors decreasing expected energy: Building Load (RT) (-4.5 kWh), load_flow_ratio (-1.4 kWh).",
+    "expected_energy": 141.5,
+    "residual": 84.0,
+    "narrative": "Factors increasing expected energy: Chilled Water Rate (L/sec) (+8.7 kWh), Cooling Water Temperature (C) (+4.0 kWh), Outside Temperature (F) (+1.5 kWh). Factors decreasing expected energy: Building Load (RT) (-4.8 kWh), load_flow_ratio (-1.7 kWh).",
     "top_contributors": [
       {
         "feature": "Chilled Water Rate (L/sec)",
-        "shap": 8.2,
+        "shap": 8.68,
         "value": 127.8,
         "direction": "increased"
       },
       {
         "feature": "Building Load (RT)",
-        "shap": -4.48,
+        "shap": -4.78,
         "value": 560.2,
         "direction": "decreased"
       },
       {
         "feature": "Cooling Water Temperature (C)",
-        "shap": 3.43,
+        "shap": 4.01,
         "value": 33.2,
         "direction": "increased"
       },
       {
-        "feature": "Outside Temperature (F)",
-        "shap": 1.82,
-        "value": 88.0,
-        "direction": "increased"
-      },
-      {
         "feature": "load_flow_ratio",
-        "shap": -1.38,
+        "shap": -1.74,
         "value": 4.38,
         "direction": "decreased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-05-12 16:00:00",
-    "equipment_id": "CHILLER-02",
-    "actual_energy": 233.1,
-    "expected_energy": 153.6,
-    "residual": 79.5,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+8.3 kWh), wet_bulb_temp_c (+3.5 kWh), Pressure (in) (+1.4 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": 8.26,
-        "value": 595.9,
-        "direction": "increased"
       },
       {
-        "feature": "wet_bulb_temp_c",
-        "shap": 3.55,
-        "value": 26.98,
-        "direction": "increased"
-      },
-      {
-        "feature": "Pressure (in)",
-        "shap": 1.44,
-        "value": 29.68,
-        "direction": "increased"
-      },
-      {
-        "feature": "equipment_id",
-        "shap": 1.37,
-        "value": "CHILLER-02",
-        "direction": "increased"
-      },
-      {
-        "feature": "Wind Speed (mph)",
-        "shap": 1.21,
-        "value": 15.0,
-        "direction": "increased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-01-28 11:00:00",
-    "equipment_id": "CHILLER-02",
-    "actual_energy": 341.9,
-    "expected_energy": 270.1,
-    "residual": 71.8,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+89.3 kWh), Chilled Water Rate (L/sec) (+19.3 kWh), Cooling Water Temperature (C) (+13.7 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": 89.27,
-        "value": 908.7,
-        "direction": "increased"
-      },
-      {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 19.33,
-        "value": 132.7,
-        "direction": "increased"
-      },
-      {
-        "feature": "Cooling Water Temperature (C)",
-        "shap": 13.66,
-        "value": 33.9,
-        "direction": "increased"
-      },
-      {
-        "feature": "load_flow_ratio",
-        "shap": 7.83,
-        "value": 6.85,
-        "direction": "increased"
-      },
-      {
-        "feature": "hour_cos",
-        "shap": 2.74,
-        "value": -0.97,
-        "direction": "increased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-04-04 16:00:00",
-    "equipment_id": "CHILLER-02",
-    "actual_energy": 350.0,
-    "expected_energy": 279.1,
-    "residual": 70.9,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+94.5 kWh), Chilled Water Rate (L/sec) (+13.9 kWh), Cooling Water Temperature (C) (+9.8 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": 94.54,
-        "value": 907.3,
-        "direction": "increased"
-      },
-      {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 13.88,
-        "value": 129.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "Cooling Water Temperature (C)",
-        "shap": 9.77,
-        "value": 33.3,
-        "direction": "increased"
-      },
-      {
-        "feature": "load_flow_ratio",
-        "shap": 9.43,
-        "value": 7.03,
-        "direction": "increased"
-      },
-      {
-        "feature": "wet_bulb_temp_c",
-        "shap": 3.89,
-        "value": 27.01,
+        "feature": "Outside Temperature (F)",
+        "shap": 1.51,
+        "value": 88.0,
         "direction": "increased"
       }
     ]
@@ -243,39 +123,39 @@
     "timestamp": "2020-04-03 19:30:00",
     "equipment_id": "CHILLER-01",
     "actual_energy": 200.6,
-    "expected_energy": 129.9,
-    "residual": 70.7,
-    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+5.0 kWh), load_flow_ratio (+1.0 kWh). Factors decreasing expected energy: Building Load (RT) (-3.8 kWh), Chilled Water Rate (L/sec) (-2.7 kWh), equipment_id (-2.4 kWh).",
+    "expected_energy": 129.5,
+    "residual": 71.1,
+    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+4.9 kWh). Factors decreasing expected energy: Building Load (RT) (-4.9 kWh), Chilled Water Rate (L/sec) (-2.5 kWh), equipment_id (-1.8 kWh).",
     "top_contributors": [
       {
         "feature": "Cooling Water Temperature (C)",
-        "shap": 5.0,
+        "shap": 4.9,
         "value": 33.2,
         "direction": "increased"
       },
       {
         "feature": "Building Load (RT)",
-        "shap": -3.78,
+        "shap": -4.9,
         "value": 549.2,
         "direction": "decreased"
       },
       {
         "feature": "Chilled Water Rate (L/sec)",
-        "shap": -2.65,
+        "shap": -2.54,
         "value": 88.9,
         "direction": "decreased"
       },
       {
         "feature": "equipment_id",
-        "shap": -2.39,
+        "shap": -1.78,
         "value": "CHILLER-01",
         "direction": "decreased"
       },
       {
-        "feature": "load_flow_ratio",
-        "shap": 1.04,
-        "value": 6.18,
-        "direction": "increased"
+        "feature": "hour_cos",
+        "shap": -0.97,
+        "value": 0.26,
+        "direction": "decreased"
       }
     ]
   },
@@ -283,79 +163,39 @@
     "timestamp": "2020-04-01 19:00:00",
     "equipment_id": "CHILLER-01",
     "actual_energy": 235.8,
-    "expected_energy": 166.8,
-    "residual": 69.0,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+30.8 kWh), Chilled Water Rate (L/sec) (+3.4 kWh), hour_of_day (+1.2 kWh). Factors decreasing expected energy: equipment_id (-2.6 kWh).",
+    "expected_energy": 171.8,
+    "residual": 64.0,
+    "narrative": "Factors increasing expected energy: Building Load (RT) (+25.9 kWh), load_lag_30m (+4.6 kWh), Chilled Water Rate (L/sec) (+4.0 kWh). Factors decreasing expected energy: equipment_id (-2.2 kWh).",
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
-        "shap": 30.76,
+        "shap": 25.94,
         "value": 642.1,
         "direction": "increased"
       },
       {
+        "feature": "load_lag_30m",
+        "shap": 4.58,
+        "value": 717.1,
+        "direction": "increased"
+      },
+      {
         "feature": "Chilled Water Rate (L/sec)",
-        "shap": 3.35,
+        "shap": 4.0,
         "value": 108.9,
         "direction": "increased"
       },
       {
+        "feature": "load_rolling_2h_mean",
+        "shap": 3.98,
+        "value": 717.1,
+        "direction": "increased"
+      },
+      {
         "feature": "equipment_id",
-        "shap": -2.59,
+        "shap": -2.2,
         "value": "CHILLER-01",
         "direction": "decreased"
-      },
-      {
-        "feature": "hour_of_day",
-        "shap": 1.17,
-        "value": "19",
-        "direction": "increased"
-      },
-      {
-        "feature": "Outside Temperature (F)",
-        "shap": 1.0,
-        "value": 86.0,
-        "direction": "increased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-04-08 13:30:00",
-    "equipment_id": "CHILLER-03",
-    "actual_energy": 329.6,
-    "expected_energy": 266.1,
-    "residual": 63.5,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+89.6 kWh), Chilled Water Rate (L/sec) (+16.1 kWh), Cooling Water Temperature (C) (+14.6 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": 89.58,
-        "value": 853.4,
-        "direction": "increased"
-      },
-      {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 16.07,
-        "value": 138.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "Cooling Water Temperature (C)",
-        "shap": 14.56,
-        "value": 33.9,
-        "direction": "increased"
-      },
-      {
-        "feature": "load_flow_ratio",
-        "shap": 5.05,
-        "value": 6.18,
-        "direction": "increased"
-      },
-      {
-        "feature": "Outside Temperature (F)",
-        "shap": 3.67,
-        "value": 91.0,
-        "direction": "increased"
       }
     ]
   },
@@ -363,158 +203,78 @@
     "timestamp": "2020-04-16 10:30:00",
     "equipment_id": "CHILLER-02",
     "actual_energy": 225.3,
-    "expected_energy": 163.9,
-    "residual": 61.4,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+14.0 kWh), Cooling Water Temperature (C) (+4.9 kWh), Chilled Water Rate (L/sec) (+3.4 kWh).",
+    "expected_energy": 163.3,
+    "residual": 62.0,
+    "narrative": "Factors increasing expected energy: Building Load (RT) (+13.3 kWh), Cooling Water Temperature (C) (+5.2 kWh), Chilled Water Rate (L/sec) (+3.9 kWh).",
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
-        "shap": 13.96,
+        "shap": 13.31,
         "value": 621.1,
         "direction": "increased"
       },
       {
         "feature": "Cooling Water Temperature (C)",
-        "shap": 4.92,
+        "shap": 5.18,
         "value": 34.7,
         "direction": "increased"
       },
       {
         "feature": "Chilled Water Rate (L/sec)",
-        "shap": 3.44,
+        "shap": 3.85,
         "value": 113.0,
         "direction": "increased"
       },
       {
         "feature": "wet_bulb_temp_c",
-        "shap": 2.82,
+        "shap": 2.8,
         "value": 27.01,
         "direction": "increased"
       },
       {
-        "feature": "Outside Temperature (F)",
-        "shap": 2.03,
-        "value": 90.0,
+        "feature": "equipment_id",
+        "shap": 1.79,
+        "value": "CHILLER-02",
         "direction": "increased"
       }
     ]
   },
   {
-    "timestamp": "2020-04-03 19:00:00",
-    "equipment_id": "CHILLER-01",
-    "actual_energy": 200.6,
-    "expected_energy": 140.3,
-    "residual": 60.3,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+6.1 kWh), Chilled Water Rate (L/sec) (+2.4 kWh), Outside Temperature (F) (+1.2 kWh). Factors decreasing expected energy: equipment_id (-1.8 kWh).",
+    "timestamp": "2020-03-27 17:00:00",
+    "equipment_id": "CHILLER-02",
+    "actual_energy": 206.3,
+    "expected_energy": 145.3,
+    "residual": 61.0,
+    "narrative": "Factors increasing expected energy: Building Load (RT) (+7.9 kWh), Outside Temperature (F) (+1.7 kWh), load_lag_30m (+1.5 kWh). Factors decreasing expected energy: Chilled Water Rate (L/sec) (-1.7 kWh).",
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
-        "shap": 6.09,
-        "value": 586.7,
+        "shap": 7.91,
+        "value": 596.1,
         "direction": "increased"
       },
       {
         "feature": "Chilled Water Rate (L/sec)",
-        "shap": 2.39,
-        "value": 103.9,
+        "shap": -1.75,
+        "value": 93.8,
+        "direction": "decreased"
+      },
+      {
+        "feature": "Outside Temperature (F)",
+        "shap": 1.7,
+        "value": 88.0,
+        "direction": "increased"
+      },
+      {
+        "feature": "load_lag_30m",
+        "shap": 1.45,
+        "value": 632.3,
         "direction": "increased"
       },
       {
         "feature": "equipment_id",
-        "shap": -1.82,
-        "value": "CHILLER-01",
-        "direction": "decreased"
-      },
-      {
-        "feature": "Outside Temperature (F)",
-        "shap": 1.17,
-        "value": 86.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "hour_of_day",
-        "shap": 0.99,
-        "value": "19",
-        "direction": "increased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-04-07 13:30:00",
-    "equipment_id": "CHILLER-03",
-    "actual_energy": 299.9,
-    "expected_energy": 239.8,
-    "residual": 60.1,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+80.9 kWh), Chilled Water Rate (L/sec) (+14.6 kWh), load_flow_ratio (+3.9 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": 80.86,
-        "value": 792.9,
-        "direction": "increased"
-      },
-      {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 14.63,
-        "value": 131.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "load_flow_ratio",
-        "shap": 3.93,
-        "value": 6.05,
-        "direction": "increased"
-      },
-      {
-        "feature": "hour_cos",
-        "shap": 3.69,
-        "value": -0.97,
-        "direction": "increased"
-      },
-      {
-        "feature": "Outside Temperature (F)",
-        "shap": 2.77,
-        "value": 91.0,
-        "direction": "increased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-03-27 16:00:00",
-    "equipment_id": "CHILLER-02",
-    "actual_energy": 254.6,
-    "expected_energy": 197.5,
-    "residual": 57.1,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+52.2 kWh), Chilled Water Rate (L/sec) (+7.9 kWh), hour_cos (+3.0 kWh). Factors decreasing expected energy: Cooling Water Temperature (C) (-2.0 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": 52.16,
-        "value": 702.3,
-        "direction": "increased"
-      },
-      {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 7.88,
-        "value": 121.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "hour_cos",
-        "shap": 3.03,
-        "value": -0.5,
-        "direction": "increased"
-      },
-      {
-        "feature": "Cooling Water Temperature (C)",
-        "shap": -2.04,
-        "value": 31.3,
-        "direction": "decreased"
-      },
-      {
-        "feature": "Outside Temperature (F)",
-        "shap": 1.65,
-        "value": 90.0,
+        "shap": 1.22,
+        "value": "CHILLER-02",
         "direction": "increased"
       }
     ]
@@ -523,37 +283,117 @@
     "timestamp": "2020-02-06 15:30:00",
     "equipment_id": "CHILLER-01",
     "actual_energy": 195.8,
-    "expected_energy": 140.0,
-    "residual": 55.8,
-    "narrative": "Factors increasing expected energy: Wind Speed (mph) (+9.5 kWh), Chilled Water Rate (L/sec) (+2.5 kWh), load_flow_ratio (+2.3 kWh). Factors decreasing expected energy: Building Load (RT) (-10.5 kWh), equipment_id (-2.2 kWh).",
+    "expected_energy": 135.7,
+    "residual": 60.1,
+    "narrative": "Factors increasing expected energy: Wind Speed (mph) (+8.6 kWh), load_flow_ratio (+2.3 kWh), Outside Temperature (F) (+1.8 kWh). Factors decreasing expected energy: Building Load (RT) (-9.9 kWh), equipment_id (-2.3 kWh).",
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
-        "shap": -10.45,
+        "shap": -9.93,
         "value": 487.5,
         "direction": "decreased"
       },
       {
         "feature": "Wind Speed (mph)",
-        "shap": 9.46,
+        "shap": 8.57,
         "value": 16.0,
         "direction": "increased"
       },
       {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 2.47,
-        "value": 97.4,
-        "direction": "increased"
+        "feature": "equipment_id",
+        "shap": -2.28,
+        "value": "CHILLER-01",
+        "direction": "decreased"
       },
       {
         "feature": "load_flow_ratio",
-        "shap": 2.35,
+        "shap": 2.25,
         "value": 5.01,
         "direction": "increased"
       },
       {
+        "feature": "Outside Temperature (F)",
+        "shap": 1.83,
+        "value": 88.0,
+        "direction": "increased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-05-14 11:00:00",
+    "equipment_id": "CHILLER-03",
+    "actual_energy": 196.5,
+    "expected_energy": 140.5,
+    "residual": 56.0,
+    "narrative": "Factors increasing expected energy: Chilled Water Rate (L/sec) (+8.6 kWh), Cooling Water Temperature (C) (+1.7 kWh), Outside Temperature (F) (+1.5 kWh). Factors decreasing expected energy: Building Load (RT) (-5.1 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": 8.62,
+        "value": 122.6,
+        "direction": "increased"
+      },
+      {
+        "feature": "Building Load (RT)",
+        "shap": -5.15,
+        "value": 559.9,
+        "direction": "decreased"
+      },
+      {
+        "feature": "Cooling Water Temperature (C)",
+        "shap": 1.73,
+        "value": 32.5,
+        "direction": "increased"
+      },
+      {
+        "feature": "Outside Temperature (F)",
+        "shap": 1.52,
+        "value": 88.0,
+        "direction": "increased"
+      },
+      {
+        "feature": "wet_bulb_temp_c",
+        "shap": 1.36,
+        "value": 26.63,
+        "direction": "increased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-04-03 19:00:00",
+    "equipment_id": "CHILLER-01",
+    "actual_energy": 200.6,
+    "expected_energy": 144.7,
+    "residual": 55.9,
+    "narrative": "Factors increasing expected energy: load_rolling_2h_mean (+4.1 kWh), load_lag_30m (+3.7 kWh), Building Load (RT) (+2.8 kWh). Factors decreasing expected energy: equipment_id (-1.8 kWh).",
+    "top_contributors": [
+      {
+        "feature": "load_rolling_2h_mean",
+        "shap": 4.09,
+        "value": 655.3,
+        "direction": "increased"
+      },
+      {
+        "feature": "load_lag_30m",
+        "shap": 3.73,
+        "value": 655.3,
+        "direction": "increased"
+      },
+      {
+        "feature": "Building Load (RT)",
+        "shap": 2.76,
+        "value": 586.7,
+        "direction": "increased"
+      },
+      {
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": 2.54,
+        "value": 103.9,
+        "direction": "increased"
+      },
+      {
         "feature": "equipment_id",
-        "shap": -2.19,
+        "shap": -1.76,
         "value": "CHILLER-01",
         "direction": "decreased"
       }
@@ -563,238 +403,38 @@
     "timestamp": "2020-04-30 15:00:00",
     "equipment_id": "CHILLER-01",
     "actual_energy": 206.3,
-    "expected_energy": 150.6,
-    "residual": 55.7,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+14.2 kWh), Chilled Water Rate (L/sec) (+3.0 kWh), Cooling Water Temperature (C) (+2.0 kWh). Factors decreasing expected energy: equipment_id (-2.2 kWh), Outside Temperature (F) (-1.3 kWh).",
+    "expected_energy": 150.8,
+    "residual": 55.5,
+    "narrative": "Factors increasing expected energy: Building Load (RT) (+12.6 kWh), Chilled Water Rate (L/sec) (+3.2 kWh), Cooling Water Temperature (C) (+2.4 kWh). Factors decreasing expected energy: equipment_id (-1.5 kWh).",
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
-        "shap": 14.2,
+        "shap": 12.64,
         "value": 625.5,
         "direction": "increased"
       },
       {
         "feature": "Chilled Water Rate (L/sec)",
-        "shap": 3.01,
+        "shap": 3.21,
         "value": 111.6,
         "direction": "increased"
       },
       {
-        "feature": "equipment_id",
-        "shap": -2.15,
-        "value": "CHILLER-01",
-        "direction": "decreased"
-      },
-      {
         "feature": "Cooling Water Temperature (C)",
-        "shap": 2.02,
+        "shap": 2.41,
         "value": 33.9,
         "direction": "increased"
       },
       {
-        "feature": "Outside Temperature (F)",
-        "shap": -1.26,
-        "value": 81.0,
-        "direction": "decreased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-05-14 11:00:00",
-    "equipment_id": "CHILLER-03",
-    "actual_energy": 196.5,
-    "expected_energy": 141.0,
-    "residual": 55.5,
-    "narrative": "Factors increasing expected energy: Chilled Water Rate (L/sec) (+8.2 kWh), Outside Temperature (F) (+1.9 kWh), Cooling Water Temperature (C) (+1.4 kWh). Factors decreasing expected energy: Building Load (RT) (-4.7 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 8.24,
-        "value": 122.6,
-        "direction": "increased"
-      },
-      {
-        "feature": "Building Load (RT)",
-        "shap": -4.67,
-        "value": 559.9,
+        "feature": "equipment_id",
+        "shap": -1.52,
+        "value": "CHILLER-01",
         "direction": "decreased"
       },
       {
-        "feature": "Outside Temperature (F)",
-        "shap": 1.85,
-        "value": 88.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "Cooling Water Temperature (C)",
-        "shap": 1.43,
-        "value": 32.5,
-        "direction": "increased"
-      },
-      {
-        "feature": "hour_cos",
-        "shap": 1.32,
-        "value": -0.97,
-        "direction": "increased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-05-07 10:30:00",
-    "equipment_id": "CHILLER-03",
-    "actual_energy": 273.6,
-    "expected_energy": 218.2,
-    "residual": 55.4,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+68.9 kWh), Chilled Water Rate (L/sec) (+8.2 kWh), Cooling Water Temperature (C) (+3.1 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": 68.87,
-        "value": 747.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 8.25,
-        "value": 127.4,
-        "direction": "increased"
-      },
-      {
-        "feature": "Cooling Water Temperature (C)",
-        "shap": 3.05,
-        "value": 32.3,
-        "direction": "increased"
-      },
-      {
-        "feature": "hour_cos",
-        "shap": 2.97,
-        "value": -0.87,
-        "direction": "increased"
-      },
-      {
-        "feature": "wet_bulb_temp_c",
-        "shap": 1.88,
-        "value": 26.63,
-        "direction": "increased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2019-09-14 22:30:00",
-    "equipment_id": "CHILLER-03",
-    "actual_energy": 341.9,
-    "expected_energy": 287.1,
-    "residual": 54.8,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+96.3 kWh), Cooling Water Temperature (C) (+19.4 kWh), load_flow_ratio (+15.6 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": 96.34,
-        "value": 1088.4,
-        "direction": "increased"
-      },
-      {
-        "feature": "Cooling Water Temperature (C)",
-        "shap": 19.37,
-        "value": 34.2,
-        "direction": "increased"
-      },
-      {
-        "feature": "load_flow_ratio",
-        "shap": 15.58,
-        "value": 9.09,
-        "direction": "increased"
-      },
-      {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 14.69,
-        "value": 119.8,
-        "direction": "increased"
-      },
-      {
-        "feature": "hour_of_day",
-        "shap": 3.02,
-        "value": "22",
-        "direction": "increased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-04-08 16:00:00",
-    "equipment_id": "CHILLER-03",
-    "actual_energy": 206.6,
-    "expected_energy": 152.7,
-    "residual": 53.9,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+13.3 kWh), Chilled Water Rate (L/sec) (+3.4 kWh), Outside Temperature (F) (+2.1 kWh). Factors decreasing expected energy: load_flow_ratio (-0.9 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": 13.29,
-        "value": 614.3,
-        "direction": "increased"
-      },
-      {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 3.37,
-        "value": 108.5,
-        "direction": "increased"
-      },
-      {
-        "feature": "Outside Temperature (F)",
-        "shap": 2.07,
-        "value": 90.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "hour_cos",
-        "shap": 1.0,
-        "value": -0.5,
-        "direction": "increased"
-      },
-      {
-        "feature": "load_flow_ratio",
-        "shap": -0.86,
-        "value": 5.66,
-        "direction": "decreased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-05-19 10:30:00",
-    "equipment_id": "CHILLER-01",
-    "actual_energy": 316.3,
-    "expected_energy": 265.2,
-    "residual": 51.1,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+89.4 kWh), Cooling Water Temperature (C) (+14.7 kWh), Chilled Water Rate (L/sec) (+14.2 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": 89.42,
-        "value": 821.2,
-        "direction": "increased"
-      },
-      {
-        "feature": "Cooling Water Temperature (C)",
-        "shap": 14.65,
-        "value": 34.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 14.17,
-        "value": 121.8,
-        "direction": "increased"
-      },
-      {
-        "feature": "wet_bulb_temp_c",
-        "shap": 6.75,
-        "value": 27.42,
-        "direction": "increased"
-      },
-      {
-        "feature": "load_flow_ratio",
-        "shap": 5.57,
-        "value": 6.74,
+        "feature": "Pressure (in)",
+        "shap": 1.04,
+        "value": 29.74,
         "direction": "increased"
       }
     ]
@@ -803,118 +443,38 @@
     "timestamp": "2020-02-06 15:30:00",
     "equipment_id": "CHILLER-02",
     "actual_energy": 192.6,
-    "expected_energy": 141.7,
-    "residual": 50.9,
-    "narrative": "Factors increasing expected energy: Wind Speed (mph) (+9.5 kWh), Outside Temperature (F) (+2.2 kWh), load_flow_ratio (+1.7 kWh). Factors decreasing expected energy: Building Load (RT) (-10.1 kWh).",
+    "expected_energy": 137.8,
+    "residual": 54.8,
+    "narrative": "Factors increasing expected energy: Wind Speed (mph) (+8.4 kWh), Outside Temperature (F) (+1.9 kWh), equipment_id (+1.8 kWh). Factors decreasing expected energy: Building Load (RT) (-9.8 kWh).",
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
-        "shap": -10.05,
+        "shap": -9.83,
         "value": 487.5,
         "direction": "decreased"
       },
       {
         "feature": "Wind Speed (mph)",
-        "shap": 9.46,
+        "shap": 8.38,
         "value": 16.0,
         "direction": "increased"
       },
       {
         "feature": "Outside Temperature (F)",
-        "shap": 2.16,
+        "shap": 1.9,
         "value": 88.0,
         "direction": "increased"
       },
       {
-        "feature": "load_flow_ratio",
-        "shap": 1.68,
-        "value": 5.08,
-        "direction": "increased"
-      },
-      {
-        "feature": "hour_cos",
-        "shap": 1.55,
-        "value": -0.71,
-        "direction": "increased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-04-07 14:00:00",
-    "equipment_id": "CHILLER-03",
-    "actual_energy": 195.8,
-    "expected_energy": 145.1,
-    "residual": 50.7,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+6.3 kWh), Outside Temperature (F) (+2.8 kWh), load_flow_ratio (+1.1 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": 6.26,
-        "value": 593.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "Outside Temperature (F)",
-        "shap": 2.81,
-        "value": 91.0,
-        "direction": "increased"
-      },
-      {
-        "feature": "load_flow_ratio",
-        "shap": 1.06,
-        "value": 6.13,
-        "direction": "increased"
-      },
-      {
-        "feature": "day_sin",
-        "shap": 0.95,
-        "value": 0.78,
-        "direction": "increased"
-      },
-      {
-        "feature": "hour_cos",
-        "shap": 0.95,
-        "value": -0.87,
-        "direction": "increased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-04-09 14:00:00",
-    "equipment_id": "CHILLER-02",
-    "actual_energy": 208.7,
-    "expected_energy": 159.1,
-    "residual": 49.6,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+18.2 kWh), Outside Temperature (F) (+2.7 kWh), equipment_id (+1.5 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Building Load (RT)",
-        "shap": 18.15,
-        "value": 622.2,
-        "direction": "increased"
-      },
-      {
-        "feature": "Outside Temperature (F)",
-        "shap": 2.73,
-        "value": 91.0,
-        "direction": "increased"
-      },
-      {
         "feature": "equipment_id",
-        "shap": 1.46,
+        "shap": 1.75,
         "value": "CHILLER-02",
         "direction": "increased"
       },
       {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 1.4,
-        "value": 103.1,
-        "direction": "increased"
-      },
-      {
         "feature": "hour_cos",
-        "shap": 0.94,
-        "value": -0.87,
+        "shap": 1.63,
+        "value": -0.71,
         "direction": "increased"
       }
     ]
@@ -923,79 +483,79 @@
     "timestamp": "2020-02-06 16:00:00",
     "equipment_id": "CHILLER-01",
     "actual_energy": 189.0,
-    "expected_energy": 140.0,
-    "residual": 49.0,
-    "narrative": "Factors increasing expected energy: Wind Speed (mph) (+9.5 kWh), Chilled Water Rate (L/sec) (+2.5 kWh), load_flow_ratio (+2.3 kWh). Factors decreasing expected energy: Building Load (RT) (-10.5 kWh), equipment_id (-2.2 kWh).",
+    "expected_energy": 135.7,
+    "residual": 53.3,
+    "narrative": "Factors increasing expected energy: Wind Speed (mph) (+8.6 kWh), load_flow_ratio (+2.3 kWh), Outside Temperature (F) (+1.8 kWh). Factors decreasing expected energy: Building Load (RT) (-9.8 kWh), equipment_id (-2.3 kWh).",
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
-        "shap": -10.54,
+        "shap": -9.8,
         "value": 487.5,
         "direction": "decreased"
       },
       {
         "feature": "Wind Speed (mph)",
-        "shap": 9.46,
+        "shap": 8.57,
         "value": 16.0,
         "direction": "increased"
       },
       {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 2.47,
-        "value": 97.4,
-        "direction": "increased"
+        "feature": "equipment_id",
+        "shap": -2.28,
+        "value": "CHILLER-01",
+        "direction": "decreased"
       },
       {
         "feature": "load_flow_ratio",
-        "shap": 2.33,
+        "shap": 2.25,
         "value": 5.01,
         "direction": "increased"
       },
       {
-        "feature": "equipment_id",
-        "shap": -2.19,
-        "value": "CHILLER-01",
-        "direction": "decreased"
+        "feature": "Outside Temperature (F)",
+        "shap": 1.83,
+        "value": 88.0,
+        "direction": "increased"
       }
     ]
   },
   {
-    "timestamp": "2020-01-28 12:30:00",
+    "timestamp": "2020-03-28 14:30:00",
     "equipment_id": "CHILLER-02",
-    "actual_energy": 199.5,
-    "expected_energy": 151.3,
-    "residual": 48.2,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+12.8 kWh), Chilled Water Rate (L/sec) (+2.6 kWh), Outside Temperature (F) (+2.1 kWh). Factors decreasing expected energy: load_flow_ratio (-1.2 kWh).",
+    "actual_energy": 192.5,
+    "expected_energy": 143.1,
+    "residual": 49.4,
+    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+4.4 kWh), Chilled Water Rate (L/sec) (+3.9 kWh), equipment_id (+1.8 kWh). Factors decreasing expected energy: Building Load (RT) (-2.3 kWh).",
     "top_contributors": [
       {
-        "feature": "Building Load (RT)",
-        "shap": 12.8,
-        "value": 613.3,
+        "feature": "Cooling Water Temperature (C)",
+        "shap": 4.4,
+        "value": 33.4,
         "direction": "increased"
       },
       {
         "feature": "Chilled Water Rate (L/sec)",
-        "shap": 2.63,
-        "value": 105.2,
+        "shap": 3.91,
+        "value": 107.7,
         "direction": "increased"
       },
       {
-        "feature": "Outside Temperature (F)",
-        "shap": 2.11,
-        "value": 90.0,
+        "feature": "Building Load (RT)",
+        "shap": -2.28,
+        "value": 575.7,
+        "direction": "decreased"
+      },
+      {
+        "feature": "equipment_id",
+        "shap": 1.8,
+        "value": "CHILLER-02",
         "direction": "increased"
       },
       {
         "feature": "wet_bulb_temp_c",
-        "shap": 1.71,
-        "value": 26.33,
+        "shap": 1.57,
+        "value": 26.32,
         "direction": "increased"
-      },
-      {
-        "feature": "load_flow_ratio",
-        "shap": -1.17,
-        "value": 5.83,
-        "direction": "decreased"
       }
     ]
   },
@@ -1003,38 +563,118 @@
     "timestamp": "2020-03-28 07:30:00",
     "equipment_id": "CHILLER-02",
     "actual_energy": 180.8,
-    "expected_energy": 132.7,
-    "residual": 48.1,
-    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+3.6 kWh), Chilled Water Rate (L/sec) (+2.0 kWh), equipment_id (+1.2 kWh). Factors decreasing expected energy: Building Load (RT) (-3.6 kWh).",
+    "expected_energy": 132.5,
+    "residual": 48.3,
+    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+3.9 kWh), Chilled Water Rate (L/sec) (+2.4 kWh), equipment_id (+1.1 kWh). Factors decreasing expected energy: Building Load (RT) (-3.2 kWh), load_lag_30m (-0.9 kWh).",
     "top_contributors": [
       {
         "feature": "Cooling Water Temperature (C)",
-        "shap": 3.62,
+        "shap": 3.91,
         "value": 32.8,
         "direction": "increased"
       },
       {
         "feature": "Building Load (RT)",
-        "shap": -3.58,
+        "shap": -3.18,
         "value": 558.2,
         "direction": "decreased"
       },
       {
         "feature": "Chilled Water Rate (L/sec)",
-        "shap": 2.0,
+        "shap": 2.44,
         "value": 103.4,
         "direction": "increased"
       },
       {
         "feature": "equipment_id",
-        "shap": 1.18,
+        "shap": 1.09,
         "value": "CHILLER-02",
         "direction": "increased"
       },
       {
-        "feature": "hour_cos",
-        "shap": 1.04,
-        "value": -0.26,
+        "feature": "load_lag_30m",
+        "shap": -0.9,
+        "value": 492.6,
+        "direction": "decreased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-02-06 16:00:00",
+    "equipment_id": "CHILLER-02",
+    "actual_energy": 185.9,
+    "expected_energy": 137.8,
+    "residual": 48.1,
+    "narrative": "Factors increasing expected energy: Wind Speed (mph) (+8.4 kWh), Outside Temperature (F) (+1.9 kWh), equipment_id (+1.8 kWh). Factors decreasing expected energy: Building Load (RT) (-9.7 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Building Load (RT)",
+        "shap": -9.7,
+        "value": 487.5,
+        "direction": "decreased"
+      },
+      {
+        "feature": "Wind Speed (mph)",
+        "shap": 8.38,
+        "value": 16.0,
+        "direction": "increased"
+      },
+      {
+        "feature": "Outside Temperature (F)",
+        "shap": 1.9,
+        "value": 88.0,
+        "direction": "increased"
+      },
+      {
+        "feature": "equipment_id",
+        "shap": 1.75,
+        "value": "CHILLER-02",
+        "direction": "increased"
+      },
+      {
+        "feature": "load_flow_ratio",
+        "shap": 1.62,
+        "value": 5.08,
+        "direction": "increased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-03-28 14:00:00",
+    "equipment_id": "CHILLER-02",
+    "actual_energy": 190.7,
+    "expected_energy": 142.6,
+    "residual": 48.1,
+    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+4.7 kWh), Chilled Water Rate (L/sec) (+3.8 kWh), equipment_id (+1.8 kWh). Factors decreasing expected energy: Building Load (RT) (-3.3 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Cooling Water Temperature (C)",
+        "shap": 4.71,
+        "value": 33.5,
+        "direction": "increased"
+      },
+      {
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": 3.8,
+        "value": 107.1,
+        "direction": "increased"
+      },
+      {
+        "feature": "Building Load (RT)",
+        "shap": -3.27,
+        "value": 568.4,
+        "direction": "decreased"
+      },
+      {
+        "feature": "equipment_id",
+        "shap": 1.84,
+        "value": "CHILLER-02",
+        "direction": "increased"
+      },
+      {
+        "feature": "wet_bulb_temp_c",
+        "shap": 1.53,
+        "value": 26.32,
         "direction": "increased"
       }
     ]
@@ -1043,119 +683,119 @@
     "timestamp": "2020-04-04 14:00:00",
     "equipment_id": "CHILLER-02",
     "actual_energy": 201.2,
-    "expected_energy": 153.2,
-    "residual": 48.0,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+11.5 kWh), Cooling Water Temperature (C) (+3.7 kWh), Chilled Water Rate (L/sec) (+3.0 kWh).",
+    "expected_energy": 153.6,
+    "residual": 47.6,
+    "narrative": "Factors increasing expected energy: Building Load (RT) (+10.4 kWh), Cooling Water Temperature (C) (+4.0 kWh), Chilled Water Rate (L/sec) (+3.2 kWh).",
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
-        "shap": 11.46,
+        "shap": 10.4,
         "value": 612.4,
         "direction": "increased"
       },
       {
         "feature": "Cooling Water Temperature (C)",
-        "shap": 3.75,
+        "shap": 3.96,
         "value": 34.0,
         "direction": "increased"
       },
       {
         "feature": "Chilled Water Rate (L/sec)",
-        "shap": 2.98,
+        "shap": 3.21,
         "value": 108.5,
         "direction": "increased"
       },
       {
         "feature": "wet_bulb_temp_c",
-        "shap": 1.86,
+        "shap": 1.82,
         "value": 26.63,
         "direction": "increased"
       },
       {
         "feature": "Outside Temperature (F)",
-        "shap": 1.67,
+        "shap": 1.4,
         "value": 88.0,
         "direction": "increased"
       }
     ]
   },
   {
-    "timestamp": "2019-11-11 16:00:00",
-    "equipment_id": "CHILLER-02",
-    "actual_energy": 314.4,
-    "expected_energy": 266.4,
-    "residual": 48.0,
-    "narrative": "Factors increasing expected energy: Building Load (RT) (+91.2 kWh), Chilled Water Rate (L/sec) (+17.8 kWh), Cooling Water Temperature (C) (+15.6 kWh).",
+    "timestamp": "2020-04-30 15:30:00",
+    "equipment_id": "CHILLER-01",
+    "actual_energy": 186.0,
+    "expected_energy": 138.7,
+    "residual": 47.3,
+    "narrative": "Factors increasing expected energy: Chilled Water Rate (L/sec) (+3.5 kWh), Cooling Water Temperature (C) (+2.5 kWh), hour_cos (+1.6 kWh). Factors decreasing expected energy: equipment_id (-1.7 kWh), Outside Temperature (F) (-1.6 kWh).",
     "top_contributors": [
       {
-        "feature": "Building Load (RT)",
-        "shap": 91.2,
-        "value": 948.5,
-        "direction": "increased"
-      },
-      {
         "feature": "Chilled Water Rate (L/sec)",
-        "shap": 17.83,
-        "value": 153.6,
+        "shap": 3.51,
+        "value": 109.5,
         "direction": "increased"
       },
       {
         "feature": "Cooling Water Temperature (C)",
-        "shap": 15.56,
-        "value": 34.0,
+        "shap": 2.47,
+        "value": 32.7,
         "direction": "increased"
-      },
-      {
-        "feature": "load_flow_ratio",
-        "shap": 5.26,
-        "value": 6.18,
-        "direction": "increased"
-      },
-      {
-        "feature": "hour_cos",
-        "shap": 2.98,
-        "value": -0.5,
-        "direction": "increased"
-      }
-    ]
-  },
-  {
-    "timestamp": "2020-01-28 19:00:00",
-    "equipment_id": "CHILLER-02",
-    "actual_energy": 184.0,
-    "expected_energy": 136.2,
-    "residual": 47.8,
-    "narrative": "Factors increasing expected energy: Chilled Water Rate (L/sec) (+3.5 kWh), equipment_id (+1.7 kWh), Outside Temperature (F) (+1.2 kWh). Factors decreasing expected energy: Cooling Water Temperature (C) (-2.4 kWh).",
-    "top_contributors": [
-      {
-        "feature": "Chilled Water Rate (L/sec)",
-        "shap": 3.52,
-        "value": 104.4,
-        "direction": "increased"
-      },
-      {
-        "feature": "Cooling Water Temperature (C)",
-        "shap": -2.45,
-        "value": 30.8,
-        "direction": "decreased"
       },
       {
         "feature": "equipment_id",
-        "shap": 1.66,
-        "value": "CHILLER-02",
+        "shap": -1.7,
+        "value": "CHILLER-01",
+        "direction": "decreased"
+      },
+      {
+        "feature": "hour_cos",
+        "shap": 1.59,
+        "value": -0.71,
         "direction": "increased"
       },
       {
         "feature": "Outside Temperature (F)",
-        "shap": 1.18,
-        "value": 84.0,
+        "shap": -1.57,
+        "value": 79.0,
+        "direction": "decreased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-05-13 00:30:00",
+    "equipment_id": "CHILLER-02",
+    "actual_energy": 171.6,
+    "expected_energy": 124.3,
+    "residual": 47.3,
+    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+5.2 kWh), wet_bulb_temp_c (+2.2 kWh). Factors decreasing expected energy: Building Load (RT) (-9.5 kWh), Chilled Water Rate (L/sec) (-2.3 kWh), hour_cos (-1.3 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Building Load (RT)",
+        "shap": -9.48,
+        "value": 468.7,
+        "direction": "decreased"
+      },
+      {
+        "feature": "Cooling Water Temperature (C)",
+        "shap": 5.22,
+        "value": 32.8,
         "direction": "increased"
       },
       {
-        "feature": "hour_of_day",
-        "shap": 0.88,
-        "value": "19",
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": -2.3,
+        "value": 87.8,
+        "direction": "decreased"
+      },
+      {
+        "feature": "wet_bulb_temp_c",
+        "shap": 2.25,
+        "value": 26.65,
         "direction": "increased"
+      },
+      {
+        "feature": "hour_cos",
+        "shap": -1.27,
+        "value": 1.0,
+        "direction": "decreased"
       }
     ]
   },
@@ -1163,38 +803,398 @@
     "timestamp": "2020-01-01 08:00:00",
     "equipment_id": "CHILLER-02",
     "actual_energy": 162.7,
-    "expected_energy": 115.1,
-    "residual": 47.6,
-    "narrative": "Factors increasing expected energy: hour_cos (+1.5 kWh). Factors decreasing expected energy: Building Load (RT) (-11.8 kWh), Cooling Water Temperature (C) (-2.6 kWh), Chilled Water Rate (L/sec) (-1.8 kWh).",
+    "expected_energy": 115.6,
+    "residual": 47.1,
+    "narrative": "Factors increasing expected energy: hour_cos (+1.4 kWh), equipment_id (+1.2 kWh). Factors decreasing expected energy: Building Load (RT) (-10.0 kWh), Cooling Water Temperature (C) (-2.7 kWh), Chilled Water Rate (L/sec) (-1.7 kWh).",
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
-        "shap": -11.79,
+        "shap": -9.99,
         "value": 501.1,
         "direction": "decreased"
       },
       {
         "feature": "Cooling Water Temperature (C)",
-        "shap": -2.56,
+        "shap": -2.71,
         "value": 31.0,
         "direction": "decreased"
       },
       {
         "feature": "Chilled Water Rate (L/sec)",
-        "shap": -1.84,
+        "shap": -1.68,
         "value": 93.2,
         "direction": "decreased"
       },
       {
         "feature": "hour_cos",
-        "shap": 1.49,
+        "shap": 1.35,
         "value": -0.5,
         "direction": "increased"
       },
       {
+        "feature": "equipment_id",
+        "shap": 1.18,
+        "value": "CHILLER-02",
+        "direction": "increased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-01-19 15:00:00",
+    "equipment_id": "CHILLER-02",
+    "actual_energy": 184.6,
+    "expected_energy": 138.0,
+    "residual": 46.6,
+    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+5.3 kWh), Chilled Water Rate (L/sec) (+2.4 kWh), equipment_id (+1.9 kWh). Factors decreasing expected energy: Building Load (RT) (-5.9 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Building Load (RT)",
+        "shap": -5.94,
+        "value": 550.0,
+        "direction": "decreased"
+      },
+      {
+        "feature": "Cooling Water Temperature (C)",
+        "shap": 5.28,
+        "value": 33.3,
+        "direction": "increased"
+      },
+      {
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": 2.36,
+        "value": 103.0,
+        "direction": "increased"
+      },
+      {
+        "feature": "equipment_id",
+        "shap": 1.93,
+        "value": "CHILLER-02",
+        "direction": "increased"
+      },
+      {
         "feature": "Outside Temperature (F)",
-        "shap": -1.27,
-        "value": 81.0,
+        "shap": 1.5,
+        "value": 90.0,
+        "direction": "increased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-04-26 13:30:00",
+    "equipment_id": "CHILLER-02",
+    "actual_energy": 169.7,
+    "expected_energy": 123.3,
+    "residual": 46.4,
+    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+3.2 kWh), Outside Temperature (F) (+1.5 kWh). Factors decreasing expected energy: Building Load (RT) (-10.6 kWh), Chilled Water Rate (L/sec) (-1.8 kWh), load_rolling_2h_mean (-1.4 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Building Load (RT)",
+        "shap": -10.63,
+        "value": 463.2,
+        "direction": "decreased"
+      },
+      {
+        "feature": "Cooling Water Temperature (C)",
+        "shap": 3.17,
+        "value": 32.4,
+        "direction": "increased"
+      },
+      {
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": -1.83,
+        "value": 90.4,
+        "direction": "decreased"
+      },
+      {
+        "feature": "Outside Temperature (F)",
+        "shap": 1.52,
+        "value": 88.0,
+        "direction": "increased"
+      },
+      {
+        "feature": "load_rolling_2h_mean",
+        "shap": -1.39,
+        "value": 458.8,
+        "direction": "decreased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-01-14 07:30:00",
+    "equipment_id": "CHILLER-02",
+    "actual_energy": 168.3,
+    "expected_energy": 122.3,
+    "residual": 46.0,
+    "narrative": "Factors increasing expected energy: Chilled Water Rate (L/sec) (+1.5 kWh). Factors decreasing expected energy: Cooling Water Temperature (C) (-5.9 kWh), Building Load (RT) (-2.2 kWh), Outside Temperature (F) (-1.5 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Cooling Water Temperature (C)",
+        "shap": -5.89,
+        "value": 29.5,
+        "direction": "decreased"
+      },
+      {
+        "feature": "Building Load (RT)",
+        "shap": -2.18,
+        "value": 554.5,
+        "direction": "decreased"
+      },
+      {
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": 1.53,
+        "value": 98.8,
+        "direction": "increased"
+      },
+      {
+        "feature": "Outside Temperature (F)",
+        "shap": -1.52,
+        "value": 79.0,
+        "direction": "decreased"
+      },
+      {
+        "feature": "load_lag_30m",
+        "shap": -1.06,
+        "value": 474.7,
+        "direction": "decreased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-01-22 17:30:00",
+    "equipment_id": "CHILLER-02",
+    "actual_energy": 198.7,
+    "expected_energy": 153.2,
+    "residual": 45.5,
+    "narrative": "Factors increasing expected energy: Building Load (RT) (+12.4 kWh), Chilled Water Rate (L/sec) (+3.3 kWh), equipment_id (+1.7 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Building Load (RT)",
+        "shap": 12.37,
+        "value": 629.5,
+        "direction": "increased"
+      },
+      {
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": 3.3,
+        "value": 113.9,
+        "direction": "increased"
+      },
+      {
+        "feature": "equipment_id",
+        "shap": 1.68,
+        "value": "CHILLER-02",
+        "direction": "increased"
+      },
+      {
+        "feature": "hour_cos",
+        "shap": 1.21,
+        "value": -0.26,
+        "direction": "increased"
+      },
+      {
+        "feature": "Wind Speed (mph)",
+        "shap": 1.2,
+        "value": 15.0,
+        "direction": "increased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-05-14 14:30:00",
+    "equipment_id": "CHILLER-01",
+    "actual_energy": 205.4,
+    "expected_energy": 160.1,
+    "residual": 45.3,
+    "narrative": "Factors increasing expected energy: Building Load (RT) (+11.8 kWh), Cooling Water Temperature (C) (+3.7 kWh), wet_bulb_temp_c (+3.4 kWh). Factors decreasing expected energy: equipment_id (-2.1 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Building Load (RT)",
+        "shap": 11.77,
+        "value": 622.7,
+        "direction": "increased"
+      },
+      {
+        "feature": "Cooling Water Temperature (C)",
+        "shap": 3.73,
+        "value": 34.2,
+        "direction": "increased"
+      },
+      {
+        "feature": "wet_bulb_temp_c",
+        "shap": 3.39,
+        "value": 27.01,
+        "direction": "increased"
+      },
+      {
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": 3.24,
+        "value": 114.9,
+        "direction": "increased"
+      },
+      {
+        "feature": "equipment_id",
+        "shap": -2.13,
+        "value": "CHILLER-01",
+        "direction": "decreased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-04-30 10:30:00",
+    "equipment_id": "CHILLER-01",
+    "actual_energy": 262.1,
+    "expected_energy": 217.3,
+    "residual": 44.8,
+    "narrative": "Factors increasing expected energy: Building Load (RT) (+68.2 kWh), Chilled Water Rate (L/sec) (+9.0 kWh), Cooling Water Temperature (C) (+4.7 kWh). Factors decreasing expected energy: equipment_id (-2.0 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Building Load (RT)",
+        "shap": 68.21,
+        "value": 740.6,
+        "direction": "increased"
+      },
+      {
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": 9.0,
+        "value": 124.5,
+        "direction": "increased"
+      },
+      {
+        "feature": "Cooling Water Temperature (C)",
+        "shap": 4.68,
+        "value": 32.6,
+        "direction": "increased"
+      },
+      {
+        "feature": "wet_bulb_temp_c",
+        "shap": 3.26,
+        "value": 26.98,
+        "direction": "increased"
+      },
+      {
+        "feature": "equipment_id",
+        "shap": -2.02,
+        "value": "CHILLER-01",
+        "direction": "decreased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2019-12-27 07:30:00",
+    "equipment_id": "CHILLER-02",
+    "actual_energy": 177.2,
+    "expected_energy": 132.8,
+    "residual": 44.4,
+    "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+4.3 kWh), Chilled Water Rate (L/sec) (+1.7 kWh). Factors decreasing expected energy: wet_bulb_temp_c (-2.2 kWh), Outside Temperature (F) (-1.6 kWh), load_lag_30m (-1.2 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Cooling Water Temperature (C)",
+        "shap": 4.32,
+        "value": 33.2,
+        "direction": "increased"
+      },
+      {
+        "feature": "wet_bulb_temp_c",
+        "shap": -2.25,
+        "value": 23.82,
+        "direction": "decreased"
+      },
+      {
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": 1.74,
+        "value": 102.8,
+        "direction": "increased"
+      },
+      {
+        "feature": "Outside Temperature (F)",
+        "shap": -1.55,
+        "value": 79.0,
+        "direction": "decreased"
+      },
+      {
+        "feature": "load_lag_30m",
+        "shap": -1.15,
+        "value": 476.7,
+        "direction": "decreased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-03-28 10:00:00",
+    "equipment_id": "CHILLER-02",
+    "actual_energy": 194.6,
+    "expected_energy": 150.7,
+    "residual": 43.9,
+    "narrative": "Factors increasing expected energy: Building Load (RT) (+8.0 kWh), Cooling Water Temperature (C) (+5.5 kWh), Chilled Water Rate (L/sec) (+3.3 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Building Load (RT)",
+        "shap": 8.05,
+        "value": 605.1,
+        "direction": "increased"
+      },
+      {
+        "feature": "Cooling Water Temperature (C)",
+        "shap": 5.52,
+        "value": 34.3,
+        "direction": "increased"
+      },
+      {
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": 3.3,
+        "value": 108.5,
+        "direction": "increased"
+      },
+      {
+        "feature": "equipment_id",
+        "shap": 1.42,
+        "value": "CHILLER-02",
+        "direction": "increased"
+      },
+      {
+        "feature": "Outside Temperature (F)",
+        "shap": 1.01,
+        "value": 86.0,
+        "direction": "increased"
+      }
+    ]
+  },
+  {
+    "timestamp": "2020-04-23 12:00:00",
+    "equipment_id": "CHILLER-03",
+    "actual_energy": 183.6,
+    "expected_energy": 139.7,
+    "residual": 43.9,
+    "narrative": "Factors increasing expected energy: Building Load (RT) (+3.8 kWh), Chilled Water Rate (L/sec) (+3.6 kWh), hour_cos (+1.6 kWh). Factors decreasing expected energy: equipment_id (-0.9 kWh).",
+    "top_contributors": [
+      {
+        "feature": "Building Load (RT)",
+        "shap": 3.84,
+        "value": 593.3,
+        "direction": "increased"
+      },
+      {
+        "feature": "Chilled Water Rate (L/sec)",
+        "shap": 3.64,
+        "value": 113.1,
+        "direction": "increased"
+      },
+      {
+        "feature": "hour_cos",
+        "shap": 1.56,
+        "value": -1.0,
+        "direction": "increased"
+      },
+      {
+        "feature": "load_lag_30m",
+        "shap": 1.31,
+        "value": 636.0,
+        "direction": "increased"
+      },
+      {
+        "feature": "equipment_id",
+        "shap": -0.94,
+        "value": "CHILLER-03",
         "direction": "decreased"
       }
     ]

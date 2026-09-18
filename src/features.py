@@ -130,6 +130,47 @@ def _add_wet_bulb(df: pd.DataFrame) -> pd.DataFrame:
     return result
 
 
+def _add_operating_envelope(df: pd.DataFrame) -> pd.DataFrame:
+    """Flag if observation is outside the 1st-99th percentile training bounds."""
+    result = df.copy()
+    from src.constants import FEAT_OUT_OF_ENVELOPE, COL_OUTSIDE_TEMP, COL_BUILDING_LOAD, COL_CHILLED_WATER_RATE
+    out_of_envelope = pd.Series(False, index=result.index)
+    
+    continuous_features = [COL_OUTSIDE_TEMP, COL_BUILDING_LOAD, COL_CHILLED_WATER_RATE]
+    for col in continuous_features:
+        if col in result.columns:
+            q_low = result[col].quantile(0.01)
+            q_high = result[col].quantile(0.99)
+            out_of_envelope |= (result[col] < q_low) | (result[col] > q_high)
+            
+    result[FEAT_OUT_OF_ENVELOPE] = out_of_envelope.astype(int)
+    return result
+
+def _add_historical_lag(df: pd.DataFrame) -> pd.DataFrame:
+    """Add temporal lag and rolling features, protecting against time gaps."""
+    result = df.copy()
+    from src.constants import COL_EQUIPMENT_ID, COL_TIMESTAMP, COL_BUILDING_LOAD, FEAT_LOAD_LAG_30M, FEAT_LOAD_ROLLING_2H_MEAN
+    
+    result = result.sort_values(by=[COL_EQUIPMENT_ID, COL_TIMESTAMP])
+    grouped = result.groupby(COL_EQUIPMENT_ID)
+    
+    # Calculate elapsed time between observations
+    elapsed_minutes = grouped[COL_TIMESTAMP].diff().dt.total_seconds() / 60.0
+    valid_lag = elapsed_minutes <= 90
+    
+    if COL_BUILDING_LOAD in result.columns:
+        result[FEAT_LOAD_LAG_30M] = grouped[COL_BUILDING_LOAD].shift(1)
+        result.loc[~valid_lag, FEAT_LOAD_LAG_30M] = np.nan
+        
+        # 2h mean (using simple rolling 4 periods = 2h since we have 30m sampling)
+        rolling_mean = grouped[COL_BUILDING_LOAD].transform(
+            lambda x: x.rolling(window=4, min_periods=1).mean()
+        )
+        # Shift it to prevent target leakage
+        result[FEAT_LOAD_ROLLING_2H_MEAN] = result.groupby(COL_EQUIPMENT_ID)[rolling_mean.name].shift(1)
+        
+    return result
+
 def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     """Add all engineered features to DataFrame.
 
@@ -141,15 +182,14 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     result = _add_temporal_features(df)
     result = _add_wet_bulb(result)
     result = _add_interaction_features(result)
+    result = _add_operating_envelope(result)
+    result = _add_historical_lag(result)
 
     validate_no_target_leakage(result, list(result.columns))
 
-    from src.constants import FEAT_HOUR_SIN, FEAT_HOUR_COS, FEAT_DAY_SIN, FEAT_DAY_COS, FEAT_LOAD_FLOW_RATIO
+    from src.constants import FEAT_HOUR_SIN, FEAT_HOUR_COS, FEAT_DAY_SIN, FEAT_DAY_COS, FEAT_LOAD_FLOW_RATIO, FEAT_OUT_OF_ENVELOPE, FEAT_LOAD_LAG_30M, FEAT_LOAD_ROLLING_2H_MEAN
     logger.info(
-        "Feature engineering complete. New columns: %s",
-        [FEAT_HOUR_OF_DAY, FEAT_DAY_OF_WEEK,
-         FEAT_IS_WEEKEND, FEAT_IS_NIGHT, FEAT_WET_BULB,
-         FEAT_HOUR_SIN, FEAT_HOUR_COS, FEAT_DAY_SIN, FEAT_DAY_COS, FEAT_LOAD_FLOW_RATIO],
+        "Feature engineering complete. New columns added."
     )
 
     return result
