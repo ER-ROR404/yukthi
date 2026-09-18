@@ -46,11 +46,23 @@ class FoldMetrics:
 
 
 @dataclass(frozen=True)
+class EquipmentMetrics:
+    """Validation metrics for a specific equipment unit."""
+
+    equipment_id: str
+    mae: float
+    rmse: float
+    r2: float
+    sample_count: int
+
+
+@dataclass(frozen=True)
 class TrainResult:
     """Complete training result with model and diagnostics."""
 
     model: CatBoostRegressor
     fold_metrics: tuple[FoldMetrics, ...]
+    equipment_metrics: tuple[EquipmentMetrics, ...]
     mean_mae: float
     mean_rmse: float
     mean_r2: float
@@ -67,8 +79,20 @@ class TrainResult:
             f"Mean R²:   {self.mean_r2:.4f}",
             f"Best Iteration: {self.best_iteration}",
             "",
-            "Top 5 Feature Importances:",
+            "Per-Fold Metrics:",
         ]
+        for fm in self.fold_metrics:
+            lines.append(
+                f"  Fold {fm.fold}: MAE={fm.mae:.4f}, RMSE={fm.rmse:.4f}, R²={fm.r2:.4f} (train={fm.train_size}, val={fm.val_size})"
+            )
+        lines.append("")
+        lines.append("Per-Equipment OOF Validation:")
+        for em in self.equipment_metrics:
+            lines.append(
+                f"  {em.equipment_id}: MAE={em.mae:.4f}, RMSE={em.rmse:.4f}, R²={em.r2:.4f} (n={em.sample_count})"
+            )
+        lines.append("")
+        lines.append("Top 5 Feature Importances:")
         sorted_fi = sorted(
             self.feature_importances.items(),
             key=lambda x: x[1],
@@ -113,9 +137,9 @@ def _evaluate_fold(
     val_size: int,
 ) -> FoldMetrics:
     """Compute MAE, RMSE, R² for a single fold."""
-    mae = mean_absolute_error(y_true, y_pred)
+    mae = float(mean_absolute_error(y_true, y_pred))
     rmse = float(np.sqrt(mean_squared_error(y_true, y_pred)))
-    r2 = r2_score(y_true, y_pred)
+    r2 = float(r2_score(y_true, y_pred))
     return FoldMetrics(
         fold=fold_idx,
         mae=mae,
@@ -131,11 +155,12 @@ def cross_validate(
     feature_cols: list[str],
     target_col: str,
     n_splits: int = CV_SPLITS,
-) -> list[FoldMetrics]:
-    """Run chronological cross-validation and return per-fold metrics."""
+) -> tuple[list[FoldMetrics], list[EquipmentMetrics]]:
+    """Run chronological cross-validation and return per-fold and per-equipment metrics."""
     tscv = TimeSeriesSplit(n_splits=n_splits)
     cat_indices = _get_cat_feature_indices(feature_cols)
     fold_results: list[FoldMetrics] = []
+    oof_records: list[pd.DataFrame] = []
 
     x_data = df[feature_cols]
     y_data = df[target_col]
@@ -164,12 +189,40 @@ def cross_validate(
         )
         fold_results.append(metrics)
 
+        # Collect out-of-fold predictions with equipment_id
+        oof_chunk = pd.DataFrame({
+            COL_EQUIPMENT_ID: x_val[COL_EQUIPMENT_ID].values,
+            "actual": y_val.values,
+            "predicted": y_pred,
+        })
+        oof_records.append(oof_chunk)
+
         logger.info(
             "Fold %d — MAE=%.4f, RMSE=%.4f, R²=%.4f",
             fold_idx + 1, metrics.mae, metrics.rmse, metrics.r2,
         )
 
-    return fold_results
+    # Per-equipment evaluation across all out-of-fold validation sets
+    all_oof = pd.concat(oof_records, ignore_index=True)
+    equipment_metrics: list[EquipmentMetrics] = []
+    for eq_id, group in all_oof.groupby(COL_EQUIPMENT_ID):
+        eq_mae = float(mean_absolute_error(group["actual"], group["predicted"]))
+        eq_rmse = float(np.sqrt(mean_squared_error(group["actual"], group["predicted"])))
+        eq_r2 = float(r2_score(group["actual"], group["predicted"]))
+        eq_res = EquipmentMetrics(
+            equipment_id=str(eq_id),
+            mae=eq_mae,
+            rmse=eq_rmse,
+            r2=eq_r2,
+            sample_count=len(group),
+        )
+        equipment_metrics.append(eq_res)
+        logger.info(
+            "Equipment %s OOF — MAE=%.4f, RMSE=%.4f, R²=%.4f (n=%d)",
+            eq_id, eq_mae, eq_rmse, eq_r2, len(group),
+        )
+
+    return fold_results, equipment_metrics
 
 
 def train_model(
@@ -183,6 +236,10 @@ def train_model(
 
     The final model is trained on the FULL dataset after CV evaluation.
     """
+    import json
+    from datetime import datetime, timezone
+    from src.envelope import compute_operating_envelope
+
     if df.empty:
         raise TrainingError("Cannot train on an empty DataFrame.")
 
@@ -199,9 +256,10 @@ def train_model(
         len(df), len(feature_cols), target_col,
     )
 
-    # Phase 1: Cross-validation
-    fold_metrics = cross_validate(df, feature_cols, target_col)
+    # Phase 1: Cross-validation (chronological TimeSeriesSplit)
+    fold_metrics, equipment_metrics = cross_validate(df, feature_cols, target_col)
     fold_metrics_tuple = tuple(fold_metrics)
+    equipment_metrics_tuple = tuple(equipment_metrics)
 
     mean_mae = float(np.mean([fm.mae for fm in fold_metrics]))
     mean_rmse = float(np.mean([fm.rmse for fm in fold_metrics]))
@@ -211,6 +269,12 @@ def train_model(
         "CV Summary — Mean MAE=%.4f, RMSE=%.4f, R²=%.4f",
         mean_mae, mean_rmse, mean_r2,
     )
+
+    # Save Operating Envelope computed strictly from the first 80% chronological split (train only)
+    split_idx = int(len(df) * 0.8)
+    train_split_df = df.iloc[:split_idx]
+    envelope_path = model_output_path.parent / "operating_envelope.json"
+    compute_operating_envelope(train_split_df, save_path=envelope_path)
 
     # Phase 2: Final model on full data
     cat_indices = _get_cat_feature_indices(feature_cols)
@@ -228,14 +292,83 @@ def train_model(
     importance_values = final_model.get_feature_importance()
     feature_importances = dict(zip(feature_cols, importance_values.tolist()))
 
-    # Save model
+    # Save model artifact
     model_output_path.parent.mkdir(parents=True, exist_ok=True)
     final_model.save_model(str(model_output_path))
     logger.info("Model saved to %s", model_output_path)
 
+    # Save Feature Configuration
+    feature_config_path = model_output_path.parent / "feature_config.json"
+    with open(feature_config_path, "w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "feature_cols": feature_cols,
+                "categorical_features": CAT_FEATURES,
+                "target_col": target_col,
+                "n_features": len(feature_cols),
+            },
+            f,
+            indent=2,
+        )
+    logger.info("Saved feature configuration to %s", feature_config_path)
+
+    # Save Model Metrics
+    metrics_path = model_output_path.parent / "model_metrics.json"
+    metrics_payload = {
+        "canonical_cv": {
+            "n_splits": len(fold_metrics),
+            "mean_mae": round(mean_mae, 4),
+            "mean_rmse": round(mean_rmse, 4),
+            "mean_r2": round(mean_r2, 4),
+            "per_fold": [
+                {
+                    "fold": fm.fold,
+                    "mae": round(fm.mae, 4),
+                    "rmse": round(fm.rmse, 4),
+                    "r2": round(fm.r2, 4),
+                    "train_size": fm.train_size,
+                    "val_size": fm.val_size,
+                }
+                for fm in fold_metrics
+            ],
+        },
+        "per_equipment": {
+            em.equipment_id: {
+                "mae": round(em.mae, 4),
+                "rmse": round(em.rmse, 4),
+                "r2": round(em.r2, 4),
+                "samples": em.sample_count,
+            }
+            for em in equipment_metrics
+        },
+    }
+    with open(metrics_path, "w", encoding="utf-8") as f:
+        json.dump(metrics_payload, f, indent=2)
+    logger.info("Saved model metrics to %s", metrics_path)
+
+    # Save Model Metadata
+    metadata_path = model_output_path.parent / "model_metadata.json"
+    metadata_payload = {
+        "model_type": "CatBoostRegressor",
+        "model_version": "1.0.0",
+        "trained_at_utc": datetime.now(timezone.utc).isoformat(),
+        "random_seed": CATBOOST_RANDOM_SEED,
+        "iterations": CATBOOST_ITERATIONS,
+        "depth": CATBOOST_DEPTH,
+        "learning_rate": CATBOOST_LEARNING_RATE,
+        "l2_leaf_reg": CATBOOST_L2_LEAF_REG,
+        "cv_splits": CV_SPLITS,
+        "training_rows": len(df),
+        "target_col": target_col,
+    }
+    with open(metadata_path, "w", encoding="utf-8") as f:
+        json.dump(metadata_payload, f, indent=2)
+    logger.info("Saved model metadata to %s", metadata_path)
+
     result = TrainResult(
         model=final_model,
         fold_metrics=fold_metrics_tuple,
+        equipment_metrics=equipment_metrics_tuple,
         mean_mae=mean_mae,
         mean_rmse=mean_rmse,
         mean_r2=mean_r2,

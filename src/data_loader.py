@@ -29,9 +29,10 @@ def load_and_validate(filepath: Path) -> pd.DataFrame:
     duplicates = _check_duplicates(df)
     if duplicates > 0:
         logger.warning(
-            "Found %d duplicate (equipment_id, timestamp) pairs.",
+            "Found %d duplicate (equipment_id, timestamp) pairs. Dropping duplicates, keeping last.",
             duplicates,
         )
+        df = df.drop_duplicates(subset=[COL_EQUIPMENT_ID, COL_TIMESTAMP], keep="last").reset_index(drop=True)
 
     _log_audit_summary(df)
     return df

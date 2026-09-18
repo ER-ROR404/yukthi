@@ -1,0 +1,33 @@
+{
+  "feature_cols": [
+    "equipment_id",
+    "Chilled Water Rate (L/sec)",
+    "Cooling Water Temperature (C)",
+    "Building Load (RT)",
+    "Outside Temperature (F)",
+    "Dew Point (F)",
+    "Humidity (%)",
+    "Wind Speed (mph)",
+    "Pressure (in)",
+    "hour_of_day",
+    "day_of_week",
+    "is_weekend",
+    "is_night",
+    "wet_bulb_temp_c",
+    "hour_sin",
+    "hour_cos",
+    "day_sin",
+    "day_cos",
+    "load_flow_ratio",
+    "out_of_envelope",
+    "load_lag_30m",
+    "load_rolling_2h_mean",
+    "was_imputed",
+    "sensor_health_suspicious"
+  ],
+  "categorical_features": [
+    "equipment_id"
+  ],
+  "target_col": "Chiller Energy Consumption (kWh)",
+  "n_features": 24
+}

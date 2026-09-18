@@ -133,18 +133,14 @@ def _add_wet_bulb(df: pd.DataFrame) -> pd.DataFrame:
 def _add_operating_envelope(df: pd.DataFrame) -> pd.DataFrame:
     """Flag if observation is outside the training bounds (prevents extrapolation).
     
-    In production, this dictionary is loaded from a JSON file saved during training.
+    Loaded from models/operating_envelope.json (computed strictly on training data).
     """
     result = df.copy()
-    from src.constants import FEAT_OUT_OF_ENVELOPE, COL_OUTSIDE_TEMP, COL_BUILDING_LOAD, COL_CHILLED_WATER_RATE
-    out_of_envelope = pd.Series(False, index=result.index)
+    from src.constants import FEAT_OUT_OF_ENVELOPE
+    from src.envelope import load_operating_envelope
     
-    # Static bounds from training set (no future leakage)
-    envelope_bounds = {
-        COL_OUTSIDE_TEMP: (77.0, 91.0),
-        COL_BUILDING_LOAD: (370.0, 745.0),
-        COL_CHILLED_WATER_RATE: (75.0, 131.0)
-    }
+    envelope_bounds = load_operating_envelope()
+    out_of_envelope = pd.Series(False, index=result.index)
     
     for col, (q_low, q_high) in envelope_bounds.items():
         if col in result.columns:
@@ -154,27 +150,43 @@ def _add_operating_envelope(df: pd.DataFrame) -> pd.DataFrame:
     return result
 
 def _add_historical_lag(df: pd.DataFrame) -> pd.DataFrame:
-    """Add temporal lag and rolling features, protecting against time gaps."""
+    """Add temporal lag and rolling features, protecting against time gaps.
+    
+    Requires explicit elapsed_minutes calculation. If elapsed_minutes > 90 min,
+    the lag is marked NaN so an old observation never masquerades as 30m lag.
+    """
     result = df.copy()
-    from src.constants import COL_EQUIPMENT_ID, COL_TIMESTAMP, COL_BUILDING_LOAD, FEAT_LOAD_LAG_30M, FEAT_LOAD_ROLLING_2H_MEAN
+    from src.constants import (
+        COL_EQUIPMENT_ID,
+        COL_TIMESTAMP,
+        COL_BUILDING_LOAD,
+        FEAT_LOAD_LAG_30M,
+        FEAT_LOAD_ROLLING_2H_MEAN,
+    )
     
     result = result.sort_values(by=[COL_EQUIPMENT_ID, COL_TIMESTAMP])
     grouped = result.groupby(COL_EQUIPMENT_ID)
     
-    # Calculate elapsed time between observations
-    elapsed_minutes = grouped[COL_TIMESTAMP].diff().dt.total_seconds() / 60.0
-    valid_lag = elapsed_minutes <= 90
+    # Calculate explicit elapsed time between observations
+    result["elapsed_minutes"] = grouped[COL_TIMESTAMP].diff().dt.total_seconds() / 60.0
+    valid_lag = (result["elapsed_minutes"] <= 90.0) & (result["elapsed_minutes"] >= 0.0)
     
     if COL_BUILDING_LOAD in result.columns:
-        result[FEAT_LOAD_LAG_30M] = grouped[COL_BUILDING_LOAD].shift(1)
+        # Prior observation (1-step lag)
+        prior_load = grouped[COL_BUILDING_LOAD].shift(1)
+        result[FEAT_LOAD_LAG_30M] = prior_load
         result.loc[~valid_lag, FEAT_LOAD_LAG_30M] = np.nan
         
-        # 2h mean (using simple rolling 4 periods = 2h since we have 30m sampling)
-        rolling_mean = grouped[COL_BUILDING_LOAD].transform(
-            lambda x: x.rolling(window=4, min_periods=1).mean()
+        # 2-hour rolling mean of PRIOR observations (strictly past observations, max 4 x 30m steps)
+        # Shifted first to guarantee zero target/current leakage
+        rolling_2h = (
+            prior_load.groupby(result[COL_EQUIPMENT_ID])
+            .rolling(window=4, min_periods=1)
+            .mean()
+            .reset_index(level=0, drop=True)
         )
-        # Shift it to prevent target leakage
-        result[FEAT_LOAD_ROLLING_2H_MEAN] = result.groupby(COL_EQUIPMENT_ID)[rolling_mean.name].shift(1)
+        result[FEAT_LOAD_ROLLING_2H_MEAN] = rolling_2h
+        result.loc[~valid_lag, FEAT_LOAD_ROLLING_2H_MEAN] = np.nan
         
     return result
 

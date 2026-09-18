@@ -88,22 +88,33 @@ def export_dashboard_payload(
         overall_median_residual = eq_df[COL_RESIDUAL].median()
         equipment_stats[eq]["recent_drift_kwh"] = round(float(recent_median_residual - overall_median_residual), 2)
 
-    summary_payload = {
-        "title": "YUKTHI Contextual Chiller Intelligence",
-        "total_records": len(df),
-        "total_anomalies": total_anomalies,
-        "anomaly_rate_pct": round(float(total_anomalies / len(df) * 100), 2),
-        "total_events": len(events),
-        "equipments": equipments,
-        "equipment_stats": equipment_stats,
-        "model_info": {
-            "type": "CatBoost Regressor",
-            "cv_mae": 9.91,
-            "cv_rmse": 14.15,
-            "cv_r2": 0.7733,
-            "features": FEATURE_COLS,
-        },
-    }
+        # Load real metrics from generated artifact if available
+        metrics_file = Path("models/model_metrics.json")
+        if metrics_file.exists():
+            with open(metrics_file, "r") as mf:
+                saved_metrics = json.load(mf).get("canonical_cv", {})
+                cv_mae = saved_metrics.get("mean_mae", 9.89)
+                cv_rmse = saved_metrics.get("mean_rmse", 14.14)
+                cv_r2 = saved_metrics.get("mean_r2", 0.7735)
+        else:
+            cv_mae, cv_rmse, cv_r2 = 9.89, 14.14, 0.7735
+
+        summary_payload = {
+            "title": "YUKTHI Contextual Chiller Intelligence",
+            "total_records": len(df),
+            "total_anomalies": total_anomalies,
+            "anomaly_rate_pct": round(float(total_anomalies / len(df) * 100), 2),
+            "total_events": len(events),
+            "equipments": equipments,
+            "equipment_stats": equipment_stats,
+            "model_info": {
+                "type": "CatBoost Regressor",
+                "cv_mae": cv_mae,
+                "cv_rmse": cv_rmse,
+                "cv_r2": cv_r2,
+                "features": FEATURE_COLS,
+            },
+        }
 
     with open(output_dir / "summary.json", "w") as f:
         json.dump(summary_payload, f, indent=2)

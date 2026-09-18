@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "lower_quantile": 0.01,
+    "upper_quantile": 0.99,
+    "train_rows": 19995,
+    "generated_from": "training_data_only"
+  },
+  "bounds": {
+    "Outside Temperature (F)": {
+      "lower": 77.0,
+      "upper": 91.0
+    },
+    "Building Load (RT)": {
+      "lower": 374.1,
+      "upper": 745.1
+    },
+    "Chilled Water Rate (L/sec)": {
+      "lower": 75.7,
+      "upper": 130.2
+    },
+    "Cooling Water Temperature (C)": {
+      "lower": 29.1,
+      "upper": 34.5
+    }
+  }
+}
