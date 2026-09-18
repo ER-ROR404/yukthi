@@ -241,3 +241,29 @@ def train_model(
 
     logger.info(result.summary())
     return result
+
+if __name__ == "__main__":
+    import argparse
+    from src.data_loader import load_and_validate
+    from src.preprocessing import preprocess
+    from src.features import engineer_features
+    from src.constants import FEATURE_COLS, COL_ENERGY
+    
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s | %(message)s")
+    
+    parser = argparse.ArgumentParser(description="Train CatBoost model.")
+    parser.add_argument("--task-type", default="CPU", choices=["CPU", "GPU"])
+    args = parser.parse_args()
+    
+    logger.info("Starting ML pipeline: Data Loader -> Preprocessing -> Feature Engineering -> Training")
+    df = load_and_validate(Path("data/raw/chiller_data.csv"))
+    df, _ = preprocess(df)
+    df = engineer_features(df)
+    
+    train_model(
+        df=df,
+        feature_cols=FEATURE_COLS,
+        target_col=COL_ENERGY,
+        model_output_path=Path("models/catboost_expected_energy.cbm"),
+        task_type=args.task_type
+    )

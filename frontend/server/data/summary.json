@@ -1,9 +1,9 @@
 {
   "title": "YUKTHI Chiller Intelligence",
   "total_records": 24994,
-  "total_anomalies": 4066,
-  "anomaly_rate_pct": 16.27,
-  "total_events": 3509,
+  "total_anomalies": 1827,
+  "anomaly_rate_pct": 7.31,
+  "total_events": 1373,
   "equipments": [
     "CHILLER-01",
     "CHILLER-02",
@@ -18,9 +18,9 @@
       "avg_expected_kwh": 127.85,
       "avg_residual_kwh": -0.01,
       "max_residual_kwh": 62.0,
-      "anomaly_count": 1396,
-      "anomaly_rate_pct": 16.75,
-      "event_count": 1187,
+      "anomaly_count": 509,
+      "anomaly_rate_pct": 6.11,
+      "event_count": 389,
       "avg_cop_approx": 14.3
     },
     "CHILLER-02": {
@@ -31,9 +31,9 @@
       "avg_expected_kwh": 130.98,
       "avg_residual_kwh": 0.84,
       "max_residual_kwh": 62.51,
-      "anomaly_count": 1344,
-      "anomaly_rate_pct": 16.12,
-      "event_count": 1169,
+      "anomaly_count": 631,
+      "anomaly_rate_pct": 7.57,
+      "event_count": 470,
       "avg_cop_approx": 13.84
     },
     "CHILLER-03": {
@@ -44,9 +44,9 @@
       "avg_expected_kwh": 132.56,
       "avg_residual_kwh": -0.04,
       "max_residual_kwh": 157.25,
-      "anomaly_count": 1326,
-      "anomaly_rate_pct": 15.94,
-      "event_count": 1153,
+      "anomaly_count": 687,
+      "anomaly_rate_pct": 8.26,
+      "event_count": 514,
       "avg_cop_approx": 14.04
     }
   },
