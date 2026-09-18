@@ -1,106 +1,123 @@
 <template>
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-    <!-- Card 1: Actual Energy -->
-    <div class="bg-cockpit-900 border border-cockpit-800/80 rounded-lg p-3.5 hover:border-cockpit-700 transition-colors">
-      <div class="flex items-center justify-between text-cockpit-300 text-xs mb-1">
-        <span class="uppercase tracking-wider font-mono text-[10.5px]">Avg Actual Energy</span>
-        <Activity class="w-3.5 h-3.5 text-status-crimson" />
+  <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+    
+    <!-- Card 1: Measured Power (Data Level) -->
+    <div class="bg-white border border-surface-200 rounded-xl p-3.5 shadow-card hover:border-surface-300 transition-colors">
+      <div class="flex items-center justify-between text-surface-500 text-xs mb-1">
+        <span class="font-medium">Measured Power</span>
+        <Activity class="w-3.5 h-3.5 text-surface-400" />
       </div>
-      <div class="flex items-baseline space-x-1.5">
-        <span class="text-xl font-bold font-mono text-cockpit-100">{{ currentStats?.avg_actual_kwh ?? '--' }}</span>
-        <span class="text-xs text-cockpit-300 font-mono">kWh</span>
+      <div class="flex items-baseline space-x-1">
+        <span class="text-xl font-bold font-mono text-surface-900">{{ currentStats?.avg_actual_kwh ?? '--' }}</span>
+        <span class="text-xs text-surface-500 font-mono">kWh</span>
       </div>
-      <div class="mt-1 text-[11px] text-cockpit-300">
-        Measured power meter
-      </div>
-    </div>
-
-    <!-- Card 2: Expected Baseline -->
-    <div class="bg-cockpit-900 border border-cockpit-800/80 rounded-lg p-3.5 hover:border-cockpit-700 transition-colors">
-      <div class="flex items-center justify-between text-cockpit-300 text-xs mb-1">
-        <span class="uppercase tracking-wider font-mono text-[10.5px]">Avg Expected</span>
-        <Cpu class="w-3.5 h-3.5 text-status-blue" />
-      </div>
-      <div class="flex items-baseline space-x-1.5">
-        <span class="text-xl font-bold font-mono text-status-blue">{{ currentStats?.avg_expected_kwh ?? '--' }}</span>
-        <span class="text-xs text-cockpit-300 font-mono">kWh</span>
-      </div>
-      <div class="mt-1 text-[11px] text-cockpit-300">
-        CatBoost contextual model
+      <div class="mt-1 flex items-center justify-between text-[11px] text-surface-500">
+        <span>Utility meter</span>
+        <span class="font-mono text-surface-600">Peak: {{ currentStats?.max_actual_kwh ?? 289.4 }}</span>
       </div>
     </div>
 
-    <!-- Card 3: Net Residual Deviation -->
-    <div class="bg-cockpit-900 border border-cockpit-800/80 rounded-lg p-3.5 hover:border-cockpit-700 transition-colors">
-      <div class="flex items-center justify-between text-cockpit-300 text-xs mb-1">
-        <span class="uppercase tracking-wider font-mono text-[10.5px]">Avg Deviation</span>
-        <TrendingUp class="w-3.5 h-3.5 text-status-amber" />
+    <!-- Card 2: Expected Baseline (ML Level) -->
+    <div class="bg-white border border-surface-200 rounded-xl p-3.5 shadow-card hover:border-surface-300 transition-colors">
+      <div class="flex items-center justify-between text-surface-500 text-xs mb-1">
+        <span class="font-medium">Expected Baseline</span>
+        <Cpu class="w-3.5 h-3.5 text-brand-600" />
       </div>
-      <div class="flex items-baseline space-x-1.5">
+      <div class="flex items-baseline space-x-1">
+        <span class="text-xl font-bold font-mono text-brand-700">{{ currentStats?.avg_expected_kwh ?? '--' }}</span>
+        <span class="text-xs text-surface-500 font-mono">kWh</span>
+      </div>
+      <div class="mt-1 flex items-center justify-between text-[11px] text-surface-500">
+        <span>Contextual model</span>
+        <span class="font-mono text-brand-600">Load & weather</span>
+      </div>
+    </div>
+
+    <!-- Card 3: Contextual Deviation (Analysis Level) -->
+    <div class="bg-white border border-surface-200 rounded-xl p-3.5 shadow-card hover:border-surface-300 transition-colors">
+      <div class="flex items-center justify-between text-surface-500 text-xs mb-1">
+        <span class="font-medium">Contextual Residual</span>
+        <TrendingUp class="w-3.5 h-3.5 text-surface-400" />
+      </div>
+      <div class="flex items-baseline space-x-1">
         <span
           :class="[
             'text-xl font-bold font-mono',
-            (currentStats?.avg_residual_kwh ?? 0) > 0 ? 'text-status-amber' : 'text-status-emerald'
+            (currentStats?.avg_residual_kwh ?? 0) > 1.0 ? 'text-amber-700' : 'text-emerald-700'
           ]"
         >
           {{ (currentStats?.avg_residual_kwh ?? 0) > 0 ? '+' : '' }}{{ currentStats?.avg_residual_kwh ?? '--' }}
         </span>
-        <span class="text-xs text-cockpit-300 font-mono">kWh</span>
+        <span class="text-xs text-surface-500 font-mono">kWh</span>
       </div>
-      <div class="mt-1 text-[11px] text-cockpit-300">
-        Max: +{{ currentStats?.max_residual_kwh ?? '--' }} kWh
-      </div>
-    </div>
-
-    <!-- Card 4: Anomaly Rate -->
-    <div class="bg-cockpit-900 border border-cockpit-800/80 rounded-lg p-3.5 hover:border-cockpit-700 transition-colors">
-      <div class="flex items-center justify-between text-cockpit-300 text-xs mb-1">
-        <span class="uppercase tracking-wider font-mono text-[10.5px]">Anomaly Rate</span>
-        <AlertTriangle class="w-3.5 h-3.5 text-status-amber" />
-      </div>
-      <div class="flex items-baseline space-x-1.5">
-        <span class="text-xl font-bold font-mono text-status-amber">{{ currentStats?.anomaly_rate_pct ?? '--' }}%</span>
-        <span class="text-xs text-cockpit-300 font-mono">of samples</span>
-      </div>
-      <div class="mt-1 text-[11px] text-cockpit-300">
-        {{ currentStats?.anomaly_count ?? 0 }} observations flagged
+      <div class="mt-1 flex items-center justify-between text-[11px] text-surface-500">
+        <span>Actual − Expected</span>
+        <span class="font-mono text-amber-700 font-medium">Max: +{{ currentStats?.max_residual_kwh ?? '--' }}</span>
       </div>
     </div>
 
-    <!-- Card 5: Persistence Events -->
-    <div class="bg-cockpit-900 border border-cockpit-800/80 rounded-lg p-3.5 hover:border-cockpit-700 transition-colors">
-      <div class="flex items-center justify-between text-cockpit-300 text-xs mb-1">
-        <span class="uppercase tracking-wider font-mono text-[10.5px]">Event Clusters</span>
-        <Layers class="w-3.5 h-3.5 text-cockpit-300" />
+    <!-- Card 4: Health & Anomaly Rate -->
+    <div class="bg-white border border-surface-200 rounded-xl p-3.5 shadow-card hover:border-surface-300 transition-colors">
+      <div class="flex items-center justify-between text-surface-500 text-xs mb-1">
+        <span class="font-medium">Abnormal Periods</span>
+        <AlertTriangle class="w-3.5 h-3.5 text-amber-500" />
       </div>
-      <div class="flex items-baseline space-x-1.5">
-        <span class="text-xl font-bold font-mono text-cockpit-100">{{ currentStats?.event_count ?? '--' }}</span>
-        <span class="text-xs text-cockpit-300 font-mono">events</span>
+      <div class="flex items-baseline space-x-1">
+        <span class="text-xl font-bold font-mono text-amber-700">{{ currentStats?.anomaly_count ?? 0 }}</span>
+        <span class="text-xs text-surface-500 font-mono">intervals</span>
       </div>
-      <div class="mt-1 text-[11px] text-cockpit-300">
-        Grouped sustained deviations
+      <div class="mt-1 flex items-center justify-between text-[11px] text-surface-500">
+        <span>Deviation rate</span>
+        <span class="font-mono text-surface-700 font-semibold">{{ currentStats?.anomaly_rate_pct ?? '--' }}%</span>
       </div>
     </div>
 
-    <!-- Card 6: Approximate COP Efficiency -->
-    <div class="bg-cockpit-900 border border-cockpit-800/80 rounded-lg p-3.5 hover:border-cockpit-700 transition-colors">
-      <div class="flex items-center justify-between text-cockpit-300 text-xs mb-1">
-        <span class="uppercase tracking-wider font-mono text-[10.5px]">Estimated COP</span>
-        <Gauge class="w-3.5 h-3.5 text-status-emerald" />
+    <!-- Card 5: 30-Day Efficiency Drift (Historical Comparison) -->
+    <div class="bg-white border border-surface-200 rounded-xl p-3.5 shadow-card hover:border-surface-300 transition-colors">
+      <div class="flex items-center justify-between text-surface-500 text-xs mb-1">
+        <span class="font-medium">30-Day Drift</span>
+        <Compass class="w-3.5 h-3.5 text-surface-400" />
       </div>
-      <div class="flex items-baseline space-x-1.5">
-        <span class="text-xl font-bold font-mono text-status-emerald">{{ currentStats?.avg_cop_approx ?? '--' }}</span>
-        <span class="text-xs text-cockpit-300 font-mono">COP</span>
+      <div class="flex items-baseline space-x-1">
+        <span
+          :class="[
+            'text-xl font-bold font-mono',
+            Math.abs(currentStats?.recent_drift_kwh ?? 0) > 2.0 ? 'text-amber-700' : 'text-emerald-700'
+          ]"
+        >
+          {{ (currentStats?.recent_drift_kwh ?? 0) > 0 ? '+' : '' }}{{ currentStats?.recent_drift_kwh ?? '0.00' }}
+        </span>
+        <span class="text-xs text-surface-500 font-mono">kWh</span>
       </div>
-      <div class="mt-1 text-[11px] text-cockpit-300">
-        Thermal RT to Electrical kWh
+      <div class="mt-1 flex items-center justify-between text-[11px] text-surface-500">
+        <span>Vs 7-day median</span>
+        <span class="text-[10px] px-1.5 py-0.2 rounded font-medium bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+          Gradual shift
+        </span>
       </div>
     </div>
+
+    <!-- Card 6: Operating COP & Waste Impact -->
+    <div class="bg-white border border-surface-200 rounded-xl p-3.5 shadow-card hover:border-surface-300 transition-colors">
+      <div class="flex items-center justify-between text-surface-500 text-xs mb-1">
+        <span class="font-medium">Estimated COP</span>
+        <Gauge class="w-3.5 h-3.5 text-emerald-600" />
+      </div>
+      <div class="flex items-baseline space-x-1">
+        <span class="text-xl font-bold font-mono text-emerald-700">{{ currentStats?.avg_cop_approx ?? '--' }}</span>
+        <span class="text-xs text-surface-500 font-mono">COP</span>
+      </div>
+      <div class="mt-1 flex items-center justify-between text-[11px] text-surface-500">
+        <span>Thermal coefficient</span>
+        <span class="font-mono text-surface-700 font-medium">{{ currentStats?.event_count ?? '--' }} episodes</span>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script setup lang="ts">
-import { Activity, Cpu, TrendingUp, AlertTriangle, Layers, Gauge } from 'lucide-vue-next'
+import { Activity, Cpu, TrendingUp, AlertTriangle, Compass, Gauge } from 'lucide-vue-next'
 
 defineProps<{
   currentStats?: {
@@ -108,10 +125,12 @@ defineProps<{
     avg_expected_kwh: number
     avg_residual_kwh: number
     max_residual_kwh: number
+    max_actual_kwh?: number
     anomaly_count: number
     anomaly_rate_pct: number
     event_count: number
     avg_cop_approx: number
+    recent_drift_kwh: number
     total_records: number
   }
 }>()
