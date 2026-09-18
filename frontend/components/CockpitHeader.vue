@@ -9,7 +9,7 @@
         <div>
           <div class="flex items-center space-x-2">
             <h1 class="font-bold text-lg text-cockpit-100 tracking-tight font-sans">
-              YUKTHI <span class="text-xs px-2 py-0.5 rounded bg-cockpit-800 border border-cockpit-700 text-cockpit-300 font-mono font-medium uppercase tracking-wider">Telemetry Cockpit</span>
+              YUKTHI <span class="text-xs px-2 py-0.5 rounded bg-cockpit-800 border border-cockpit-700 text-cockpit-300 font-mono font-medium uppercase tracking-wider">Contextual Chiller Intelligence</span>
             </h1>
             <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse mr-1.5"></span>
@@ -17,7 +17,7 @@
             </span>
           </div>
           <p class="text-xs text-cockpit-300 mt-0.5">
-            Expected-Energy Baseline & Contextual Anomaly Engine • CatBoost + SHAP
+            Physics-Informed Expected-Energy Baseline & Robust Anomaly Engine
           </p>
         </div>
       </div>
@@ -54,7 +54,7 @@
       <div class="hidden lg:flex items-center space-x-4 border-l border-cockpit-800 pl-4 text-xs font-mono">
         <div>
           <span class="text-cockpit-300 block text-[10px] uppercase tracking-wider">Model R²</span>
-          <span class="text-status-emerald font-semibold">0.771 (CV 5-fold)</span>
+          <span class="text-status-emerald font-semibold">0.7727 (CV 5-fold)</span>
         </div>
         <div>
           <span class="text-cockpit-300 block text-[10px] uppercase tracking-wider">CV MAE</span>

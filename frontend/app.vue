@@ -57,7 +57,7 @@
               </li>
               <li class="flex justify-between">
                 <span>Anomaly Threshold:</span>
-                <span class="text-status-amber">Rolling |z| > 2.5 (2h window)</span>
+                <span class="text-status-amber">Robust MAD > 3.0 + Isolation Forest</span>
               </li>
               <li class="flex justify-between">
                 <span>Target Leakage Protection:</span>
@@ -65,9 +65,9 @@
               </li>
             </ul>
 
-            <div class="mt-4 pt-3 border-t border-cockpit-800 text-[11px] text-cockpit-300 font-sans">
+            <div class="mt-4 pt-3 border-t border-cockpit-800 text-[11px] text-cockpit-300 font-sans leading-relaxed">
               <p>
-                <strong>Evaluation Rationale:</strong> In unsupervised chiller telemetry, labeling cannot be fabricated. The engine computes contextual expected energy, isolating abnormal deviations from normal weather/building load fluctuations.
+                <strong>Evaluation Rationale:</strong> A physics-informed, context-aware chiller intelligence system that learns expected energy consumption from operating, environmental, equipment and temporal context. Instead of using fixed thresholds, it compares measured energy with contextual expected energy, analyses the residual using robust anomaly detection and persistence logic, and provides SHAP-based explanations for the model's prediction.
               </p>
             </div>
           </div>
