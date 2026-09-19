@@ -72,11 +72,27 @@
       </div>
     </div>
 
-    <!-- Card 5: 30-Day Efficiency Drift (Historical Comparison) -->
+    <!-- Card 5: Persistent Episodes (Clustered Maintenance Events) -->
+    <div class="bg-white border border-surface-200 rounded-xl p-4 sm:p-5 shadow-card hover:border-surface-300 transition-colors">
+      <div class="flex items-center justify-between text-surface-600 text-xs sm:text-sm font-semibold mb-1.5">
+        <span>Persistent Episodes</span>
+        <Layers class="w-4 h-4 text-orange-600" />
+      </div>
+      <div class="flex items-baseline space-x-1.5">
+        <span class="text-2xl sm:text-3xl font-bold font-mono text-orange-700">{{ currentStats?.event_count ?? '--' }}</span>
+        <span class="text-xs sm:text-sm text-surface-500 font-mono font-medium">episodes</span>
+      </div>
+      <div class="mt-1.5 flex items-center justify-between text-xs text-surface-500">
+        <span>Consolidated</span>
+        <span class="font-mono text-surface-700 font-medium">Maintenance events</span>
+      </div>
+    </div>
+
+    <!-- Card 6: 30-Day Efficiency Drift (Historical Comparison) -->
     <div class="bg-white border border-surface-200 rounded-xl p-4 sm:p-5 shadow-card hover:border-surface-300 transition-colors">
       <div class="flex items-center justify-between text-surface-600 text-xs sm:text-sm font-semibold mb-1.5">
         <span>30-Day Drift</span>
-        <Compass class="w-4 h-4 text-surface-500" />
+        <Compass class="w-4 h-4 text-emerald-600" />
       </div>
       <div class="flex items-baseline space-x-1.5">
         <span
@@ -97,27 +113,11 @@
       </div>
     </div>
 
-    <!-- Card 6: Operating COP & Episodes -->
-    <div class="bg-white border border-surface-200 rounded-xl p-4 sm:p-5 shadow-card hover:border-surface-300 transition-colors">
-      <div class="flex items-center justify-between text-surface-600 text-xs sm:text-sm font-semibold mb-1.5">
-        <span>Estimated COP</span>
-        <Gauge class="w-4 h-4 text-emerald-600" />
-      </div>
-      <div class="flex items-baseline space-x-1.5">
-        <span class="text-2xl sm:text-3xl font-bold font-mono text-emerald-700">{{ currentStats?.avg_cop_approx ?? '--' }}</span>
-        <span class="text-xs sm:text-sm text-surface-500 font-mono font-medium">COP</span>
-      </div>
-      <div class="mt-1.5 flex items-center justify-between text-xs text-surface-500">
-        <span>Coefficient</span>
-        <span class="font-mono text-surface-800 font-semibold">{{ currentStats?.event_count ?? '--' }} episodes</span>
-      </div>
-    </div>
-
   </div>
 </template>
 
 <script setup lang="ts">
-import { Activity, Cpu, TrendingUp, AlertTriangle, Compass, Gauge } from 'lucide-vue-next'
+import { Activity, Cpu, TrendingUp, AlertTriangle, Compass, Layers } from 'lucide-vue-next'
 
 defineProps<{
   currentStats?: {
@@ -129,7 +129,7 @@ defineProps<{
     anomaly_count: number
     anomaly_rate_pct: number
     event_count: number
-    avg_cop_approx: number
+    avg_cop_approx?: number
     recent_drift_kwh: number
     total_records: number
   }
