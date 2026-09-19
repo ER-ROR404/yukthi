@@ -6,9 +6,18 @@
 html, body {
   background-color: #EDF2F7;
   color: #0F172A;
-  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   margin: 0;
   padding: 0;
+}
+
+/* High-precision numerical alignment across industrial telemetry tables and cards */
+.font-mono, table, code, [data-tabular-nums] {
+  font-feature-settings: "tnum" 1, "zero" 1;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Force solid card rendering so no card ever looks transparent */

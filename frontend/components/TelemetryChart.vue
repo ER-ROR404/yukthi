@@ -300,20 +300,20 @@ const chartOption = computed(() => {
     {
       type: 'value',
       name: 'Power (kWh)',
-      nameTextStyle: { color: '#475569', fontSize: 12, fontFamily: 'Plus Jakarta Sans', align: 'left', padding: [0, 0, 8, 0], fontWeight: 'bold' },
+      nameTextStyle: { color: '#475569', fontSize: 12, fontFamily: 'Inter, system-ui, sans-serif', align: 'left', padding: [0, 0, 8, 0], fontWeight: 600 },
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { color: '#475569', fontSize: 11, fontFamily: 'Fira Code', fontWeight: 500 },
+      axisLabel: { color: '#475569', fontSize: 11, fontFamily: 'JetBrains Mono, monospace', fontWeight: 500 },
       splitLine: { lineStyle: { color: '#F1F5F9', type: 'solid' } }
     },
     {
       gridIndex: 1,
       type: 'value',
       name: 'Δ kWh',
-      nameTextStyle: { color: '#64748B', fontSize: 11, fontFamily: 'Fira Code', fontWeight: 500 },
+      nameTextStyle: { color: '#64748B', fontSize: 11, fontFamily: 'JetBrains Mono, monospace', fontWeight: 500 },
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { color: '#64748B', fontSize: 10, fontFamily: 'Fira Code' },
+      axisLabel: { color: '#64748B', fontSize: 10, fontFamily: 'JetBrains Mono, monospace' },
       splitLine: { lineStyle: { color: '#F1F5F9', type: 'solid' } }
     }
   ]
@@ -323,10 +323,10 @@ const chartOption = computed(() => {
       type: 'value',
       position: 'right',
       name: activeOverlay.value === 'load' ? 'Load (RT)' : 'Flow (L/s)',
-      nameTextStyle: { color: activeOverlay.value === 'load' ? '#475569' : '#0D9488', fontSize: 12, fontWeight: 'bold' },
+      nameTextStyle: { color: activeOverlay.value === 'load' ? '#475569' : '#0D9488', fontSize: 12, fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 600 },
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { color: '#64748B', fontSize: 11, fontFamily: 'Fira Code' },
+      axisLabel: { color: '#64748B', fontSize: 11, fontFamily: 'JetBrains Mono, monospace' },
       splitLine: { show: false }
     })
   }
@@ -346,7 +346,7 @@ const chartOption = computed(() => {
       padding: 14,
       shadowColor: 'rgba(15, 23, 42, 0.08)',
       shadowBlur: 16,
-      textStyle: { color: '#0F172A', fontFamily: 'Plus Jakarta Sans', fontSize: 13 },
+      textStyle: { color: '#0F172A', fontFamily: 'Inter, system-ui, sans-serif', fontSize: 13 },
       formatter: (params: any) => {
         if (!params || params.length === 0) return ''
         const idx = params[0].dataIndex
@@ -365,13 +365,13 @@ const chartOption = computed(() => {
         }
 
         return `
-          <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; min-width: 260px;">
+          <div style="font-family: 'Inter', system-ui, sans-serif; min-width: 260px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid #F1F5F9; padding-bottom: 6px;">
-              <span style="font-family: 'Fira Code', monospace; color: #475569; font-size: 12px; font-weight: 600;">${item.ts}</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-feature-settings: 'tnum' 1; color: #475569; font-size: 12px; font-weight: 600;">${item.ts}</span>
               ${statusBadge}
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-family: 'Fira Code', monospace; margin-bottom: 10px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-family: 'JetBrains Mono', monospace; font-feature-settings: 'tnum' 1; margin-bottom: 10px;">
               <div>
                 <span style="color: #DC2626; font-size: 11px; display: block; font-weight: 600;">Measured Power</span>
                 <span style="font-weight: 700; color: #DC2626; font-size: 15px;">${item.act} kWh</span>
@@ -383,7 +383,7 @@ const chartOption = computed(() => {
             </div>
 
             <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 8px 10px; margin-bottom: 10px;">
-              <div style="display: flex; justify-content: space-between; font-family: 'Fira Code', monospace; font-size: 12px;">
+              <div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-feature-settings: 'tnum' 1; font-size: 12px;">
                 <span style="color: #475569; font-weight: 500;">Contextual Residual:</span>
                 <span style="font-weight: 700; color: ${item.res > 15 ? '#DC2626' : item.res > 0 ? '#EA580C' : '#059669'}; font-size: 13px;">
                   ${item.res > 0 ? '+' : ''}${item.res} kWh (z=${item.z})
@@ -419,7 +419,7 @@ const chartOption = computed(() => {
         data: timestamps,
         boundaryGap: false,
         axisLine: { lineStyle: { color: '#CBD5E1' } },
-        axisLabel: { color: '#475569', fontSize: 11, fontFamily: 'Fira Code', fontWeight: 500 },
+        axisLabel: { color: '#475569', fontSize: 11, fontFamily: 'JetBrains Mono, monospace', fontWeight: 500 },
         splitLine: { show: true, lineStyle: { color: '#F8FAFC' } }
       }
     ],
