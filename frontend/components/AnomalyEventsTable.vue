@@ -64,49 +64,49 @@
         displayedEvents.length > 25 ? 'max-h-[560px] overflow-y-auto' : ''
       ]"
     >
-      <table class="w-full text-left text-xs sm:text-sm font-mono">
-        <thead class="bg-surface-50 text-surface-600 uppercase text-xs tracking-wider sticky top-0 border-b border-surface-200 z-10 font-sans">
-          <tr>
+      <table class="w-full text-left text-xs sm:text-sm font-mono border-collapse">
+        <thead class="sticky top-0 z-20 font-sans shadow-xs">
+          <tr class="border-b border-surface-300">
             <th
               @click="toggleSort('event_id')"
-              class="py-3 px-3.5 font-semibold cursor-pointer select-none hover:text-surface-900 transition-colors"
+              class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider cursor-pointer select-none hover:text-surface-950 transition-colors"
             >
               <div class="flex items-center space-x-1">
                 <span>Event</span>
-                <component :is="getSortIcon('event_id')" class="w-3 h-3 text-surface-400" />
+                <component :is="getSortIcon('event_id')" class="w-3 h-3 text-surface-500" />
               </div>
             </th>
-            <th class="py-3 px-3.5 font-semibold">Unit</th>
+            <th class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider">Unit</th>
             <th
               @click="toggleSort('start_time')"
-              class="py-3 px-3.5 font-semibold cursor-pointer select-none hover:text-surface-900 transition-colors"
+              class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider cursor-pointer select-none hover:text-surface-950 transition-colors"
             >
               <div class="flex items-center space-x-1">
                 <span>Start Time Window</span>
-                <component :is="getSortIcon('start_time')" class="w-3 h-3 text-surface-400" />
+                <component :is="getSortIcon('start_time')" class="w-3 h-3 text-surface-500" />
               </div>
             </th>
             <th
               @click="toggleSort('duration_minutes')"
-              class="py-3 px-3.5 font-semibold cursor-pointer select-none hover:text-surface-900 transition-colors"
+              class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider cursor-pointer select-none hover:text-surface-950 transition-colors"
             >
               <div class="flex items-center space-x-1">
                 <span>Duration</span>
-                <component :is="getSortIcon('duration_minutes')" class="w-3 h-3 text-surface-400" />
+                <component :is="getSortIcon('duration_minutes')" class="w-3 h-3 text-surface-500" />
               </div>
             </th>
             <th
               @click="toggleSort('max_residual')"
-              class="py-3 px-3.5 font-semibold text-right cursor-pointer select-none hover:text-surface-900 transition-colors"
+              class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider text-right cursor-pointer select-none hover:text-surface-950 transition-colors"
             >
               <div class="flex items-center justify-end space-x-1">
                 <span>Peak Dev</span>
-                <component :is="getSortIcon('max_residual')" class="w-3 h-3 text-surface-400" />
+                <component :is="getSortIcon('max_residual')" class="w-3 h-3 text-surface-500" />
               </div>
             </th>
-            <th class="py-3 px-3.5 font-semibold text-right">Mean Dev</th>
-            <th class="py-3 px-3.5 font-semibold text-center">Severity</th>
-            <th class="py-3 px-3.5 font-semibold text-right">Action</th>
+            <th class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider text-right">Mean Dev</th>
+            <th class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider text-center">Severity</th>
+            <th class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider text-right">Action</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-surface-100 text-surface-800">
@@ -117,7 +117,7 @@
             :class="[
               'transition-colors cursor-pointer text-xs sm:text-sm',
               selectedEventId === ev.event_id
-                ? 'bg-brand-50/80 font-medium border-l-4 border-brand-600'
+                ? 'bg-brand-50 font-medium border-l-4 border-brand-600'
                 : 'hover:bg-surface-50'
             ]"
           >
@@ -147,7 +147,7 @@
             </td>
             <td class="py-3 px-3.5 text-right">
               <button
-                class="px-3 py-1.5 rounded-md bg-brand-50 text-brand-700 hover:bg-brand-100 text-xs font-bold border border-brand-200/80 transition-colors cursor-pointer"
+                class="px-3 py-1.5 rounded-md bg-brand-50 text-brand-700 hover:bg-brand-100 text-xs font-bold border border-brand-200 transition-colors cursor-pointer"
                 @click.stop="$emit('select-event', ev)"
               >
                 Inspect
@@ -191,7 +191,7 @@
           
           <span
             v-if="remainingCount > 0"
-            class="text-xs font-mono text-surface-600 bg-surface-200/70 px-2 py-0.5 rounded font-medium"
+            class="text-xs font-mono text-surface-700 bg-surface-200 px-2 py-0.5 rounded font-medium"
           >
             {{ remainingCount }} remaining
           </span>
@@ -229,7 +229,7 @@
           <button
             v-if="isExpandedBeyondInitial"
             @click="collapseToInitial"
-            class="flex items-center space-x-1.5 px-3 py-1.5 bg-surface-200/70 hover:bg-surface-200 text-surface-800 font-semibold text-xs sm:text-sm rounded-md border border-surface-300 transition-colors cursor-pointer"
+            class="flex items-center space-x-1.5 px-3 py-1.5 bg-surface-200 hover:bg-surface-300 text-surface-800 font-semibold text-xs sm:text-sm rounded-md border border-surface-300 transition-colors cursor-pointer"
           >
             <span>Collapse to {{ defaultBatchSize }}</span>
             <ChevronUp class="w-3.5 h-3.5 text-surface-600" />
@@ -579,3 +579,10 @@ watch(
   }
 )
 </script>
+
+<style scoped>
+thead th {
+  background-color: #f1f5f9 !important;
+  opacity: 1 !important;
+}
+</style>
