@@ -6,6 +6,107 @@
     "expected_energy": 123.0,
     "residual": 166.4,
     "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+6.4 kWh), hour_cos (+1.1 kWh). Factors decreasing expected energy: Building Load (RT) (-10.0 kWh), Chilled Water Rate (L/sec) (-1.5 kWh), load_lag_30m (-1.2 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 289.4,
+        "expected": 123.0,
+        "deviation": 166.4,
+        "anomaly_score": 13.83,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 9.0,
+        "expected": 3.0,
+        "deviation": 6.0,
+        "anomaly_score": 4.05,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 33.2,
+        "expected": 31.8,
+        "deviation": 1.4,
+        "anomaly_score": 1.05,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 474.4,
+        "expected": 439.8,
+        "deviation": 34.6,
+        "anomaly_score": 0.76,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 75.0,
+        "expected": 77.0,
+        "deviation": -2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 79.0,
+        "expected": 84.0,
+        "deviation": -5.0,
+        "anomaly_score": 0.64,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 93.1,
+        "expected": 90.1,
+        "deviation": 3.0,
+        "anomaly_score": 0.33,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 82.0,
+        "expected": 82.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.8,
+        "expected": 29.8,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -46,6 +147,107 @@
     "expected_energy": 124.0,
     "residual": 165.4,
     "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+4.2 kWh), wet_bulb_temp_c (+2.5 kWh), Outside Temperature (F) (+1.7 kWh). Factors decreasing expected energy: Building Load (RT) (-11.3 kWh), load_lag_30m (-1.7 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 289.4,
+        "expected": 124.0,
+        "deviation": 165.4,
+        "anomaly_score": 13.86,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 90.0,
+        "expected": 82.0,
+        "deviation": 8.0,
+        "anomaly_score": 2.7,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 7.0,
+        "expected": 3.0,
+        "deviation": 4.0,
+        "anomaly_score": 2.7,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 70.0,
+        "expected": 84.0,
+        "deviation": -14.0,
+        "anomaly_score": 1.8,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 79.0,
+        "expected": 77.0,
+        "deviation": 2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 32.6,
+        "expected": 31.8,
+        "deviation": 0.8,
+        "anomaly_score": 0.6,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 457.6,
+        "expected": 439.8,
+        "deviation": 17.9,
+        "anomaly_score": 0.39,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 90.9,
+        "expected": 90.1,
+        "deviation": 0.8,
+        "anomaly_score": 0.09,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.8,
+        "expected": 29.8,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -86,6 +288,107 @@
     "expected_energy": 124.6,
     "residual": 164.8,
     "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+5.6 kWh), Outside Temperature (F) (+1.6 kWh). Factors decreasing expected energy: Building Load (RT) (-10.7 kWh), Chilled Water Rate (L/sec) (-1.7 kWh), load_lag_30m (-1.6 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 289.4,
+        "expected": 124.6,
+        "deviation": 164.8,
+        "anomaly_score": 13.76,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 9.0,
+        "expected": 3.0,
+        "deviation": 6.0,
+        "anomaly_score": 4.05,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 88.0,
+        "expected": 82.0,
+        "deviation": 6.0,
+        "anomaly_score": 2.02,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 70.0,
+        "expected": 84.0,
+        "deviation": -14.0,
+        "anomaly_score": 1.8,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 33.0,
+        "expected": 31.8,
+        "deviation": 1.2,
+        "anomaly_score": 0.9,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 470.2,
+        "expected": 439.8,
+        "deviation": 30.4,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 92.5,
+        "expected": 90.1,
+        "deviation": 2.4,
+        "anomaly_score": 0.26,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 77.0,
+        "expected": 77.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.8,
+        "expected": 29.8,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -126,6 +429,107 @@
     "expected_energy": 142.3,
     "residual": 83.2,
     "narrative": "Factors increasing expected energy: Chilled Water Rate (L/sec) (+7.8 kWh), Cooling Water Temperature (C) (+4.5 kWh), Outside Temperature (F) (+1.7 kWh). Factors decreasing expected energy: Building Load (RT) (-4.3 kWh), load_flow_ratio (-1.4 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 225.5,
+        "expected": 142.3,
+        "deviation": 83.2,
+        "anomaly_score": 7.96,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 127.8,
+        "expected": 92.5,
+        "deviation": 35.2,
+        "anomaly_score": 4.55,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 560.2,
+        "expected": 465.1,
+        "deviation": 95.1,
+        "anomaly_score": 2.38,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 66.0,
+        "expected": 79.0,
+        "deviation": -13.0,
+        "anomaly_score": 1.75,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 88.0,
+        "expected": 84.0,
+        "deviation": 4.0,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 75.0,
+        "expected": 79.0,
+        "deviation": -4.0,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 33.2,
+        "expected": 32.9,
+        "deviation": 0.3,
+        "anomaly_score": 0.37,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 5.0,
+        "expected": 6.0,
+        "deviation": -1.0,
+        "anomaly_score": 0.34,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.77,
+        "expected": 29.77,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Chilled Water Rate (L/sec)",
@@ -166,6 +570,107 @@
     "expected_energy": 171.8,
     "residual": 77.2,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+15.6 kWh), load_lag_30m (+5.1 kWh), wet_bulb_temp_c (+5.1 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 249.0,
+        "expected": 171.8,
+        "deviation": 77.2,
+        "anomaly_score": 10.86,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 635.2,
+        "expected": 466.9,
+        "deviation": 168.3,
+        "anomaly_score": 4.01,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 105.8,
+        "expected": 88.2,
+        "deviation": 17.5,
+        "anomaly_score": 2.43,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 90.0,
+        "expected": 86.0,
+        "deviation": 4.0,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 70.0,
+        "expected": 79.0,
+        "deviation": -9.0,
+        "anomaly_score": 1.21,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 32.9,
+        "expected": 33.0,
+        "deviation": -0.1,
+        "anomaly_score": 0.12,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 7.0,
+        "expected": 7.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.77,
+        "expected": 29.77,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -206,6 +711,107 @@
     "expected_energy": 273.5,
     "residual": 76.5,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+91.5 kWh), Chilled Water Rate (L/sec) (+12.5 kWh), Cooling Water Temperature (C) (+9.8 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 77.0,
+        "expected": 75.0,
+        "deviation": 2.0,
+        "anomaly_score": 13489.82,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 350.0,
+        "expected": 273.5,
+        "deviation": 76.5,
+        "anomaly_score": 6.51,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 907.3,
+        "expected": 557.5,
+        "deviation": 349.8,
+        "anomaly_score": 2.76,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 15.0,
+        "expected": 6.0,
+        "deviation": 9.0,
+        "anomaly_score": 2.02,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 129.0,
+        "expected": 99.5,
+        "deviation": 29.5,
+        "anomaly_score": 1.9,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 90.0,
+        "expected": 84.0,
+        "deviation": 6.0,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.71,
+        "expected": 29.77,
+        "deviation": -0.06,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 33.3,
+        "expected": 32.3,
+        "deviation": 1.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 66.0,
+        "expected": 74.0,
+        "deviation": -8.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -246,6 +852,107 @@
     "expected_energy": 161.3,
     "residual": 73.5,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+10.1 kWh), Cooling Water Temperature (C) (+4.7 kWh), wet_bulb_temp_c (+4.1 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 234.8,
+        "expected": 161.3,
+        "deviation": 73.5,
+        "anomaly_score": 10.01,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 610.4,
+        "expected": 467.3,
+        "deviation": 143.1,
+        "anomaly_score": 3.36,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 107.4,
+        "expected": 88.2,
+        "deviation": 19.2,
+        "anomaly_score": 2.66,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 10.0,
+        "expected": 7.0,
+        "deviation": 3.0,
+        "anomaly_score": 2.02,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 34.1,
+        "expected": 33.0,
+        "deviation": 1.1,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 90.0,
+        "expected": 86.0,
+        "deviation": 4.0,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 70.0,
+        "expected": 79.0,
+        "deviation": -9.0,
+        "anomaly_score": 1.21,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.74,
+        "expected": 29.77,
+        "deviation": -0.03,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -286,6 +993,107 @@
     "expected_energy": 205.3,
     "residual": 73.0,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+46.2 kWh), Chilled Water Rate (L/sec) (+6.1 kWh), wet_bulb_temp_c (+5.0 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 278.3,
+        "expected": 205.3,
+        "deviation": 73.0,
+        "anomaly_score": 10.29,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 679.8,
+        "expected": 466.9,
+        "deviation": 212.8,
+        "anomaly_score": 5.07,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 119.7,
+        "expected": 88.2,
+        "deviation": 31.5,
+        "anomaly_score": 4.35,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 90.0,
+        "expected": 86.0,
+        "deviation": 4.0,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 70.0,
+        "expected": 79.0,
+        "deviation": -9.0,
+        "anomaly_score": 1.21,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 8.0,
+        "expected": 7.0,
+        "deviation": 1.0,
+        "anomaly_score": 0.56,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 32.7,
+        "expected": 33.0,
+        "deviation": -0.3,
+        "anomaly_score": 0.37,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.77,
+        "expected": 29.77,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -326,6 +1134,107 @@
     "expected_energy": 269.4,
     "residual": 72.5,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+90.2 kWh), Chilled Water Rate (L/sec) (+15.1 kWh), Cooling Water Temperature (C) (+14.9 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 341.9,
+        "expected": 269.4,
+        "deviation": 72.5,
+        "anomaly_score": 4.04,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 908.7,
+        "expected": 490.6,
+        "deviation": 418.1,
+        "anomaly_score": 3.91,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 132.7,
+        "expected": 98.6,
+        "deviation": 34.1,
+        "anomaly_score": 2.42,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 88.0,
+        "expected": 81.0,
+        "deviation": 7.0,
+        "anomaly_score": 2.36,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 66.0,
+        "expected": 79.0,
+        "deviation": -13.0,
+        "anomaly_score": 1.75,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 33.9,
+        "expected": 31.4,
+        "deviation": 2.5,
+        "anomaly_score": 1.53,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 6.0,
+        "expected": 8.0,
+        "deviation": -2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.86,
+        "expected": 29.83,
+        "deviation": 0.03,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 75.0,
+        "expected": 75.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -366,6 +1275,107 @@
     "expected_energy": 161.9,
     "residual": 71.2,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+6.3 kWh), load_lag_30m (+5.0 kWh), load_rolling_2h_mean (+4.6 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 233.1,
+        "expected": 161.9,
+        "deviation": 71.2,
+        "anomaly_score": 9.35,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 15.0,
+        "expected": 7.0,
+        "deviation": 8.0,
+        "anomaly_score": 5.4,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 595.9,
+        "expected": 467.3,
+        "deviation": 128.6,
+        "anomaly_score": 3.02,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.68,
+        "expected": 29.77,
+        "deviation": -0.09,
+        "anomaly_score": 2.02,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 99.3,
+        "expected": 88.2,
+        "deviation": 11.0,
+        "anomaly_score": 1.54,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 32.0,
+        "expected": 33.0,
+        "deviation": -1.0,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 86.0,
+        "expected": 86.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -406,6 +1416,107 @@
     "expected_energy": 129.6,
     "residual": 71.0,
     "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+5.5 kWh), load_rolling_2h_mean (+1.6 kWh). Factors decreasing expected energy: Building Load (RT) (-5.8 kWh), equipment_id (-2.3 kWh), Chilled Water Rate (L/sec) (-2.3 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 200.6,
+        "expected": 129.6,
+        "deviation": 71.0,
+        "anomaly_score": 8.78,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.74,
+        "expected": 29.8,
+        "deviation": -0.06,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 88.9,
+        "expected": 101.2,
+        "deviation": -12.3,
+        "anomaly_score": 0.83,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 33.2,
+        "expected": 32.2,
+        "deviation": 1.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 9.0,
+        "expected": 6.0,
+        "deviation": 3.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 549.2,
+        "expected": 560.1,
+        "deviation": -10.9,
+        "anomaly_score": 0.08,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 84.0,
+        "expected": 84.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 74.0,
+        "expected": 74.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 75.0,
+        "expected": 75.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -446,6 +1557,107 @@
     "expected_energy": 195.1,
     "residual": 67.7,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+42.1 kWh), load_lag_30m (+4.1 kWh), Cooling Water Temperature (C) (+3.1 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 262.8,
+        "expected": 195.1,
+        "deviation": 67.7,
+        "anomaly_score": 9.06,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 671.3,
+        "expected": 467.3,
+        "deviation": 204.0,
+        "anomaly_score": 4.79,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 13.0,
+        "expected": 7.0,
+        "deviation": 6.0,
+        "anomaly_score": 4.05,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 113.8,
+        "expected": 88.2,
+        "deviation": 25.5,
+        "anomaly_score": 3.55,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.71,
+        "expected": 29.77,
+        "deviation": -0.06,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 74.0,
+        "expected": 79.0,
+        "deviation": -5.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 77.0,
+        "expected": 79.0,
+        "deviation": -2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 32.5,
+        "expected": 33.0,
+        "deviation": -0.5,
+        "anomaly_score": 0.64,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 86.0,
+        "expected": 86.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -486,6 +1698,107 @@
     "expected_energy": 205.9,
     "residual": 67.3,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+46.5 kWh), load_lag_30m (+6.5 kWh), Cooling Water Temperature (C) (+4.3 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 273.2,
+        "expected": 205.9,
+        "deviation": 67.3,
+        "anomaly_score": 9.01,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 683.8,
+        "expected": 467.3,
+        "deviation": 216.5,
+        "anomaly_score": 5.09,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 14.0,
+        "expected": 7.0,
+        "deviation": 7.0,
+        "anomaly_score": 4.72,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 115.0,
+        "expected": 88.2,
+        "deviation": 26.8,
+        "anomaly_score": 3.72,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.71,
+        "expected": 29.77,
+        "deviation": -0.06,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 32.8,
+        "expected": 33.0,
+        "deviation": -0.2,
+        "anomaly_score": 0.25,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 86.0,
+        "expected": 86.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -526,6 +1839,107 @@
     "expected_energy": 192.4,
     "residual": 67.2,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+40.1 kWh), load_lag_30m (+4.0 kWh), Chilled Water Rate (L/sec) (+3.1 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 259.6,
+        "expected": 192.4,
+        "deviation": 67.2,
+        "anomaly_score": 8.99,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 667.6,
+        "expected": 467.3,
+        "deviation": 200.3,
+        "anomaly_score": 4.71,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 113.5,
+        "expected": 88.2,
+        "deviation": 25.2,
+        "anomaly_score": 3.51,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 12.0,
+        "expected": 7.0,
+        "deviation": 5.0,
+        "anomaly_score": 3.37,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.71,
+        "expected": 29.77,
+        "deviation": -0.06,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 32.2,
+        "expected": 33.0,
+        "deviation": -0.8,
+        "anomaly_score": 1.08,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 74.0,
+        "expected": 79.0,
+        "deviation": -5.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 77.0,
+        "expected": 79.0,
+        "deviation": -2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 86.0,
+        "expected": 86.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -566,6 +1980,107 @@
     "expected_energy": 138.0,
     "residual": 64.4,
     "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+4.3 kWh), load_rolling_2h_mean (+2.2 kWh), equipment_id (+1.3 kWh). Factors decreasing expected energy: Building Load (RT) (-6.5 kWh), Chilled Water Rate (L/sec) (-2.2 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 202.4,
+        "expected": 138.0,
+        "deviation": 64.4,
+        "anomaly_score": 8.42,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 14.0,
+        "expected": 7.0,
+        "deviation": 7.0,
+        "anomaly_score": 4.72,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.68,
+        "expected": 29.77,
+        "deviation": -0.09,
+        "anomaly_score": 2.02,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 550.9,
+        "expected": 467.3,
+        "deviation": 83.6,
+        "anomaly_score": 1.96,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 74.0,
+        "expected": 79.0,
+        "deviation": -5.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 77.0,
+        "expected": 79.0,
+        "deviation": -2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 32.8,
+        "expected": 33.0,
+        "deviation": -0.2,
+        "anomaly_score": 0.27,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 90.2,
+        "expected": 88.5,
+        "deviation": 1.7,
+        "anomaly_score": 0.23,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 86.0,
+        "expected": 86.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -606,6 +2121,107 @@
     "expected_energy": 136.4,
     "residual": 64.3,
     "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+6.8 kWh), Outside Temperature (F) (+0.8 kWh). Factors decreasing expected energy: equipment_id (-2.3 kWh), hour_cos (-1.3 kWh), Building Load (RT) (-1.0 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 77.0,
+        "expected": 75.0,
+        "deviation": 2.0,
+        "anomaly_score": 13489.82,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 200.7,
+        "expected": 136.4,
+        "deviation": 64.3,
+        "anomaly_score": 7.92,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 33.8,
+        "expected": 32.2,
+        "deviation": 1.6,
+        "anomaly_score": 1.08,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.77,
+        "expected": 29.8,
+        "deviation": -0.03,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 8.0,
+        "expected": 6.0,
+        "deviation": 2.0,
+        "anomaly_score": 0.45,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 79.0,
+        "expected": 74.0,
+        "deviation": 5.0,
+        "anomaly_score": 0.42,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 98.5,
+        "expected": 101.2,
+        "deviation": -2.7,
+        "anomaly_score": 0.18,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 574.1,
+        "expected": 560.1,
+        "deviation": 14.0,
+        "anomaly_score": 0.1,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 84.0,
+        "expected": 84.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Cooling Water Temperature (C)",
@@ -646,6 +2262,107 @@
     "expected_energy": 265.5,
     "residual": 64.1,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+90.2 kWh), Cooling Water Temperature (C) (+15.6 kWh), Chilled Water Rate (L/sec) (+13.1 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 329.6,
+        "expected": 265.5,
+        "deviation": 64.1,
+        "anomaly_score": 6.63,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 853.4,
+        "expected": 518.6,
+        "deviation": 334.8,
+        "anomaly_score": 2.73,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 138.0,
+        "expected": 96.2,
+        "deviation": 41.8,
+        "anomaly_score": 2.71,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 55.0,
+        "expected": 79.0,
+        "deviation": -24.0,
+        "anomaly_score": 1.62,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 91.0,
+        "expected": 84.0,
+        "deviation": 7.0,
+        "anomaly_score": 1.57,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 33.9,
+        "expected": 32.4,
+        "deviation": 1.5,
+        "anomaly_score": 1.04,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 10.0,
+        "expected": 6.0,
+        "deviation": 4.0,
+        "anomaly_score": 0.9,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 73.0,
+        "expected": 75.0,
+        "deviation": -2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.8,
+        "expected": 29.8,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -686,6 +2403,107 @@
     "expected_energy": 172.1,
     "residual": 63.7,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+27.1 kWh), load_lag_30m (+5.7 kWh), load_rolling_2h_mean (+3.7 kWh). Factors decreasing expected energy: equipment_id (-2.6 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 235.8,
+        "expected": 172.1,
+        "deviation": 63.7,
+        "anomaly_score": 6.95,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.74,
+        "expected": 29.8,
+        "deviation": -0.06,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 86.0,
+        "expected": 84.0,
+        "deviation": 2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 9.0,
+        "expected": 6.0,
+        "deviation": 3.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 642.1,
+        "expected": 565.3,
+        "deviation": 76.8,
+        "anomaly_score": 0.55,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 108.9,
+        "expected": 101.3,
+        "deviation": 7.6,
+        "anomaly_score": 0.46,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 70.0,
+        "expected": 74.0,
+        "deviation": -4.0,
+        "anomaly_score": 0.3,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 32.2,
+        "expected": 32.0,
+        "deviation": 0.2,
+        "anomaly_score": 0.16,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 75.0,
+        "expected": 75.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -726,6 +2544,107 @@
     "expected_energy": 204.7,
     "residual": 62.6,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+62.5 kWh), Chilled Water Rate (L/sec) (+3.1 kWh), hour_cos (+2.5 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 267.3,
+        "expected": 204.7,
+        "deviation": 62.6,
+        "anomaly_score": 9.83,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 13.0,
+        "expected": 6.0,
+        "deviation": 7.0,
+        "anomaly_score": 1.57,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 731.9,
+        "expected": 548.1,
+        "deviation": 183.8,
+        "anomaly_score": 1.55,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 86.0,
+        "expected": 82.0,
+        "deviation": 4.0,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.74,
+        "expected": 29.8,
+        "deviation": -0.06,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 115.3,
+        "expected": 99.8,
+        "deviation": 15.5,
+        "anomaly_score": 0.9,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 70.0,
+        "expected": 79.0,
+        "deviation": -9.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 31.8,
+        "expected": 32.0,
+        "deviation": -0.2,
+        "anomaly_score": 0.19,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 75.0,
+        "expected": 75.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -766,6 +2685,107 @@
     "expected_energy": 246.5,
     "residual": 62.6,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+84.1 kWh), Chilled Water Rate (L/sec) (+9.3 kWh), Cooling Water Temperature (C) (+6.8 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 309.1,
+        "expected": 246.5,
+        "deviation": 62.6,
+        "anomaly_score": 9.15,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 802.2,
+        "expected": 466.9,
+        "deviation": 335.3,
+        "anomaly_score": 7.98,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 123.9,
+        "expected": 88.2,
+        "deviation": 35.7,
+        "anomaly_score": 4.96,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 70.0,
+        "expected": 79.0,
+        "deviation": -9.0,
+        "anomaly_score": 1.21,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 88.0,
+        "expected": 86.0,
+        "deviation": 2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 77.0,
+        "expected": 79.0,
+        "deviation": -2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.8,
+        "expected": 29.77,
+        "deviation": 0.03,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 32.9,
+        "expected": 33.0,
+        "deviation": -0.1,
+        "anomaly_score": 0.12,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 7.0,
+        "expected": 7.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -806,6 +2826,107 @@
     "expected_energy": 145.0,
     "residual": 62.0,
     "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+6.1 kWh), wet_bulb_temp_c (+3.2 kWh), Chilled Water Rate (L/sec) (+1.7 kWh). Factors decreasing expected energy: Building Load (RT) (-6.2 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 207.0,
+        "expected": 145.0,
+        "deviation": 62.0,
+        "anomaly_score": 8.05,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 12.0,
+        "expected": 7.0,
+        "deviation": 5.0,
+        "anomaly_score": 3.37,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.68,
+        "expected": 29.77,
+        "deviation": -0.09,
+        "anomaly_score": 2.02,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 549.4,
+        "expected": 467.3,
+        "deviation": 82.1,
+        "anomaly_score": 1.93,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 99.9,
+        "expected": 88.5,
+        "deviation": 11.4,
+        "anomaly_score": 1.57,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 33.3,
+        "expected": 33.0,
+        "deviation": 0.3,
+        "anomaly_score": 0.4,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 86.0,
+        "expected": 86.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -846,6 +2967,107 @@
     "expected_energy": 140.1,
     "residual": 61.9,
     "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+6.1 kWh), wet_bulb_temp_c (+2.2 kWh), equipment_id (+1.3 kWh). Factors decreasing expected energy: Building Load (RT) (-4.4 kWh), load_lag_30m (-0.8 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 202.0,
+        "expected": 140.1,
+        "deviation": 61.9,
+        "anomaly_score": 8.02,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 553.1,
+        "expected": 467.3,
+        "deviation": 85.8,
+        "anomaly_score": 2.0,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 98.8,
+        "expected": 88.5,
+        "deviation": 10.2,
+        "anomaly_score": 1.42,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 9.0,
+        "expected": 7.0,
+        "deviation": 2.0,
+        "anomaly_score": 1.23,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 84.0,
+        "expected": 86.0,
+        "deviation": -2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 84.0,
+        "expected": 79.0,
+        "deviation": 5.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.74,
+        "expected": 29.77,
+        "deviation": -0.03,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 33.4,
+        "expected": 33.0,
+        "deviation": 0.4,
+        "anomaly_score": 0.54,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Cooling Water Temperature (C)",
@@ -886,6 +3108,107 @@
     "expected_energy": 241.8,
     "residual": 61.0,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+70.0 kWh), Cooling Water Temperature (C) (+9.6 kWh), Chilled Water Rate (L/sec) (+8.1 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 302.8,
+        "expected": 241.8,
+        "deviation": 61.0,
+        "anomaly_score": 8.3,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 750.5,
+        "expected": 467.3,
+        "deviation": 283.2,
+        "anomaly_score": 6.66,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 129.5,
+        "expected": 88.2,
+        "deviation": 41.2,
+        "anomaly_score": 5.74,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 12.0,
+        "expected": 7.0,
+        "deviation": 5.0,
+        "anomaly_score": 3.37,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 88.0,
+        "expected": 86.0,
+        "deviation": 2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.74,
+        "expected": 29.77,
+        "deviation": -0.03,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 75.0,
+        "expected": 79.0,
+        "deviation": -4.0,
+        "anomaly_score": 0.54,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 33.3,
+        "expected": 33.0,
+        "deviation": 0.3,
+        "anomaly_score": 0.37,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -926,6 +3249,107 @@
     "expected_energy": 188.3,
     "residual": 60.0,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+30.4 kWh), load_lag_30m (+8.6 kWh), wet_bulb_temp_c (+5.0 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 248.3,
+        "expected": 188.3,
+        "deviation": 60.0,
+        "anomaly_score": 8.69,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 648.9,
+        "expected": 466.9,
+        "deviation": 181.9,
+        "anomaly_score": 4.33,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 116.4,
+        "expected": 88.2,
+        "deviation": 28.2,
+        "anomaly_score": 3.91,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 3.0,
+        "expected": 7.0,
+        "deviation": -4.0,
+        "anomaly_score": 2.25,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 31.9,
+        "expected": 33.0,
+        "deviation": -1.1,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 90.0,
+        "expected": 86.0,
+        "deviation": 4.0,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 70.0,
+        "expected": 79.0,
+        "deviation": -9.0,
+        "anomaly_score": 1.21,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.77,
+        "expected": 29.77,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -966,6 +3390,107 @@
     "expected_energy": 236.7,
     "residual": 59.7,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+73.4 kWh), Cooling Water Temperature (C) (+13.2 kWh), Chilled Water Rate (L/sec) (+5.9 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 296.4,
+        "expected": 236.7,
+        "deviation": 59.7,
+        "anomaly_score": 8.18,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 741.6,
+        "expected": 467.3,
+        "deviation": 274.3,
+        "anomaly_score": 6.45,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 119.5,
+        "expected": 88.2,
+        "deviation": 31.2,
+        "anomaly_score": 4.35,
+        "status": "CRITICAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 10.0,
+        "expected": 7.0,
+        "deviation": 3.0,
+        "anomaly_score": 2.02,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 66.0,
+        "expected": 79.0,
+        "deviation": -13.0,
+        "anomaly_score": 1.75,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 90.0,
+        "expected": 86.0,
+        "deviation": 4.0,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 34.0,
+        "expected": 33.0,
+        "deviation": 1.0,
+        "anomaly_score": 1.23,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 77.0,
+        "expected": 79.0,
+        "deviation": -2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.74,
+        "expected": 29.77,
+        "deviation": -0.03,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -1006,6 +3531,107 @@
     "expected_energy": 240.4,
     "residual": 59.5,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+83.1 kWh), Chilled Water Rate (L/sec) (+12.0 kWh), Outside Temperature (F) (+2.9 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 299.9,
+        "expected": 240.4,
+        "deviation": 59.5,
+        "anomaly_score": 7.01,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 131.0,
+        "expected": 97.5,
+        "deviation": 33.5,
+        "anomaly_score": 2.07,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 792.9,
+        "expected": 534.0,
+        "deviation": 258.9,
+        "anomaly_score": 2.05,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 91.0,
+        "expected": 84.0,
+        "deviation": 7.0,
+        "anomaly_score": 1.57,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 55.0,
+        "expected": 74.0,
+        "deviation": -19.0,
+        "anomaly_score": 1.28,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 10.0,
+        "expected": 5.0,
+        "deviation": 5.0,
+        "anomaly_score": 1.12,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 73.0,
+        "expected": 75.0,
+        "deviation": -2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 31.7,
+        "expected": 32.3,
+        "deviation": -0.6,
+        "anomaly_score": 0.43,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.8,
+        "expected": 29.8,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -1046,6 +3672,107 @@
     "expected_energy": 137.4,
     "residual": 58.4,
     "narrative": "Factors increasing expected energy: Wind Speed (mph) (+9.5 kWh), load_flow_ratio (+2.5 kWh), Outside Temperature (F) (+1.8 kWh). Factors decreasing expected energy: Building Load (RT) (-11.3 kWh), equipment_id (-2.3 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 195.8,
+        "expected": 137.4,
+        "deviation": 58.4,
+        "anomaly_score": 12.11,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 88.0,
+        "expected": 82.0,
+        "deviation": 6.0,
+        "anomaly_score": 2.02,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 16.0,
+        "expected": 7.0,
+        "deviation": 9.0,
+        "anomaly_score": 2.02,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 62.0,
+        "expected": 79.0,
+        "deviation": -17.0,
+        "anomaly_score": 1.91,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.77,
+        "expected": 29.83,
+        "deviation": -0.06,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 73.0,
+        "expected": 75.0,
+        "deviation": -2.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 31.1,
+        "expected": 31.6,
+        "deviation": -0.5,
+        "anomaly_score": 0.44,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 97.4,
+        "expected": 98.2,
+        "deviation": -0.8,
+        "anomaly_score": 0.05,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 487.5,
+        "expected": 489.5,
+        "deviation": -2.0,
+        "anomaly_score": 0.02,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -1086,6 +3813,107 @@
     "expected_energy": 140.0,
     "residual": 57.7,
     "narrative": "Factors increasing expected energy: Cooling Water Temperature (C) (+5.0 kWh), wet_bulb_temp_c (+2.7 kWh), equipment_id (+1.6 kWh). Factors decreasing expected energy: Building Load (RT) (-8.5 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 197.7,
+        "expected": 140.0,
+        "deviation": 57.7,
+        "anomaly_score": 7.5,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 99.1,
+        "expected": 88.5,
+        "deviation": 10.5,
+        "anomaly_score": 1.46,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 9.0,
+        "expected": 7.0,
+        "deviation": 2.0,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.71,
+        "expected": 29.77,
+        "deviation": -0.06,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 517.8,
+        "expected": 467.3,
+        "deviation": 50.5,
+        "anomaly_score": 1.19,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 32.9,
+        "expected": 33.0,
+        "deviation": -0.1,
+        "anomaly_score": 0.13,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 86.0,
+        "expected": 86.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 79.0,
+        "expected": 79.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",
@@ -1126,6 +3954,107 @@
     "expected_energy": 144.0,
     "residual": 56.6,
     "narrative": "Factors increasing expected energy: load_lag_30m (+5.1 kWh), load_rolling_2h_mean (+3.4 kWh), Building Load (RT) (+2.4 kWh). Factors decreasing expected energy: equipment_id (-1.9 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 200.6,
+        "expected": 144.0,
+        "deviation": 56.6,
+        "anomaly_score": 7.02,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.74,
+        "expected": 29.8,
+        "deviation": -0.06,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 9.0,
+        "expected": 6.0,
+        "deviation": 3.0,
+        "anomaly_score": 0.67,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 31.4,
+        "expected": 32.2,
+        "deviation": -0.8,
+        "anomaly_score": 0.54,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 86.0,
+        "expected": 84.0,
+        "deviation": 2.0,
+        "anomaly_score": 0.45,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 70.0,
+        "expected": 74.0,
+        "deviation": -4.0,
+        "anomaly_score": 0.34,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 586.7,
+        "expected": 560.1,
+        "deviation": 26.6,
+        "anomaly_score": 0.2,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 103.9,
+        "expected": 101.2,
+        "deviation": 2.7,
+        "anomaly_score": 0.18,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 75.0,
+        "expected": 75.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "load_lag_30m",
@@ -1166,6 +4095,107 @@
     "expected_energy": 149.9,
     "residual": 56.4,
     "narrative": "Factors increasing expected energy: Building Load (RT) (+8.7 kWh), load_rolling_2h_mean (+4.2 kWh), hour_cos (+1.9 kWh). Factors decreasing expected energy: Chilled Water Rate (L/sec) (-1.9 kWh).",
+    "param_details": [
+      {
+        "raw_col": "Chiller Energy Consumption (kWh)",
+        "parameter": "Energy Consumption",
+        "unit": "kWh",
+        "actual": 206.3,
+        "expected": 149.9,
+        "deviation": 56.4,
+        "anomaly_score": 9.04,
+        "status": "CRITICAL",
+        "is_target": true
+      },
+      {
+        "raw_col": "Outside Temperature (F)",
+        "parameter": "Outside Temperature",
+        "unit": "\u00b0F",
+        "actual": 88.0,
+        "expected": 82.0,
+        "deviation": 6.0,
+        "anomaly_score": 2.02,
+        "status": "WARNING",
+        "is_target": false
+      },
+      {
+        "raw_col": "Wind Speed (mph)",
+        "parameter": "Wind Speed",
+        "unit": "mph",
+        "actual": 12.0,
+        "expected": 6.0,
+        "deviation": 6.0,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Pressure (in)",
+        "parameter": "Barometric Pressure",
+        "unit": "in",
+        "actual": 29.74,
+        "expected": 29.8,
+        "deviation": -0.06,
+        "anomaly_score": 1.35,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Humidity (%)",
+        "parameter": "Relative Humidity",
+        "unit": "%",
+        "actual": 66.0,
+        "expected": 79.0,
+        "deviation": -13.0,
+        "anomaly_score": 0.97,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Cooling Water Temperature (C)",
+        "parameter": "Cooling Water Temperature",
+        "unit": "\u00b0C",
+        "actual": 31.0,
+        "expected": 32.0,
+        "deviation": -1.0,
+        "anomaly_score": 0.96,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Building Load (RT)",
+        "parameter": "Building Load",
+        "unit": "RT",
+        "actual": 596.1,
+        "expected": 548.1,
+        "deviation": 48.0,
+        "anomaly_score": 0.39,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Chilled Water Rate (L/sec)",
+        "parameter": "Chilled Water Rate",
+        "unit": "L/s",
+        "actual": 93.8,
+        "expected": 100.0,
+        "deviation": -6.2,
+        "anomaly_score": 0.36,
+        "status": "NORMAL",
+        "is_target": false
+      },
+      {
+        "raw_col": "Dew Point (F)",
+        "parameter": "Dew Point",
+        "unit": "\u00b0F",
+        "actual": 75.0,
+        "expected": 75.0,
+        "deviation": 0.0,
+        "anomaly_score": 0.0,
+        "status": "NORMAL",
+        "is_target": false
+      }
+    ],
     "top_contributors": [
       {
         "feature": "Building Load (RT)",

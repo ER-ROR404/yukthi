@@ -30,8 +30,10 @@
           <!-- Persistent Anomaly Events Cluster Table -->
           <AnomalyEventsTable
             :events="eventsData"
+            :classified-anomalies="classifiedAnomalies"
             :selected-event-id="activeEventId"
             @select-event="onEventSelect"
+            @select-classified="onClassifiedSelect"
           />
         </div>
 
@@ -121,12 +123,16 @@ const { data: rawEvents } = await useFetch(() => `/api/events?equipment=${select
 // 4. Fetch SHAP samples for active equipment
 const { data: rawShap } = await useFetch(() => `/api/shap?equipment=${selectedEquipment.value}`)
 
+// 5. Fetch Classified Anomalies for active equipment
+const { data: rawClassified } = await useFetch(() => `/api/classified-anomalies?equipment=${selectedEquipment.value}`)
+
 const telemetryData = computed(() => (rawTelemetry.value as any[]) || [])
 const eventsData = computed(() => {
   const all = (rawEvents.value as any[]) || []
   return all.filter((e: any) => e.equipment_id === selectedEquipment.value)
 })
 const shapSamples = computed(() => (rawShap.value as any[]) || [])
+const classifiedAnomalies = computed(() => (rawClassified.value as any[]) || [])
 
 const currentEquipmentStats = computed(() => {
   if (!summary.value?.equipment_stats) return undefined
@@ -166,6 +172,41 @@ const onEventSelect = (event: any) => {
       anom: 1,
       status: 'ABNORMAL ENERGY',
       equipment_id: event.equipment_id
+    }
+  }
+}
+
+const onClassifiedSelect = (anom: any) => {
+  activeEventId.value = undefined
+  // Try to match a telemetry point for full SHAP inspection
+  const match = telemetryData.value.find((t: any) =>
+    t.ts.startsWith((anom.timestamp || '').substring(0, 16))
+  )
+  if (match) {
+    activePoint.value = {
+      ...match,
+      equipment_id: anom.equipment_id
+    }
+  } else {
+    // Synthesise a reading from classified anomaly data
+    activePoint.value = {
+      ts: anom.timestamp,
+      act: anom.actual,
+      exp: anom.expected,
+      res: anom.deviation,
+      residual: anom.deviation,
+      z: anom.anomaly_score || 3.0,
+      anom: 1,
+      status: 'ABNORMAL ENERGY',
+      equipment_id: anom.equipment_id,
+      param_details: anom.param_details || null,
+      classification: {
+        anomaly_type: anom.anomaly_type,
+        icon: anom.icon,
+        category: anom.category,
+        diagnosis: anom.diagnosis,
+        recommendation: anom.recommendation
+      }
     }
   }
 }

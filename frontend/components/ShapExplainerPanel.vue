@@ -47,6 +47,84 @@
         </div>
       </div>
 
+      <!-- 🚨 Granular Parameter-Level Anomaly Breakdown (Deviation & Statistical Score) -->
+      <div class="space-y-2.5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2 text-slate-950 font-bold text-xs sm:text-sm font-sans">
+            <AlertOctagon class="w-4 h-4 text-red-600 shrink-0" />
+            <span class="uppercase tracking-wider">Multi-Sensor Anomaly Breakdown</span>
+          </div>
+          <span class="text-xs font-mono text-slate-500 font-medium">9 Parameters</span>
+        </div>
+
+        <div class="border border-slate-300 rounded-lg overflow-hidden bg-white shadow-xs">
+          <table class="w-full text-left text-xs font-mono border-collapse">
+            <thead class="bg-slate-100 border-b border-slate-300 font-sans text-slate-700">
+              <tr>
+                <th class="py-2.5 px-3 font-bold uppercase text-[11px]">Parameter</th>
+                <th class="py-2.5 px-2 font-bold uppercase text-[11px] text-right">Actual</th>
+                <th class="py-2.5 px-2 font-bold uppercase text-[11px] text-right">Expected</th>
+                <th class="py-2.5 px-2 font-bold uppercase text-[11px] text-right">Deviation</th>
+                <th class="py-2.5 px-2.5 font-bold uppercase text-[11px] text-right">Score</th>
+                <th class="py-2.5 px-2.5 font-bold uppercase text-[11px] text-center">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr
+                v-for="param in parameterDetails"
+                :key="param.parameter"
+                :class="[
+                  'transition-colors',
+                  param.anomaly_score >= 3.0 ? 'bg-red-50/60 font-semibold' : param.anomaly_score >= 2.0 ? 'bg-amber-50/40' : 'hover:bg-slate-50'
+                ]"
+              >
+                <td class="py-2 px-3 font-sans text-slate-950 truncate max-w-[130px]">
+                  {{ param.parameter }}
+                </td>
+                <td class="py-2 px-2 text-right text-slate-950 font-bold">
+                  {{ param.actual }} <span class="text-[10px] text-slate-500 font-normal">{{ param.unit }}</span>
+                </td>
+                <td class="py-2 px-2 text-right text-slate-600">
+                  {{ param.expected }} <span class="text-[10px] text-slate-400 font-normal">{{ param.unit }}</span>
+                </td>
+                <td
+                  class="py-2 px-2 text-right font-bold"
+                  :class="param.anomaly_score >= 3.0 ? 'text-red-700' : param.anomaly_score >= 2.0 ? 'text-amber-800' : 'text-slate-700'"
+                >
+                  {{ param.deviation > 0 ? '+' : '' }}{{ param.deviation }} {{ param.unit }}
+                </td>
+                <td
+                  class="py-2 px-2.5 text-right font-bold"
+                  :class="param.anomaly_score >= 3.0 ? 'text-red-700' : param.anomaly_score >= 2.0 ? 'text-amber-800' : 'text-emerald-700'"
+                >
+                  {{ param.anomaly_score.toFixed(2) }}
+                </td>
+                <td class="py-2 px-2.5 text-center">
+                  <span
+                    v-if="param.anomaly_score >= 3.0"
+                    class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-900 border border-red-300"
+                  >
+                    🔴 Critical
+                  </span>
+                  <span
+                    v-else-if="param.anomaly_score >= 2.0"
+                    class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300"
+                  >
+                    🟠 Warning
+                  </span>
+                  <span
+                    v-else
+                    class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-900 border border-emerald-300"
+                  >
+                    🟢 Normal
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- Multi-Layer Supporting Evidence Checklist -->
       <div class="space-y-3">
         <h4 class="text-xs sm:text-sm font-bold text-slate-900 uppercase tracking-wider font-sans">
@@ -159,7 +237,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Sliders, CheckCircle2 } from 'lucide-vue-next'
+import { Sliders, CheckCircle2, AlertOctagon } from 'lucide-vue-next'
 
 const props = defineProps<{
   selectedPoint?: any
@@ -181,7 +259,8 @@ const activeReading = computed(() => {
       cw_temp: props.selectedPoint.cw_temp,
       out_temp: props.selectedPoint.out_temp,
       wb_temp: props.selectedPoint.wb_temp,
-      equipment_id: props.selectedPoint.equipment_id
+      equipment_id: props.selectedPoint.equipment_id,
+      param_details: props.selectedPoint.param_details || props.selectedPoint.peak_parameters
     }
   }
 
@@ -245,6 +324,95 @@ const contributors = computed(() => {
     { feature: 'Outside Temperature (F)', shap: 1.2, value: '82.0' },
     { feature: 'Chilled Water Rate (L/sec)', shap: -2.3, value: '88.3' }
   ]
+})
+
+const parameterDetails = computed(() => {
+  // 1. Direct param_details attached to active reading
+  if (activeReading.value.param_details && activeReading.value.param_details.length > 0) {
+    return activeReading.value.param_details
+  }
+
+  // 2. Fallback to matched SHAP sample param_details
+  if (matchedSample.value?.param_details && matchedSample.value.param_details.length > 0) {
+    return matchedSample.value.param_details
+  }
+
+  // 3. Dynamic baseline derivation for active observation
+  const r = activeReading.value
+  const actKwh = r.act
+  const expKwh = r.exp
+  const devKwh = r.res
+  const zKwh = Math.abs(r.z)
+
+  const cwAct = r.cw_temp ?? 31.6
+  const cwExp = 31.6
+  const cwDev = Number((cwAct - cwExp).toFixed(1))
+  const cwZ = Number((Math.abs(cwDev) / 0.85).toFixed(2))
+
+  const flowAct = r.flow ?? 88.3
+  const flowExp = 88.0
+  const flowDev = Number((flowAct - flowExp).toFixed(1))
+  const flowZ = Number((Math.abs(flowDev) / 8.5).toFixed(2))
+
+  const loadAct = r.load ?? 438.1
+  const loadExp = 435.0
+  const loadDev = Number((loadAct - loadExp).toFixed(1))
+  const loadZ = Number((Math.abs(loadDev) / 45.0).toFixed(2))
+
+  const outAct = r.out_temp ?? 82.0
+  const outExp = 82.0
+  const outDev = Number((outAct - outExp).toFixed(1))
+  const outZ = Number((Math.abs(outDev) / 4.5).toFixed(2))
+
+  const list = [
+    {
+      parameter: 'Energy Consumption',
+      unit: 'kWh',
+      actual: Number(actKwh.toFixed(1)),
+      expected: Number(expKwh.toFixed(1)),
+      deviation: Number(devKwh.toFixed(1)),
+      anomaly_score: Number(zKwh.toFixed(2)),
+      status: zKwh >= 3.0 ? 'CRITICAL' : zKwh >= 2.0 ? 'WARNING' : 'NORMAL'
+    },
+    {
+      parameter: 'Cooling Water Temperature',
+      unit: '°C',
+      actual: Number(cwAct.toFixed(1)),
+      expected: Number(cwExp.toFixed(1)),
+      deviation: cwDev,
+      anomaly_score: cwZ,
+      status: cwZ >= 3.0 ? 'CRITICAL' : cwZ >= 2.0 ? 'WARNING' : 'NORMAL'
+    },
+    {
+      parameter: 'Chilled Water Rate',
+      unit: 'L/s',
+      actual: Number(flowAct.toFixed(1)),
+      expected: Number(flowExp.toFixed(1)),
+      deviation: flowDev,
+      anomaly_score: flowZ,
+      status: flowZ >= 3.0 ? 'CRITICAL' : flowZ >= 2.0 ? 'WARNING' : 'NORMAL'
+    },
+    {
+      parameter: 'Building Load',
+      unit: 'RT',
+      actual: Number(loadAct.toFixed(1)),
+      expected: Number(loadExp.toFixed(1)),
+      deviation: loadDev,
+      anomaly_score: loadZ,
+      status: loadZ >= 3.0 ? 'CRITICAL' : loadZ >= 2.0 ? 'WARNING' : 'NORMAL'
+    },
+    {
+      parameter: 'Outside Temperature',
+      unit: '°F',
+      actual: Number(outAct.toFixed(1)),
+      expected: Number(outExp.toFixed(1)),
+      deviation: outDev,
+      anomaly_score: outZ,
+      status: outZ >= 3.0 ? 'CRITICAL' : outZ >= 2.0 ? 'WARNING' : 'NORMAL'
+    }
+  ]
+
+  return list.sort((a, b) => b.anomaly_score - a.anomaly_score)
 })
 
 const operationalRecommendation = computed(() => {

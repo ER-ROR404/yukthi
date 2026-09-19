@@ -28,6 +28,13 @@ from src.constants import (
 from src.data_loader import load_and_validate
 from src.explain import explain_prediction, generate_narrative
 from src.features import engineer_features
+from src.parameter_anomaly import (
+    compute_all_parameter_anomalies,
+    extract_parameter_breakdown_for_row,
+    generate_parameter_anomaly_table,
+    classify_observation_anomaly,
+    generate_classified_anomalies_table,
+)
 from src.predict import predict_expected_energy
 from src.preprocessing import preprocess
 
@@ -54,6 +61,9 @@ def export_dashboard_payload(
 
     logger.info("Scoring anomalies and grouping events...")
     df, events = score_anomalies(df)
+
+    logger.info("Computing parameter-level expected baselines, deviations, and anomaly scores...")
+    df = compute_all_parameter_anomalies(df)
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -126,9 +136,26 @@ def export_dashboard_payload(
         json.dump(summary_payload, f, indent=2)
     logger.info("Saved summary.json")
 
-    # 2. Events payload
-    events_payload = [
-        {
+    # 2. Events payload with attached parameter-level breakdown at peak timestamp
+    events_payload = []
+    for e in events:
+        ev_mask = (
+            (df[COL_EQUIPMENT_ID] == e.equipment_id)
+            & (df[COL_TIMESTAMP] >= e.start_time)
+            & (df[COL_TIMESTAMP] <= e.end_time)
+        )
+        ev_sub = df[ev_mask]
+        if not ev_sub.empty:
+            peak_idx = ev_sub[COL_RESIDUAL].abs().idxmax()
+            peak_row = ev_sub.loc[peak_idx]
+            peak_params = extract_parameter_breakdown_for_row(peak_row)
+        else:
+            peak_params = []
+
+        primary = peak_params[0] if peak_params else None
+        classification = classify_observation_anomaly(peak_row) if not ev_sub.empty else None
+
+        events_payload.append({
             "event_id": e.event_id,
             "equipment_id": e.equipment_id,
             "start_time": str(e.start_time),
@@ -138,39 +165,70 @@ def export_dashboard_payload(
             "mean_residual": round(e.mean_residual, 2),
             "max_z_score": round(e.max_robust_score, 2),
             "observation_count": e.observation_count,
-        }
-        for e in events
-    ]
+            "anomaly_type": classification["type"] if classification else "Excess Power Surge",
+            "anomaly_category": classification["category"] if classification else "power_surge",
+            "anomaly_icon": classification["icon"] if classification else "⚡",
+            "diagnosis": classification["diagnosis"] if classification else "Operational anomaly detected.",
+            "recommendation": classification["recommendation"] if classification else "Inspect chiller operation.",
+            "primary_parameter": primary["parameter"] if primary else "Energy Consumption",
+            "primary_deviation": primary["deviation"] if primary else round(e.max_residual, 1),
+            "primary_unit": primary["unit"] if primary else "kWh",
+            "primary_score": primary["anomaly_score"] if primary else round(e.max_robust_score, 2),
+            "peak_parameters": peak_params,
+        })
 
     with open(output_dir / "events.json", "w") as f:
         json.dump(events_payload, f, indent=2)
     logger.info("Saved events.json (%d events)", len(events_payload))
 
-    # 3. Telemetry time series per equipment (downsampled/structured for fast 60fps charts)
+    # 3. Categorized Multi-Type Anomalies Table Payload
+    logger.info("Generating categorized multi-type anomaly records...")
+    classified_records = generate_classified_anomalies_table(df, max_rows=2500)
+    with open(output_dir / "classified_anomalies.json", "w") as f:
+        json.dump(classified_records, f, indent=2)
+    logger.info("Saved classified_anomalies.json (%d records)", len(classified_records))
+
+    # 4. Dedicated Parameter-Level Anomaly Table Payload
+    logger.info("Generating parameter-level anomaly records table...")
+    param_table_records = generate_parameter_anomaly_table(df, min_score=2.0, max_rows=2000)
+    with open(output_dir / "parameter_anomalies.json", "w") as f:
+        json.dump(param_table_records, f, indent=2)
+    logger.info("Saved parameter_anomalies.json (%d records)", len(param_table_records))
+
+    # 5. Telemetry time series per equipment (downsampled/structured for fast 60fps charts)
     for eq in equipments:
         eq_df = df[df[COL_EQUIPMENT_ID] == eq].sort_values(COL_TIMESTAMP)
         records = []
         for _, r in eq_df.iterrows():
+            is_anom = int(r[COL_ANOMALY_FLAG])
+            status_val = str(r.get("system_status")) if (not pd.isna(r.get("system_status")) and str(r.get("system_status")) != "nan") else "NORMAL"
+            
+            # Attach full parameter breakdown and classification if anomalous or low confidence
+            param_details = extract_parameter_breakdown_for_row(r) if (is_anom or status_val != "NORMAL") else None
+            classification = classify_observation_anomaly(r) if (is_anom or status_val != "NORMAL") else None
+
             records.append({
                 "ts": str(r[COL_TIMESTAMP]),
                 "act": round(float(r[COL_ENERGY]), 1),
                 "exp": round(float(r[COL_EXPECTED_ENERGY]), 1),
                 "res": round(float(r[COL_RESIDUAL]), 1),
                 "z": round(float(r[COL_ROBUST_SCORE]) if not pd.isna(r[COL_ROBUST_SCORE]) else 0.0, 2),
-                "anom": int(r[COL_ANOMALY_FLAG]),
-                "status": str(r.get("system_status")) if (not pd.isna(r.get("system_status")) and str(r.get("system_status")) != "nan") else "NORMAL",
+                "anom": is_anom,
+                "status": status_val,
                 "low_conf": int(r.get("low_confidence_flag", 0)) if not pd.isna(r.get("low_confidence_flag")) else 0,
                 "load": round(float(r[COL_BUILDING_LOAD]), 1) if not pd.isna(r[COL_BUILDING_LOAD]) else None,
                 "flow": round(float(r[COL_CHILLED_WATER_RATE]), 1) if not pd.isna(r[COL_CHILLED_WATER_RATE]) else None,
                 "cw_temp": round(float(r[COL_COOLING_WATER_TEMP]), 1) if not pd.isna(r[COL_COOLING_WATER_TEMP]) else None,
                 "out_temp": round(float(r[COL_OUTSIDE_TEMP]), 1) if not pd.isna(r[COL_OUTSIDE_TEMP]) else None,
                 "wb_temp": round(float(r[FEAT_WET_BULB]), 1) if not pd.isna(r[FEAT_WET_BULB]) else None,
+                "param_details": param_details,
+                "classification": classification,
             })
         with open(output_dir / f"telemetry_{eq}.json", "w") as f:
             json.dump(records, f)
         logger.info("Saved telemetry_%s.json (%d records)", eq, len(records))
 
-    # 4. Precompute top SHAP explanations for high-severity anomalies
+    # 5. Precompute top SHAP explanations for high-severity anomalies
     logger.info("Precomputing SHAP explanations for anomaly events...")
     anomaly_samples = df[df[COL_ANOMALY_FLAG] == 1].sort_values(
         by=COL_RESIDUAL, ascending=False
@@ -182,6 +240,7 @@ def export_dashboard_payload(
             row_df = pd.DataFrame([row])
             exp = explain_prediction(model, row_df, FEATURE_COLS)
             narrative = generate_narrative(exp)
+            param_details = extract_parameter_breakdown_for_row(row)
             shap_explanations.append({
                 "timestamp": str(row[COL_TIMESTAMP]),
                 "equipment_id": str(row[COL_EQUIPMENT_ID]),
@@ -189,6 +248,7 @@ def export_dashboard_payload(
                 "expected_energy": round(float(exp.predicted_value), 1),
                 "residual": round(float(row[COL_RESIDUAL]), 1),
                 "narrative": narrative,
+                "param_details": param_details,
                 "top_contributors": [
                     {
                         "feature": c.feature_name,
