@@ -45,18 +45,18 @@
           />
 
           <!-- Model & Thermodynamic Context Card -->
-          <div class="bg-white border border-surface-200 rounded-xl p-5 shadow-card text-xs font-sans space-y-3">
-            <div class="flex items-center justify-between pb-2.5 border-b border-surface-200">
-              <h4 class="font-bold text-surface-900 tracking-tight">
+          <div class="bg-white border border-surface-200 rounded-xl p-5 sm:p-6 shadow-card text-xs sm:text-sm font-sans space-y-3.5">
+            <div class="flex items-center justify-between pb-3 border-b border-surface-200">
+              <h4 class="text-base sm:text-lg font-bold text-surface-900 tracking-tight">
                 ML Pipeline Architecture & Verification
               </h4>
-              <span class="text-[10.5px] font-mono px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold">
+              <span class="text-xs font-mono px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">
                 Validated
               </span>
             </div>
 
             <!-- Architectural Breakdown -->
-            <ul class="space-y-2 text-surface-600 font-mono text-[11px]">
+            <ul class="space-y-2.5 text-surface-700 font-mono text-xs sm:text-sm">
               <li class="flex justify-between">
                 <span class="text-surface-500 font-sans">Model Core:</span>
                 <span class="text-surface-900 font-semibold">CatBoost Regressor (Depth 4)</span>
@@ -67,19 +67,19 @@
               </li>
               <li class="flex justify-between">
                 <span class="text-surface-500 font-sans">Chronological CV R²:</span>
-                <span class="text-emerald-700 font-semibold">0.7734 (CV MAE 9.89 kWh)</span>
+                <span class="text-emerald-700 font-bold">0.7734 (CV MAE 9.89 kWh)</span>
               </li>
               <li class="flex justify-between">
                 <span class="text-surface-500 font-sans">Production Accuracy:</span>
-                <span class="text-emerald-700 font-semibold">93.56% (100 − WAPE)</span>
+                <span class="text-emerald-700 font-bold">93.56% (100 − WAPE)</span>
               </li>
               <li class="flex justify-between">
                 <span class="text-surface-500 font-sans">Anomaly Authority:</span>
-                <span class="text-orange-700 font-semibold">Robust MAD > 3.0 (7d Baseline)</span>
+                <span class="text-orange-700 font-bold">Robust MAD > 3.0 (7d Baseline)</span>
               </li>
               <li class="flex justify-between">
                 <span class="text-surface-500 font-sans">Secondary Evidence:</span>
-                <span class="text-surface-700 font-semibold">Isolation Forest Corroboration</span>
+                <span class="text-surface-800 font-semibold">Isolation Forest Corroboration</span>
               </li>
               <li class="flex justify-between">
                 <span class="text-surface-500 font-sans">Data Quality Decoupling:</span>
@@ -88,12 +88,12 @@
             </ul>
 
             <!-- Process Rationale (Clean, direct, human-written) -->
-            <div class="pt-2 border-t border-surface-100 text-[11.5px] text-surface-600 leading-relaxed space-y-1.5">
+            <div class="pt-3 border-t border-surface-100 text-xs sm:text-sm text-surface-600 leading-relaxed space-y-2">
               <p>
-                <strong>Operating Principle:</strong> Rather than applying static energy thresholds that cause false alarms during peak summer loads, this system learns expected power from simultaneous environmental and operating telemetry.
+                <strong>Operating Principle:</strong> Rather than applying static energy thresholds that cause false alarms during peak summer heat, this system learns expected power from simultaneous environmental and operating telemetry.
               </p>
               <p>
-                The residual between measured and expected power is tested against a 7-day rolling median using median absolute deviation (MAD). Sensor faults and extreme weather trigger a <strong class="text-amber-700">Low Confidence</strong> state rather than false mechanical alerts.
+                The residual between measured and expected power is evaluated against a 7-day rolling median using median absolute deviation (MAD). Sensor faults and extreme weather trigger a <strong class="text-amber-800 font-semibold">Low Confidence</strong> state rather than false mechanical alerts.
               </p>
             </div>
           </div>

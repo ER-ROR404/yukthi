@@ -1,31 +1,31 @@
 <template>
-  <div class="bg-white border border-surface-200 rounded-xl p-5 shadow-card">
+  <div class="bg-white border border-surface-200 rounded-xl p-5 sm:p-6 shadow-card">
     
     <!-- Top Bar: Title, Context Toggles, Range Presets, Legend -->
-    <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3 pb-3.5 mb-2 border-b border-surface-200">
+    <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3 pb-4 mb-3 border-b border-surface-200">
       <div>
-        <div class="flex items-center space-x-2">
-          <h3 class="text-sm font-bold text-surface-900 font-sans tracking-tight">
+        <div class="flex items-center space-x-2.5">
+          <h3 class="text-base sm:text-lg font-bold text-surface-900 font-sans tracking-tight">
             Time-Series Telemetry & Contextual Energy Baseline
           </h3>
-          <span class="text-[11px] px-2 py-0.5 rounded font-mono font-medium bg-surface-100 text-surface-600 border border-surface-200">
+          <span class="text-xs px-2.5 py-0.5 rounded font-mono font-medium bg-surface-100 text-surface-700 border border-surface-200">
             Actual vs Expected kWh
           </span>
         </div>
-        <p class="text-xs text-surface-500 mt-0.5">
-          Select time range or click any observation to isolate contextual residuals and inspect model factors.
+        <p class="text-xs sm:text-sm text-surface-600 mt-1">
+          Scrub the timeline or select any observation point to isolate contextual residuals and examine model factors.
         </p>
       </div>
 
       <!-- Controls: Context Overlays + Range Presets -->
-      <div class="flex flex-wrap items-center gap-2 text-xs">
+      <div class="flex flex-wrap items-center gap-2.5 text-xs sm:text-sm">
         
         <!-- Context Sensor Toggle Buttons -->
-        <div class="flex items-center bg-surface-100 p-0.5 rounded-lg border border-surface-200">
+        <div class="flex items-center bg-surface-100 p-1 rounded-lg border border-surface-200">
           <button
             @click="toggleOverlay('load')"
             :class="[
-              'px-2.5 py-1 rounded text-[11px] font-medium transition-colors',
+              'px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors cursor-pointer',
               activeOverlay === 'load'
                 ? 'bg-white text-surface-900 shadow-xs border border-surface-200 font-semibold'
                 : 'text-surface-600 hover:text-surface-900'
@@ -36,7 +36,7 @@
           <button
             @click="toggleOverlay('flow')"
             :class="[
-              'px-2.5 py-1 rounded text-[11px] font-medium transition-colors',
+              'px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors cursor-pointer',
               activeOverlay === 'flow'
                 ? 'bg-white text-surface-900 shadow-xs border border-surface-200 font-semibold'
                 : 'text-surface-600 hover:text-surface-900'
@@ -47,7 +47,7 @@
           <button
             @click="toggleOverlay('none')"
             :class="[
-              'px-2 py-1 rounded text-[11px] font-medium transition-colors',
+              'px-2.5 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors cursor-pointer',
               activeOverlay === 'none'
                 ? 'bg-white text-surface-900 shadow-xs border border-surface-200 font-semibold'
                 : 'text-surface-500 hover:text-surface-800'
@@ -58,13 +58,13 @@
         </div>
 
         <!-- Quick Range Presets -->
-        <div class="flex items-center bg-surface-100 p-0.5 rounded-lg border border-surface-200 font-mono text-[11px]">
+        <div class="flex items-center bg-surface-100 p-1 rounded-lg border border-surface-200 font-mono text-xs sm:text-sm">
           <button
             v-for="preset in ['7D', '30D', '90D', 'ALL']"
             :key="preset"
             @click="setZoomPreset(preset)"
             :class="[
-              'px-2 py-1 rounded transition-colors',
+              'px-2.5 py-1 rounded-md transition-colors cursor-pointer font-medium',
               activeRangePreset === preset
                 ? 'bg-brand-600 text-white font-semibold shadow-xs'
                 : 'text-surface-600 hover:text-surface-900'
@@ -78,33 +78,33 @@
     </div>
 
     <!-- Chart Legend & Status Indicator -->
-    <div class="flex flex-wrap items-center justify-between gap-2 pb-2 text-xs font-mono">
-      <div class="flex items-center space-x-4">
-        <span class="flex items-center space-x-1.5">
-          <span class="w-3 h-1 rounded-full bg-surface-900"></span>
-          <span class="text-surface-700 font-medium">Measured Power (Actual)</span>
+    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 text-xs sm:text-sm">
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <span class="flex items-center space-x-2">
+          <span class="w-3.5 h-1 rounded-full bg-red-600"></span>
+          <span class="text-surface-800 font-semibold">Measured Power (Actual)</span>
         </span>
-        <span class="flex items-center space-x-1.5">
-          <span class="w-3 h-1 rounded-full bg-brand-600"></span>
-          <span class="text-surface-700 font-medium">Contextual Expected Baseline</span>
+        <span class="flex items-center space-x-2">
+          <span class="w-3.5 h-1 rounded-full bg-brand-600"></span>
+          <span class="text-surface-800 font-semibold">Contextual Expected Baseline</span>
         </span>
-        <span class="flex items-center space-x-1.5">
+        <span class="flex items-center space-x-2">
           <span class="w-2.5 h-2.5 rounded-full bg-status-orange border-2 border-white shadow-xs"></span>
           <span class="text-surface-700 font-medium">Abnormal Energy (|z| > 3.0)</span>
         </span>
-        <span class="flex items-center space-x-1.5">
+        <span class="flex items-center space-x-2">
           <span class="w-2.5 h-2.5 rounded-full bg-status-amber border-2 border-white shadow-xs"></span>
-          <span class="text-surface-700 font-medium">Low Confidence / Envelope</span>
+          <span class="text-surface-700 font-medium">Low Confidence / Out of Envelope</span>
         </span>
       </div>
 
-      <div class="text-[11px] text-surface-500 font-sans">
-        Click any point to inspect root-cause attribution
+      <div class="text-xs text-surface-500 font-sans hidden md:block">
+        Click any data point to inspect model factors
       </div>
     </div>
 
     <!-- Chart Canvas -->
-    <div class="h-[480px] w-full relative">
+    <div class="h-[500px] w-full relative">
       <ClientOnly>
         <v-chart
           v-if="telemetry.length > 0"
@@ -114,9 +114,9 @@
           class="h-full w-full"
           @click="onChartClick"
         />
-        <div v-else class="h-full w-full flex items-center justify-center text-surface-400 text-sm font-mono">
+        <div v-else class="h-full w-full flex items-center justify-center text-surface-500 text-sm font-mono">
           <div class="flex items-center space-x-2">
-            <div class="w-2 h-2 rounded-full bg-brand-600 animate-ping"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-brand-600 animate-ping"></div>
             <span>Loading telemetry stream...</span>
           </div>
         </div>
@@ -208,7 +208,7 @@ const chartOption = computed(() => {
       type: 'line',
       data: actuals,
       showSymbol: false,
-      lineStyle: { width: 2, color: '#0F172A' },
+      lineStyle: { width: 2.2, color: '#DC2626' }, // Vibrant industrial RED as requested
       z: 3
     },
     {
@@ -216,9 +216,9 @@ const chartOption = computed(() => {
       type: 'line',
       data: expecteds,
       showSymbol: false,
-      lineStyle: { width: 2, color: '#2563EB', type: 'solid' },
+      lineStyle: { width: 2.2, color: '#2563EB', type: 'solid' },
       areaStyle: {
-        color: 'rgba(37, 99, 235, 0.04)'
+        color: 'rgba(37, 99, 235, 0.05)'
       },
       z: 2
     },
@@ -227,13 +227,13 @@ const chartOption = computed(() => {
       type: 'scatter',
       data: anomalies,
       symbol: 'circle',
-      symbolSize: 8,
+      symbolSize: 9,
       itemStyle: {
         color: '#EA580C',
         borderColor: '#FFFFFF',
-        borderWidth: 1.5,
-        shadowColor: 'rgba(234, 88, 12, 0.3)',
-        shadowBlur: 4
+        borderWidth: 2,
+        shadowColor: 'rgba(234, 88, 12, 0.35)',
+        shadowBlur: 5
       },
       z: 4
     },
@@ -242,11 +242,11 @@ const chartOption = computed(() => {
       type: 'scatter',
       data: lowConfMarkers,
       symbol: 'diamond',
-      symbolSize: 7,
+      symbolSize: 8,
       itemStyle: {
         color: '#D97706',
         borderColor: '#FFFFFF',
-        borderWidth: 1
+        borderWidth: 1.5
       },
       z: 4
     },
@@ -259,7 +259,7 @@ const chartOption = computed(() => {
       itemStyle: {
         color: (params: any) => {
           const val = params.value
-          if (val > 25) return '#DC2626'   // Critical high
+          if (val > 25) return '#DC2626'   // Severe high
           if (val > 10) return '#EA580C'   // Abnormal
           if (val < -15) return '#0284C7'  // Deep negative
           return '#94A3B8'                // Nominal
@@ -276,7 +276,7 @@ const chartOption = computed(() => {
       yAxisIndex: 2,
       data: loads,
       showSymbol: false,
-      lineStyle: { width: 1.5, color: '#64748B', type: 'dotted' },
+      lineStyle: { width: 1.8, color: '#64748B', type: 'dashed' },
       z: 1
     })
   } else if (activeOverlay.value === 'flow') {
@@ -286,7 +286,7 @@ const chartOption = computed(() => {
       yAxisIndex: 2,
       data: flows,
       showSymbol: false,
-      lineStyle: { width: 1.5, color: '#0D9488', type: 'dotted' },
+      lineStyle: { width: 1.8, color: '#0D9488', type: 'dashed' },
       z: 1
     })
   }
@@ -295,20 +295,20 @@ const chartOption = computed(() => {
     {
       type: 'value',
       name: 'Power (kWh)',
-      nameTextStyle: { color: '#64748B', fontSize: 11, fontFamily: 'Plus Jakarta Sans', align: 'left', padding: [0, 0, 8, 0] },
+      nameTextStyle: { color: '#475569', fontSize: 12, fontFamily: 'Plus Jakarta Sans', align: 'left', padding: [0, 0, 8, 0], fontWeight: 'bold' },
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { color: '#64748B', fontSize: 10, fontFamily: 'Fira Code' },
+      axisLabel: { color: '#475569', fontSize: 11, fontFamily: 'Fira Code', fontWeight: 500 },
       splitLine: { lineStyle: { color: '#F1F5F9', type: 'solid' } }
     },
     {
       gridIndex: 1,
       type: 'value',
       name: 'Δ kWh',
-      nameTextStyle: { color: '#64748B', fontSize: 10, fontFamily: 'Fira Code' },
+      nameTextStyle: { color: '#64748B', fontSize: 11, fontFamily: 'Fira Code', fontWeight: 500 },
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { color: '#64748B', fontSize: 9, fontFamily: 'Fira Code' },
+      axisLabel: { color: '#64748B', fontSize: 10, fontFamily: 'Fira Code' },
       splitLine: { lineStyle: { color: '#F1F5F9', type: 'solid' } }
     }
   ]
@@ -318,10 +318,10 @@ const chartOption = computed(() => {
       type: 'value',
       position: 'right',
       name: activeOverlay.value === 'load' ? 'Load (RT)' : 'Flow (L/s)',
-      nameTextStyle: { color: activeOverlay.value === 'load' ? '#64748B' : '#0D9488', fontSize: 10 },
+      nameTextStyle: { color: activeOverlay.value === 'load' ? '#475569' : '#0D9488', fontSize: 12, fontWeight: 'bold' },
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { color: '#64748B', fontSize: 10, fontFamily: 'Fira Code' },
+      axisLabel: { color: '#64748B', fontSize: 11, fontFamily: 'Fira Code' },
       splitLine: { show: false }
     })
   }
@@ -338,10 +338,10 @@ const chartOption = computed(() => {
       backgroundColor: 'rgba(255, 255, 255, 0.98)',
       borderColor: '#E2E8F0',
       borderWidth: 1,
-      padding: 12,
+      padding: 14,
       shadowColor: 'rgba(15, 23, 42, 0.08)',
       shadowBlur: 16,
-      textStyle: { color: '#0F172A', fontFamily: 'Plus Jakarta Sans', fontSize: 12 },
+      textStyle: { color: '#0F172A', fontFamily: 'Plus Jakarta Sans', fontSize: 13 },
       formatter: (params: any) => {
         if (!params || params.length === 0) return ''
         const idx = params[0].dataIndex
@@ -350,45 +350,45 @@ const chartOption = computed(() => {
 
         const isAnom = item.anom === 1
         const statusLabel = item.status || (isAnom ? 'ABNORMAL ENERGY' : 'NORMAL')
-        let statusBadge = `<span style="background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">NORMAL</span>`
+        let statusBadge = `<span style="background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">NORMAL</span>`
         if (statusLabel === 'ABNORMAL ENERGY') {
-          statusBadge = `<span style="background: #FFF7ED; color: #9A3412; border: 1px solid #FED7AA; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">ABNORMAL ENERGY</span>`
+          statusBadge = `<span style="background: #FFF7ED; color: #9A3412; border: 1px solid #FED7AA; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">ABNORMAL ENERGY</span>`
         } else if (statusLabel === 'LOW CONFIDENCE') {
-          statusBadge = `<span style="background: #FFFBEB; color: #92400E; border: 1px solid #FDE68A; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">LOW CONFIDENCE</span>`
+          statusBadge = `<span style="background: #FFFBEB; color: #92400E; border: 1px solid #FDE68A; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">LOW CONFIDENCE</span>`
         } else if (statusLabel === 'DATA + ENERGY ISSUE') {
-          statusBadge = `<span style="background: #FEF2F2; color: #991B1B; border: 1px solid #FECACA; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">DATA + ENERGY ISSUE</span>`
+          statusBadge = `<span style="background: #FEF2F2; color: #991B1B; border: 1px solid #FECACA; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">DATA + ENERGY ISSUE</span>`
         }
 
         return `
-          <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; min-width: 240px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; border-bottom: 1px solid #F1F5F9; padding-bottom: 4px;">
-              <span style="font-family: 'Fira Code', monospace; color: #64748B; font-size: 11px;">${item.ts}</span>
+          <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; min-width: 260px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid #F1F5F9; padding-bottom: 6px;">
+              <span style="font-family: 'Fira Code', monospace; color: #475569; font-size: 12px; font-weight: 600;">${item.ts}</span>
               ${statusBadge}
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-family: 'Fira Code', monospace; margin-bottom: 8px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-family: 'Fira Code', monospace; margin-bottom: 10px;">
               <div>
-                <span style="color: #64748B; font-size: 10px; display: block;">Measured Power</span>
-                <span style="font-weight: 700; color: #0F172A; font-size: 13px;">${item.act} kWh</span>
+                <span style="color: #DC2626; font-size: 11px; display: block; font-weight: 600;">Measured Power</span>
+                <span style="font-weight: 700; color: #DC2626; font-size: 15px;">${item.act} kWh</span>
               </div>
               <div>
-                <span style="color: #64748B; font-size: 10px; display: block;">Expected Baseline</span>
-                <span style="font-weight: 700; color: #2563EB; font-size: 13px;">${item.exp} kWh</span>
+                <span style="color: #2563EB; font-size: 11px; display: block; font-weight: 600;">Expected Baseline</span>
+                <span style="font-weight: 700; color: #2563EB; font-size: 15px;">${item.exp} kWh</span>
               </div>
             </div>
 
-            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 8px; margin-bottom: 8px;">
-              <div style="display: flex; justify-content: space-between; font-family: 'Fira Code', monospace; font-size: 11px;">
-                <span style="color: #64748B;">Contextual Residual:</span>
-                <span style="font-weight: 700; color: ${item.res > 15 ? '#DC2626' : item.res > 0 ? '#EA580C' : '#059669'};">
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 8px 10px; margin-bottom: 10px;">
+              <div style="display: flex; justify-content: space-between; font-family: 'Fira Code', monospace; font-size: 12px;">
+                <span style="color: #475569; font-weight: 500;">Contextual Residual:</span>
+                <span style="font-weight: 700; color: ${item.res > 15 ? '#DC2626' : item.res > 0 ? '#EA580C' : '#059669'}; font-size: 13px;">
                   ${item.res > 0 ? '+' : ''}${item.res} kWh (z=${item.z})
                 </span>
               </div>
             </div>
 
-            <div style="font-size: 10.5px; color: #64748B; line-height: 1.5; border-top: 1px solid #F1F5F9; padding-top: 6px;">
-              <div>Building Load: <strong style="color: #334155;">${item.load ?? '--'} RT</strong> • Flow: <strong style="color: #334155;">${item.flow ?? '--'} L/s</strong></div>
-              <div>Cooling Water: <strong style="color: #334155;">${item.cw_temp ?? '--'}°C</strong> • Wet-Bulb: <strong style="color: #334155;">${item.wb_temp ?? '--'}°C</strong></div>
+            <div style="font-size: 11.5px; color: #475569; line-height: 1.6; border-top: 1px solid #F1F5F9; padding-top: 8px;">
+              <div>Building Load: <strong style="color: #0F172A;">${item.load ?? '--'} RT</strong> • Flow: <strong style="color: #0F172A;">${item.flow ?? '--'} L/s</strong></div>
+              <div>Cooling Water: <strong style="color: #0F172A;">${item.cw_temp ?? '--'}°C</strong> • Wet-Bulb: <strong style="color: #0F172A;">${item.wb_temp ?? '--'}°C</strong></div>
             </div>
           </div>
         `
@@ -396,8 +396,8 @@ const chartOption = computed(() => {
     },
     axisPointer: { link: [{ xAxisIndex: 'all' }] },
     grid: [
-      { left: '55', right: activeOverlay.value !== 'none' ? '55' : '25', top: '25', height: '58%' },
-      { left: '55', right: activeOverlay.value !== 'none' ? '55' : '25', top: '78%', height: '14%' }
+      { left: '60', right: activeOverlay.value !== 'none' ? '60' : '25', top: '25', height: '58%' },
+      { left: '60', right: activeOverlay.value !== 'none' ? '60' : '25', top: '78%', height: '14%' }
     ],
     xAxis: [
       {
@@ -414,7 +414,7 @@ const chartOption = computed(() => {
         data: timestamps,
         boundaryGap: false,
         axisLine: { lineStyle: { color: '#CBD5E1' } },
-        axisLabel: { color: '#64748B', fontSize: 10, fontFamily: 'Fira Code' },
+        axisLabel: { color: '#475569', fontSize: 11, fontFamily: 'Fira Code', fontWeight: 500 },
         splitLine: { show: true, lineStyle: { color: '#F8FAFC' } }
       }
     ],
@@ -430,11 +430,11 @@ const chartOption = computed(() => {
         type: 'slider',
         xAxisIndex: [0, 1],
         bottom: 2,
-        height: 18,
+        height: 20,
         borderColor: '#E2E8F0',
         backgroundColor: '#F8FAFC',
         fillerColor: 'rgba(37, 99, 235, 0.12)',
-        handleStyle: { color: '#2563EB', borderColor: '#FFFFFF', borderWidth: 1 },
+        handleStyle: { color: '#2563EB', borderColor: '#FFFFFF', borderWidth: 1.5 },
         textStyle: { color: 'transparent' },
         start: zoomRange.value[0],
         end: zoomRange.value[1]
