@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-surface-50 text-surface-900 font-sans antialiased selection:bg-brand-100 selection:text-brand-900">
+  <div class="min-h-screen bg-[#F1F5F9] text-surface-900 font-sans antialiased selection:bg-brand-100 selection:text-brand-900">
     
     <!-- Top Cockpit Header -->
     <CockpitHeader
@@ -10,16 +10,16 @@
     />
 
     <!-- Main Dashboard Body -->
-    <main class="p-4 md:p-6 space-y-4 max-w-[1680px] mx-auto">
+    <main class="p-4 sm:p-5 md:p-6 space-y-5 max-w-[1680px] mx-auto">
       
       <!-- Top Operational KPI Bar -->
       <KpiMetricsStrip :current-stats="currentEquipmentStats" />
 
       <!-- Main Operational Analytics View -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
         
         <!-- Left Column: Time-Series Exploration + Persistent Events Table (8 cols) -->
-        <div class="lg:col-span-8 space-y-4">
+        <div class="lg:col-span-8 space-y-5">
           
           <!-- Interactive Time-Series Chart -->
           <TelemetryChart
@@ -36,7 +36,7 @@
         </div>
 
         <!-- Right Column: Investigation Workbench & Supporting Evidence (4 cols) -->
-        <div class="lg:col-span-4 space-y-4">
+        <div class="lg:col-span-4 space-y-5 lg:sticky lg:top-20">
           
           <!-- Investigation & Attribution Workbench -->
           <ShapExplainerPanel
@@ -45,55 +45,55 @@
           />
 
           <!-- Model & Thermodynamic Context Card -->
-          <div class="bg-white border border-surface-200 rounded-xl p-5 sm:p-6 shadow-card text-xs sm:text-sm font-sans space-y-3.5">
-            <div class="flex items-center justify-between pb-3 border-b border-surface-200">
-              <h4 class="text-base sm:text-lg font-bold text-surface-900 tracking-tight">
+          <div class="bg-surface-900 border border-surface-800 rounded-xl p-5 sm:p-6 shadow-card text-xs sm:text-sm font-sans space-y-3.5 text-white">
+            <div class="flex items-center justify-between pb-3 border-b border-surface-800">
+              <h4 class="text-base sm:text-lg font-bold text-white tracking-tight">
                 ML Pipeline Architecture & Verification
               </h4>
-              <span class="text-xs font-mono px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">
+              <span class="text-xs font-mono px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-500/40 font-bold">
                 Validated
               </span>
             </div>
 
             <!-- Architectural Breakdown -->
-            <ul class="space-y-2.5 text-surface-700 font-mono text-xs sm:text-sm">
+            <ul class="space-y-2.5 text-surface-300 font-mono text-xs sm:text-sm">
               <li class="flex justify-between">
-                <span class="text-surface-500 font-sans">Model Core:</span>
-                <span class="text-surface-900 font-semibold">CatBoost Regressor (Depth 4)</span>
+                <span class="text-surface-400 font-sans">Model Core:</span>
+                <span class="text-white font-semibold">CatBoost Regressor (Depth 4)</span>
               </li>
               <li class="flex justify-between">
-                <span class="text-surface-500 font-sans">Validation Scheme:</span>
-                <span class="text-surface-900 font-semibold">TimeSeriesSplit (5-Fold CV)</span>
+                <span class="text-surface-400 font-sans">Validation Scheme:</span>
+                <span class="text-white font-semibold">TimeSeriesSplit (5-Fold CV)</span>
               </li>
               <li class="flex justify-between">
-                <span class="text-surface-500 font-sans">Chronological CV R²:</span>
-                <span class="text-emerald-700 font-bold">0.7734 (CV MAE 9.89 kWh)</span>
+                <span class="text-surface-400 font-sans">Chronological CV R²:</span>
+                <span class="text-emerald-400 font-bold">0.7734 (CV MAE 9.89 kWh)</span>
               </li>
               <li class="flex justify-between">
-                <span class="text-surface-500 font-sans">Production Accuracy:</span>
-                <span class="text-emerald-700 font-bold">93.56% (100 − WAPE)</span>
+                <span class="text-surface-400 font-sans">Production Accuracy:</span>
+                <span class="text-emerald-400 font-bold">93.56% (100 − WAPE)</span>
               </li>
               <li class="flex justify-between">
-                <span class="text-surface-500 font-sans">Anomaly Authority:</span>
-                <span class="text-orange-700 font-bold">Robust MAD > 3.0 (7d Baseline)</span>
+                <span class="text-surface-400 font-sans">Anomaly Authority:</span>
+                <span class="text-orange-400 font-bold">Robust MAD > 3.0 (7d Baseline)</span>
               </li>
               <li class="flex justify-between">
-                <span class="text-surface-500 font-sans">Secondary Evidence:</span>
-                <span class="text-surface-800 font-semibold">Isolation Forest Corroboration</span>
+                <span class="text-surface-400 font-sans">Secondary Evidence:</span>
+                <span class="text-surface-200 font-semibold">Isolation Forest Corroboration</span>
               </li>
               <li class="flex justify-between">
-                <span class="text-surface-500 font-sans">Data Quality Decoupling:</span>
-                <span class="text-brand-700 font-semibold">4-State Separation Logic</span>
+                <span class="text-surface-400 font-sans">Data Quality Decoupling:</span>
+                <span class="text-brand-300 font-semibold">4-State Separation Logic</span>
               </li>
             </ul>
 
             <!-- Process Rationale (Clean, direct, human-written) -->
-            <div class="pt-3 border-t border-surface-100 text-xs sm:text-sm text-surface-600 leading-relaxed space-y-2">
+            <div class="pt-3 border-t border-surface-800 text-xs sm:text-sm text-surface-400 leading-relaxed space-y-2 font-sans">
               <p>
-                <strong>Operating Principle:</strong> Rather than applying static energy thresholds that cause false alarms during peak summer heat, this system learns expected power from simultaneous environmental and operating telemetry.
+                <strong class="text-surface-200">Operating Principle:</strong> Rather than applying static energy thresholds that cause false alarms during peak summer heat, this system learns expected power from simultaneous environmental and operating telemetry.
               </p>
               <p>
-                The residual between measured and expected power is evaluated against a 7-day rolling median using median absolute deviation (MAD). Sensor faults and extreme weather trigger a <strong class="text-amber-800 font-semibold">Low Confidence</strong> state rather than false mechanical alerts.
+                The residual between measured and expected power is evaluated against a 7-day rolling median using median absolute deviation (MAD). Sensor faults and extreme weather trigger a <strong class="text-amber-400 font-semibold">Low Confidence</strong> state rather than false mechanical alerts.
               </p>
             </div>
           </div>

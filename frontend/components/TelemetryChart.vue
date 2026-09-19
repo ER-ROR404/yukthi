@@ -1,18 +1,18 @@
 <template>
-  <div class="bg-white border border-surface-200 rounded-xl p-5 sm:p-6 shadow-card">
+  <div class="bg-white border border-surface-200 rounded-xl p-5 sm:p-6 shadow-card hover:border-surface-300 transition-colors">
     
     <!-- Top Bar: Title, Context Toggles, Range Presets, Legend -->
-    <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3 pb-4 mb-3 border-b border-surface-200">
+    <div class="-m-5 sm:-m-6 p-4 sm:p-5 mb-4 rounded-t-xl bg-surface-50 border-b border-surface-200 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
       <div>
         <div class="flex items-center space-x-2.5">
           <h3 class="text-base sm:text-lg font-bold text-surface-900 font-sans tracking-tight">
             Time-Series Telemetry & Contextual Energy Baseline
           </h3>
-          <span class="text-xs px-2.5 py-0.5 rounded font-mono font-medium bg-surface-100 text-surface-700 border border-surface-200">
+          <span class="text-xs px-2.5 py-0.5 rounded font-mono font-semibold bg-white text-surface-700 border border-surface-200 shadow-xs">
             Actual vs Expected kWh
           </span>
         </div>
-        <p class="text-xs sm:text-sm text-surface-600 mt-1">
+        <p class="text-xs sm:text-sm text-surface-600 mt-1 font-sans">
           Scrub the timeline or select any observation point to isolate contextual residuals and examine model factors.
         </p>
       </div>

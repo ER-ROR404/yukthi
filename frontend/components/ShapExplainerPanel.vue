@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-white border border-surface-200 rounded-xl p-5 sm:p-6 shadow-card space-y-4">
+  <div class="bg-white border border-surface-200 rounded-xl p-5 sm:p-6 shadow-card space-y-4 hover:border-surface-300 transition-colors">
     
     <!-- Panel Header -->
-    <div class="flex items-center justify-between pb-3.5 border-b border-surface-200">
+    <div class="-m-5 sm:-m-6 p-4 sm:p-5 mb-4 rounded-t-xl bg-surface-50 border-b border-surface-200 flex items-center justify-between">
       <div class="flex items-center space-x-2">
         <Sliders class="w-4 h-4 text-brand-600" />
         <h3 class="text-base sm:text-lg font-bold text-surface-900 font-sans tracking-tight">
@@ -11,7 +11,7 @@
       </div>
       <span
         :class="[
-          'text-xs font-mono font-bold px-2.5 py-1 rounded uppercase tracking-wide',
+          'text-xs font-mono font-bold px-2.5 py-1 rounded uppercase tracking-wide shadow-xs',
           activeStatusClass
         ]"
       >
@@ -20,7 +20,7 @@
     </div>
 
     <!-- Active Observation Primary Metrics -->
-    <div class="bg-surface-50 border border-surface-200 rounded-lg p-3.5 text-xs sm:text-sm font-mono">
+    <div class="bg-surface-100 border border-surface-200 rounded-lg p-3.5 text-xs sm:text-sm font-mono">
       <div class="flex items-center justify-between text-surface-600 mb-2.5 font-sans text-xs sm:text-sm">
         <span>Timestamp: <strong class="text-surface-900 font-mono font-bold">{{ activeReading.ts }}</strong></span>
         <span>Unit: <strong class="text-surface-900 font-mono font-bold">{{ activeReading.equipment_id || 'CHILLER-01' }}</strong></span>
