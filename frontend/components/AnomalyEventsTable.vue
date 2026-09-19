@@ -1,8 +1,8 @@
 <template>
-  <div class="card-solid bg-white border border-slate-300 rounded-xl p-5 sm:p-6 shadow-xs hover:border-slate-400 transition-colors">
+  <div class="card-solid bg-white border border-slate-300 rounded-xl overflow-hidden shadow-xs hover:border-slate-400 transition-colors">
     
     <!-- Table Header & Controls -->
-    <div class="-m-5 sm:-m-6 p-4 sm:p-5 mb-5 rounded-t-xl bg-slate-100 border-b border-slate-300 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+    <div class="px-5 sm:px-6 py-4 sm:py-5 bg-slate-100 border-b border-slate-300 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
       <div>
         <div class="flex items-center space-x-2.5">
           <h3 class="text-base sm:text-xl font-bold text-slate-950 font-sans tracking-tight">
@@ -57,13 +57,15 @@
       </div>
     </div>
 
-    <!-- Interactive Event Table -->
-    <div
-      :class="[
-        'overflow-x-auto border border-slate-300 rounded-lg transition-all bg-white',
-        displayedEvents.length > 10 ? 'max-h-[580px] overflow-y-auto' : ''
-      ]"
-    >
+    <!-- Table Body Container with clean padding -->
+    <div class="p-5 sm:p-6 space-y-4">
+      <!-- Interactive Event Table -->
+      <div
+        :class="[
+          'overflow-x-auto border border-slate-300 rounded-lg transition-all bg-white',
+          displayedEvents.length > 10 ? 'max-h-[580px] overflow-y-auto' : ''
+        ]"
+      >
       <table class="w-full text-left text-sm font-mono border-collapse">
         <thead class="sticky top-0 z-20 font-sans shadow-xs">
           <tr class="border-b-2 border-slate-300">
@@ -239,6 +241,8 @@
       </div>
 
     </div>
+
+  </div>
 
   </div>
 </template>
