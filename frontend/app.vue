@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-[#F1F5F9] text-surface-900 font-sans antialiased selection:bg-brand-100 selection:text-brand-900">
+  <div class="min-h-screen bg-[#EDF2F7] text-slate-900 font-sans antialiased selection:bg-blue-100 selection:text-blue-900">
     
     <!-- Top Cockpit Header -->
     <CockpitHeader
@@ -44,56 +44,52 @@
             :shap-samples="shapSamples"
           />
 
-          <!-- Model & Thermodynamic Context Card -->
-          <div class="bg-surface-900 border border-surface-800 rounded-xl p-5 sm:p-6 shadow-card text-xs sm:text-sm font-sans space-y-3.5 text-white">
-            <div class="flex items-center justify-between pb-3 border-b border-surface-800">
-              <h4 class="text-base sm:text-lg font-bold text-white tracking-tight">
+          <!-- Model & Operational Intelligence Context Card -->
+          <div class="card-solid bg-white border border-slate-300 rounded-xl p-5 sm:p-6 shadow-xs text-sm font-sans space-y-4 text-slate-900">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+              <h4 class="text-base sm:text-xl font-bold text-slate-950 tracking-tight">
                 ML Pipeline Architecture & Verification
               </h4>
-              <span class="text-xs font-mono px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-500/40 font-bold">
+              <span class="text-xs font-mono px-3 py-1 rounded-md bg-emerald-100 text-emerald-900 border border-emerald-300 font-bold">
                 Validated
               </span>
             </div>
 
             <!-- Architectural Breakdown -->
-            <ul class="space-y-2.5 text-surface-300 font-mono text-xs sm:text-sm">
-              <li class="flex justify-between">
-                <span class="text-surface-400 font-sans">Model Core:</span>
-                <span class="text-white font-semibold">CatBoost Regressor (Depth 4)</span>
+            <ul class="space-y-3 text-slate-800 font-mono text-sm">
+              <li class="flex justify-between items-center">
+                <span class="text-slate-600 font-sans font-medium">Model Core:</span>
+                <span class="text-slate-950 font-bold">CatBoost Regressor (Depth 4)</span>
               </li>
-              <li class="flex justify-between">
-                <span class="text-surface-400 font-sans">Validation Scheme:</span>
-                <span class="text-white font-semibold">TimeSeriesSplit (5-Fold CV)</span>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-600 font-sans font-medium">Validation Scheme:</span>
+                <span class="text-slate-950 font-bold">TimeSeriesSplit (5-Fold CV)</span>
               </li>
-              <li class="flex justify-between">
-                <span class="text-surface-400 font-sans">Chronological CV R²:</span>
-                <span class="text-emerald-400 font-bold">0.7734 (CV MAE 9.89 kWh)</span>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-600 font-sans font-medium">Chronological CV R²:</span>
+                <span class="text-emerald-800 font-bold">0.7734 (CV MAE 9.89 kWh)</span>
               </li>
-              <li class="flex justify-between">
-                <span class="text-surface-400 font-sans">Production Accuracy:</span>
-                <span class="text-emerald-400 font-bold">93.56% (100 − WAPE)</span>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-600 font-sans font-medium">Production Accuracy:</span>
+                <span class="text-emerald-800 font-bold">93.56% (100 − WAPE)</span>
               </li>
-              <li class="flex justify-between">
-                <span class="text-surface-400 font-sans">Anomaly Authority:</span>
-                <span class="text-orange-400 font-bold">Robust MAD > 3.0 (7d Baseline)</span>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-600 font-sans font-medium">Secondary Evidence:</span>
+                <span class="text-slate-900 font-bold">Isolation Forest Corroboration</span>
               </li>
-              <li class="flex justify-between">
-                <span class="text-surface-400 font-sans">Secondary Evidence:</span>
-                <span class="text-surface-200 font-semibold">Isolation Forest Corroboration</span>
-              </li>
-              <li class="flex justify-between">
-                <span class="text-surface-400 font-sans">Data Quality Decoupling:</span>
-                <span class="text-brand-300 font-semibold">4-State Separation Logic</span>
+              <li class="flex justify-between items-center">
+                <span class="text-slate-600 font-sans font-medium">Data Quality Decoupling:</span>
+                <span class="text-blue-800 font-bold">4-State Separation Logic</span>
               </li>
             </ul>
 
             <!-- Process Rationale (Clean, direct, human-written) -->
-            <div class="pt-3 border-t border-surface-800 text-xs sm:text-sm text-surface-400 leading-relaxed space-y-2 font-sans">
+            <div class="pt-3.5 border-t border-slate-200 text-sm text-slate-700 leading-relaxed space-y-2.5 font-sans font-medium">
               <p>
-                <strong class="text-surface-200">Operating Principle:</strong> Rather than applying static energy thresholds that cause false alarms during peak summer heat, this system learns expected power from simultaneous environmental and operating telemetry.
+                <strong class="text-slate-950 font-bold">Operating Principle:</strong> Rather than applying static energy thresholds that cause false alarms during peak summer heat, this system learns expected power from simultaneous environmental and operating telemetry.
               </p>
               <p>
-                The residual between measured and expected power is evaluated against a 7-day rolling median using median absolute deviation (MAD). Sensor faults and extreme weather trigger a <strong class="text-amber-400 font-semibold">Low Confidence</strong> state rather than false mechanical alerts.
+                The residual between measured and expected power identifies true energy inefficiency. Sensor faults and extreme weather trigger a <strong class="text-amber-900 font-bold">Low Confidence</strong> state rather than false mechanical alerts.
               </p>
             </div>
           </div>

@@ -1,18 +1,18 @@
 <template>
-  <div class="bg-white border border-surface-200 rounded-xl p-5 sm:p-6 shadow-card hover:border-surface-300 transition-colors">
+  <div class="card-solid bg-white border border-slate-300 rounded-xl p-5 sm:p-6 shadow-xs hover:border-slate-400 transition-colors">
     
     <!-- Top Bar: Title, Context Toggles, Range Presets, Legend -->
-    <div class="-m-5 sm:-m-6 p-4 sm:p-5 mb-4 rounded-t-xl bg-surface-50 border-b border-surface-200 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
+    <div class="-m-5 sm:-m-6 p-4 sm:p-5 mb-5 rounded-t-xl bg-slate-100 border-b border-slate-300 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
       <div>
         <div class="flex items-center space-x-2.5">
-          <h3 class="text-base sm:text-lg font-bold text-surface-900 font-sans tracking-tight">
+          <h3 class="text-base sm:text-xl font-bold text-slate-950 font-sans tracking-tight">
             Time-Series Telemetry & Contextual Energy Baseline
           </h3>
-          <span class="text-xs px-2.5 py-0.5 rounded font-mono font-semibold bg-white text-surface-700 border border-surface-200 shadow-xs">
+          <span class="text-xs px-2.5 py-0.5 rounded font-mono font-bold bg-white text-slate-800 border border-slate-300 shadow-xs">
             Actual vs Expected kWh
           </span>
         </div>
-        <p class="text-xs sm:text-sm text-surface-600 mt-1 font-sans">
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 font-sans font-medium">
           Scrub the timeline or select any observation point to isolate contextual residuals and examine model factors.
         </p>
       </div>
@@ -21,14 +21,14 @@
       <div class="flex flex-wrap items-center gap-2.5 text-xs sm:text-sm">
         
         <!-- Context Sensor Toggle Buttons -->
-        <div class="flex items-center bg-surface-100 p-1 rounded-lg border border-surface-200">
+        <div class="flex items-center bg-slate-200/80 p-1 rounded-lg border border-slate-300">
           <button
             @click="toggleOverlay('load')"
             :class="[
               'px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors cursor-pointer',
               activeOverlay === 'load'
-                ? 'bg-white text-surface-900 shadow-xs border border-surface-200 font-semibold'
-                : 'text-surface-600 hover:text-surface-900'
+                ? 'bg-white text-slate-950 shadow-xs border border-slate-300 font-bold'
+                : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
             ]"
           >
             Overlay Load (RT)
@@ -38,8 +38,8 @@
             :class="[
               'px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors cursor-pointer',
               activeOverlay === 'flow'
-                ? 'bg-white text-surface-900 shadow-xs border border-surface-200 font-semibold'
-                : 'text-surface-600 hover:text-surface-900'
+                ? 'bg-white text-slate-950 shadow-xs border border-slate-300 font-bold'
+                : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
             ]"
           >
             Overlay Flow (L/s)
@@ -49,8 +49,8 @@
             :class="[
               'px-2.5 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors cursor-pointer',
               activeOverlay === 'none'
-                ? 'bg-white text-surface-900 shadow-xs border border-surface-200 font-semibold'
-                : 'text-surface-500 hover:text-surface-800'
+                ? 'bg-white text-slate-950 shadow-xs border border-slate-300 font-bold'
+                : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
             ]"
           >
             Off
@@ -58,16 +58,16 @@
         </div>
 
         <!-- Quick Range Presets -->
-        <div class="flex items-center bg-surface-100 p-1 rounded-lg border border-surface-200 font-mono text-xs sm:text-sm">
+        <div class="flex items-center bg-slate-200/80 p-1 rounded-lg border border-slate-300 font-mono text-xs sm:text-sm">
           <button
             v-for="preset in ['7D', '30D', '90D', 'ALL']"
             :key="preset"
             @click="setZoomPreset(preset)"
             :class="[
-              'px-2.5 py-1 rounded-md transition-colors cursor-pointer font-medium',
+              'px-3 py-1.5 rounded-md transition-colors cursor-pointer font-bold',
               activeRangePreset === preset
-                ? 'bg-brand-600 text-white font-semibold shadow-xs'
-                : 'text-surface-600 hover:text-surface-900'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
             ]"
           >
             {{ preset }}
@@ -82,23 +82,23 @@
       <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
         <span class="flex items-center space-x-2">
           <span class="w-3.5 h-1 rounded-full bg-red-600"></span>
-          <span class="text-surface-800 font-semibold">Measured Power (Actual)</span>
+          <span class="text-slate-900 font-semibold">Measured Power (Actual)</span>
         </span>
         <span class="flex items-center space-x-2">
-          <span class="w-3.5 h-1 rounded-full bg-brand-600"></span>
-          <span class="text-surface-800 font-semibold">Contextual Expected Baseline</span>
+          <span class="w-3.5 h-1 rounded-full bg-blue-600"></span>
+          <span class="text-slate-900 font-semibold">Contextual Expected Baseline</span>
         </span>
         <span class="flex items-center space-x-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-status-orange border-2 border-white shadow-xs"></span>
-          <span class="text-surface-700 font-medium">Abnormal Energy (|z| > 3.0)</span>
+          <span class="w-3 h-3 rounded-full bg-orange-600 border-2 border-white shadow-xs"></span>
+          <span class="text-slate-800 font-medium">Abnormal Energy (|z| > 3.0)</span>
         </span>
         <span class="flex items-center space-x-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-status-amber border-2 border-white shadow-xs"></span>
-          <span class="text-surface-700 font-medium">Low Confidence / Out of Envelope</span>
+          <span class="w-3 h-3 rounded-full bg-amber-600 border-2 border-white shadow-xs"></span>
+          <span class="text-slate-800 font-medium">Low Confidence / Envelope Flag</span>
         </span>
       </div>
 
-      <div class="text-xs text-surface-500 font-sans hidden md:block">
+      <div class="text-xs sm:text-sm text-slate-600 font-sans font-medium hidden md:block">
         Click any data point to inspect model factors
       </div>
     </div>

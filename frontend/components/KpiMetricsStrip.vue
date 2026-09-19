@@ -2,124 +2,126 @@
   <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3.5 sm:gap-4">
     
     <!-- Card 1: Measured Power (Data Level) -->
-    <div class="bg-white border border-surface-200 rounded-xl p-4 sm:p-5 shadow-card hover:border-surface-300 hover:shadow-hover transition-all">
-      <div class="flex items-center justify-between text-surface-600 text-xs sm:text-sm font-semibold mb-2">
+    <div class="card-solid bg-white border border-slate-300 rounded-xl p-4 sm:p-5 shadow-xs hover:border-slate-400 transition-all">
+      <div class="flex items-center justify-between text-slate-700 text-sm font-bold mb-2">
         <span class="font-sans">Measured Power</span>
-        <div class="w-7 h-7 rounded-md bg-red-50 border border-red-200/80 flex items-center justify-center">
-          <Activity class="w-3.5 h-3.5 text-red-600" />
+        <div class="w-8 h-8 rounded-lg bg-red-100 border border-red-300 flex items-center justify-center">
+          <Activity class="w-4 h-4 text-red-700" />
         </div>
       </div>
-      <div class="flex items-baseline space-x-1.5 my-1">
-        <span class="text-2xl sm:text-3xl font-bold font-mono text-surface-900 tracking-tight">{{ currentStats?.avg_actual_kwh ?? '--' }}</span>
-        <span class="text-xs sm:text-sm text-surface-500 font-mono font-medium">kWh</span>
+      <div class="flex items-baseline space-x-1.5 my-1.5">
+        <span class="text-2xl sm:text-3xl font-bold font-mono text-slate-950 tracking-tight">{{ currentStats?.avg_actual_kwh ?? '--' }}</span>
+        <span class="text-sm text-slate-600 font-mono font-semibold">kWh</span>
       </div>
-      <div class="mt-2 pt-2 border-t border-surface-100 flex items-center justify-between text-xs text-surface-500 font-sans">
-        <span>Power meter</span>
-        <span class="font-mono text-surface-700 font-semibold">Peak: {{ currentStats?.max_actual_kwh ?? 289.4 }}</span>
+      <div class="mt-2.5 pt-2.5 border-t border-slate-200 flex items-center justify-between text-xs sm:text-sm text-slate-600 font-sans">
+        <span class="font-medium">Power Meter</span>
+        <span class="font-mono text-slate-900 font-bold">Peak: {{ currentStats?.max_actual_kwh ?? 289.4 }}</span>
       </div>
     </div>
 
     <!-- Card 2: Expected Baseline (ML Level) -->
-    <div class="bg-white border border-surface-200 rounded-xl p-4 sm:p-5 shadow-card hover:border-surface-300 hover:shadow-hover transition-all">
-      <div class="flex items-center justify-between text-surface-600 text-xs sm:text-sm font-semibold mb-2">
+    <div class="card-solid bg-white border border-slate-300 rounded-xl p-4 sm:p-5 shadow-xs hover:border-slate-400 transition-all">
+      <div class="flex items-center justify-between text-slate-700 text-sm font-bold mb-2">
         <span class="font-sans">Expected Baseline</span>
-        <div class="w-7 h-7 rounded-md bg-brand-50 border border-brand-200/80 flex items-center justify-center">
-          <Cpu class="w-3.5 h-3.5 text-brand-600" />
+        <div class="w-8 h-8 rounded-lg bg-blue-100 border border-blue-300 flex items-center justify-center">
+          <Cpu class="w-4 h-4 text-blue-700" />
         </div>
       </div>
-      <div class="flex items-baseline space-x-1.5 my-1">
-        <span class="text-2xl sm:text-3xl font-bold font-mono text-brand-700 tracking-tight">{{ currentStats?.avg_expected_kwh ?? '--' }}</span>
-        <span class="text-xs sm:text-sm text-surface-500 font-mono font-medium">kWh</span>
+      <div class="flex items-baseline space-x-1.5 my-1.5">
+        <span class="text-2xl sm:text-3xl font-bold font-mono text-blue-800 tracking-tight">{{ currentStats?.avg_expected_kwh ?? '--' }}</span>
+        <span class="text-sm text-slate-600 font-mono font-semibold">kWh</span>
       </div>
-      <div class="mt-2 pt-2 border-t border-surface-100 flex items-center justify-between text-xs text-surface-500 font-sans">
-        <span>Contextual model</span>
-        <span class="font-mono text-brand-700 font-semibold">Load & weather</span>
+      <div class="mt-2.5 pt-2.5 border-t border-slate-200 flex items-center justify-between text-xs sm:text-sm text-slate-600 font-sans">
+        <span class="font-medium">Contextual Model</span>
+        <span class="font-mono text-blue-800 font-bold">Load & Weather</span>
       </div>
     </div>
 
     <!-- Card 3: Contextual Deviation (Analysis Level) -->
-    <div class="bg-white border border-surface-200 rounded-xl p-4 sm:p-5 shadow-card hover:border-surface-300 hover:shadow-hover transition-all">
-      <div class="flex items-center justify-between text-surface-600 text-xs sm:text-sm font-semibold mb-2">
+    <div class="card-solid bg-white border border-slate-300 rounded-xl p-4 sm:p-5 shadow-xs hover:border-slate-400 transition-all">
+      <div class="flex items-center justify-between text-slate-700 text-sm font-bold mb-2">
         <span class="font-sans">Contextual Residual</span>
-        <div class="w-7 h-7 rounded-md bg-amber-50 border border-amber-200/80 flex items-center justify-center">
-          <TrendingUp class="w-3.5 h-3.5 text-amber-600" />
+        <div class="w-8 h-8 rounded-lg bg-amber-100 border border-amber-300 flex items-center justify-center">
+          <TrendingUp class="w-4 h-4 text-amber-800" />
         </div>
       </div>
-      <div class="flex items-baseline space-x-1.5 my-1">
+      <div class="flex items-baseline space-x-1.5 my-1.5">
         <span
           :class="[
             'text-2xl sm:text-3xl font-bold font-mono tracking-tight',
-            (currentStats?.avg_residual_kwh ?? 0) > 1.0 ? 'text-amber-700' : 'text-emerald-700'
+            (currentStats?.avg_residual_kwh ?? 0) > 1.0 ? 'text-amber-800' : 'text-emerald-800'
           ]"
         >
           {{ (currentStats?.avg_residual_kwh ?? 0) > 0 ? '+' : '' }}{{ currentStats?.avg_residual_kwh ?? '--' }}
         </span>
-        <span class="text-xs sm:text-sm text-surface-500 font-mono font-medium">kWh</span>
+        <span class="text-sm text-slate-600 font-mono font-semibold">kWh</span>
       </div>
-      <div class="mt-2 pt-2 border-t border-surface-100 flex items-center justify-between text-xs text-surface-500 font-sans">
-        <span>Actual − Expected</span>
-        <span class="font-mono text-amber-700 font-semibold">Max: +{{ currentStats?.max_residual_kwh ?? '--' }}</span>
+      <div class="mt-2.5 pt-2.5 border-t border-slate-200 flex items-center justify-between text-xs sm:text-sm text-slate-600 font-sans">
+        <span class="font-medium">Actual − Model</span>
+        <span class="font-mono text-amber-900 font-bold">Max: +{{ currentStats?.max_residual_kwh ?? '--' }}</span>
       </div>
     </div>
 
     <!-- Card 4: Health & Anomaly Rate -->
-    <div class="bg-white border border-surface-200 rounded-xl p-4 sm:p-5 shadow-card hover:border-surface-300 hover:shadow-hover transition-all">
-      <div class="flex items-center justify-between text-surface-600 text-xs sm:text-sm font-semibold mb-2">
+    <div class="card-solid bg-white border border-slate-300 rounded-xl p-4 sm:p-5 shadow-xs hover:border-slate-400 transition-all">
+      <div class="flex items-center justify-between text-slate-700 text-sm font-bold mb-2">
         <span class="font-sans">Abnormal Intervals</span>
-        <div class="w-7 h-7 rounded-md bg-amber-50 border border-amber-200/80 flex items-center justify-center">
-          <AlertTriangle class="w-3.5 h-3.5 text-amber-600" />
+        <div class="w-8 h-8 rounded-lg bg-orange-100 border border-orange-300 flex items-center justify-center">
+          <AlertTriangle class="w-4 h-4 text-orange-800" />
         </div>
       </div>
-      <div class="flex items-baseline space-x-1.5 my-1">
-        <span class="text-2xl sm:text-3xl font-bold font-mono text-amber-700 tracking-tight">{{ currentStats?.anomaly_count ?? 0 }}</span>
-        <span class="text-xs sm:text-sm text-surface-500 font-mono font-medium">periods</span>
+      <div class="flex items-baseline space-x-1.5 my-1.5">
+        <span class="text-2xl sm:text-3xl font-bold font-mono text-orange-800 tracking-tight">{{ currentStats?.anomaly_count ?? 0 }}</span>
+        <span class="text-sm text-slate-600 font-mono font-semibold">periods</span>
       </div>
-      <div class="mt-2 pt-2 border-t border-surface-100 flex items-center justify-between text-xs text-surface-500 font-sans">
-        <span>Deviation rate</span>
-        <span class="font-mono text-surface-800 font-semibold">{{ currentStats?.anomaly_rate_pct ?? '--' }}%</span>
+      <div class="mt-2.5 pt-2.5 border-t border-slate-200 flex items-center justify-between text-xs sm:text-sm text-slate-600 font-sans">
+        <span class="font-medium">Deviation Rate</span>
+        <span class="font-mono text-slate-950 font-bold">{{ currentStats?.anomaly_rate_pct ?? '--' }}%</span>
       </div>
     </div>
 
-    <!-- Card 5: Persistent Episodes (Clustered Maintenance Events) -->
-    <div class="bg-white border border-surface-200 rounded-xl p-4 sm:p-5 shadow-card hover:border-orange-300 hover:shadow-hover transition-all">
-      <div class="flex items-center justify-between text-surface-600 text-xs sm:text-sm font-semibold mb-2">
-        <span class="font-sans">Persistent Episodes</span>
-        <div class="w-7 h-7 rounded-md bg-orange-50 border border-orange-200/80 flex items-center justify-center">
-          <Layers class="w-3.5 h-3.5 text-orange-600" />
+    <!-- Card 5: Operational Health Index (Clustered Maintenance Indicator) -->
+    <div class="card-solid bg-white border border-slate-300 rounded-xl p-4 sm:p-5 shadow-xs hover:border-slate-400 transition-all">
+      <div class="flex items-center justify-between text-slate-700 text-sm font-bold mb-2">
+        <span class="font-sans">Health Indicator</span>
+        <div class="w-8 h-8 rounded-lg bg-emerald-100 border border-emerald-300 flex items-center justify-center">
+          <ShieldCheck class="w-4 h-4 text-emerald-800" />
         </div>
       </div>
-      <div class="flex items-baseline space-x-1.5 my-1">
-        <span class="text-2xl sm:text-3xl font-bold font-mono text-orange-700 tracking-tight">{{ currentStats?.event_count ?? '--' }}</span>
-        <span class="text-xs sm:text-sm text-surface-500 font-mono font-medium">episodes</span>
+      <div class="flex items-baseline space-x-1.5 my-1.5">
+        <span class="text-2xl sm:text-3xl font-bold font-mono text-emerald-800 tracking-tight">
+          {{ (100 - (currentStats?.anomaly_rate_pct ?? 0)).toFixed(1) }}%
+        </span>
+        <span class="text-sm text-slate-600 font-mono font-semibold">Nominal</span>
       </div>
-      <div class="mt-2 pt-2 border-t border-surface-100 flex items-center justify-between text-xs text-surface-500 font-sans">
-        <span>Consolidated</span>
-        <span class="font-mono text-surface-700 font-semibold">Maintenance events</span>
+      <div class="mt-2.5 pt-2.5 border-t border-slate-200 flex items-center justify-between text-xs sm:text-sm text-slate-600 font-sans">
+        <span class="font-medium">Fault Episodes</span>
+        <span class="font-mono text-slate-950 font-bold">{{ currentStats?.event_count ?? '--' }} events</span>
       </div>
     </div>
 
     <!-- Card 6: 30-Day Efficiency Drift (Historical Comparison) -->
-    <div class="bg-white border border-surface-200 rounded-xl p-4 sm:p-5 shadow-card hover:border-surface-300 hover:shadow-hover transition-all">
-      <div class="flex items-center justify-between text-surface-600 text-xs sm:text-sm font-semibold mb-2">
+    <div class="card-solid bg-white border border-slate-300 rounded-xl p-4 sm:p-5 shadow-xs hover:border-slate-400 transition-all">
+      <div class="flex items-center justify-between text-slate-700 text-sm font-bold mb-2">
         <span class="font-sans">30-Day Drift</span>
-        <div class="w-7 h-7 rounded-md bg-emerald-50 border border-emerald-200/80 flex items-center justify-center">
-          <Compass class="w-3.5 h-3.5 text-emerald-600" />
+        <div class="w-8 h-8 rounded-lg bg-slate-200 border border-slate-300 flex items-center justify-center">
+          <Compass class="w-4 h-4 text-slate-800" />
         </div>
       </div>
-      <div class="flex items-baseline space-x-1.5 my-1">
+      <div class="flex items-baseline space-x-1.5 my-1.5">
         <span
           :class="[
             'text-2xl sm:text-3xl font-bold font-mono tracking-tight',
-            Math.abs(currentStats?.recent_drift_kwh ?? 0) > 2.0 ? 'text-amber-700' : 'text-emerald-700'
+            Math.abs(currentStats?.recent_drift_kwh ?? 0) > 2.0 ? 'text-amber-800' : 'text-emerald-800'
           ]"
         >
           {{ (currentStats?.recent_drift_kwh ?? 0) > 0 ? '+' : '' }}{{ currentStats?.recent_drift_kwh ?? '0.00' }}
         </span>
-        <span class="text-xs sm:text-sm text-surface-500 font-mono font-medium">kWh</span>
+        <span class="text-sm text-slate-600 font-mono font-semibold">kWh</span>
       </div>
-      <div class="mt-2 pt-2 border-t border-surface-100 flex items-center justify-between text-xs text-surface-500 font-sans">
-        <span>Vs 7-day median</span>
-        <span class="text-xs px-2 py-0.5 rounded font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+      <div class="mt-2.5 pt-2.5 border-t border-slate-200 flex items-center justify-between text-xs sm:text-sm text-slate-600 font-sans">
+        <span class="font-medium">Vs 7d Median</span>
+        <span class="text-xs px-2 py-0.5 rounded font-bold bg-emerald-100 text-emerald-900 border border-emerald-300">
           Normal Drift
         </span>
       </div>
@@ -129,7 +131,7 @@
 </template>
 
 <script setup lang="ts">
-import { Activity, Cpu, TrendingUp, AlertTriangle, Compass, Layers } from 'lucide-vue-next'
+import { Activity, Cpu, TrendingUp, AlertTriangle, Compass, ShieldCheck } from 'lucide-vue-next'
 
 defineProps<{
   currentStats?: {

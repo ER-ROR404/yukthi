@@ -1,17 +1,17 @@
 <template>
-  <div class="bg-white border border-surface-200 rounded-xl p-5 sm:p-6 shadow-card space-y-4 hover:border-surface-300 transition-colors">
+  <div class="card-solid bg-white border border-slate-300 rounded-xl p-5 sm:p-6 shadow-xs space-y-5 hover:border-slate-400 transition-colors">
     
     <!-- Panel Header -->
-    <div class="-m-5 sm:-m-6 p-4 sm:p-5 mb-4 rounded-t-xl bg-surface-50 border-b border-surface-200 flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <Sliders class="w-4 h-4 text-brand-600" />
-        <h3 class="text-base sm:text-lg font-bold text-surface-900 font-sans tracking-tight">
+    <div class="-m-5 sm:-m-6 p-4 sm:p-5 mb-5 rounded-t-xl bg-slate-100 border-b border-slate-300 flex items-center justify-between">
+      <div class="flex items-center space-x-2.5">
+        <Sliders class="w-5 h-5 text-blue-600" />
+        <h3 class="text-base sm:text-xl font-bold text-slate-950 font-sans tracking-tight">
           Investigation & Evidence Workbench
         </h3>
       </div>
       <span
         :class="[
-          'text-xs font-mono font-bold px-2.5 py-1 rounded uppercase tracking-wide shadow-xs',
+          'text-xs font-mono font-bold px-3 py-1 rounded-md uppercase tracking-wider shadow-xs',
           activeStatusClass
         ]"
       >
@@ -20,82 +20,82 @@
     </div>
 
     <!-- Active Observation Primary Metrics -->
-    <div class="bg-surface-100 border border-surface-200 rounded-lg p-3.5 text-xs sm:text-sm font-mono">
-      <div class="flex items-center justify-between text-surface-600 mb-2.5 font-sans text-xs sm:text-sm">
-        <span>Timestamp: <strong class="text-surface-900 font-mono font-bold">{{ activeReading.ts }}</strong></span>
-        <span>Unit: <strong class="text-surface-900 font-mono font-bold">{{ activeReading.equipment_id || 'CHILLER-01' }}</strong></span>
+    <div class="bg-slate-100 border border-slate-300 rounded-lg p-4 text-sm font-mono">
+      <div class="flex items-center justify-between text-slate-700 mb-3 font-sans text-xs sm:text-sm font-medium">
+        <span>Timestamp: <strong class="text-slate-950 font-mono font-bold">{{ activeReading.ts }}</strong></span>
+        <span>Unit: <strong class="text-slate-950 font-mono font-bold">{{ activeReading.equipment_id || 'CHILLER-01' }}</strong></span>
       </div>
 
-      <div class="grid grid-cols-3 gap-2.5 pt-2 border-t border-surface-200">
+      <div class="grid grid-cols-3 gap-3 pt-3 border-t border-slate-300">
         <div>
-          <span class="text-surface-500 block text-xs uppercase font-medium">Measured</span>
-          <span class="text-lg sm:text-xl font-bold text-red-700">{{ activeReading.act.toFixed(1) }} <span class="text-xs font-normal text-surface-500">kWh</span></span>
+          <span class="text-slate-600 block text-xs uppercase font-bold tracking-wider">Measured</span>
+          <span class="text-xl sm:text-2xl font-bold text-red-700">{{ activeReading.act.toFixed(1) }} <span class="text-xs font-normal text-slate-600">kWh</span></span>
         </div>
         <div>
-          <span class="text-surface-500 block text-xs uppercase font-medium">Expected</span>
-          <span class="text-lg sm:text-xl font-bold text-brand-700">{{ activeReading.exp.toFixed(1) }} <span class="text-xs font-normal text-surface-500">kWh</span></span>
+          <span class="text-slate-600 block text-xs uppercase font-bold tracking-wider">Expected</span>
+          <span class="text-xl sm:text-2xl font-bold text-blue-700">{{ activeReading.exp.toFixed(1) }} <span class="text-xs font-normal text-slate-600">kWh</span></span>
         </div>
         <div>
-          <span class="text-surface-500 block text-xs uppercase font-medium">Residual</span>
-          <span :class="['text-lg sm:text-xl font-bold', activeReading.res > 15 ? 'text-red-700' : activeReading.res > 0 ? 'text-orange-700' : 'text-emerald-700']">
-            {{ activeReading.res > 0 ? '+' : '' }}{{ activeReading.res.toFixed(1) }} <span class="text-xs font-normal text-surface-500">kWh</span>
+          <span class="text-slate-600 block text-xs uppercase font-bold tracking-wider">Residual</span>
+          <span :class="['text-xl sm:text-2xl font-bold', activeReading.res > 15 ? 'text-red-700' : activeReading.res > 0 ? 'text-amber-800' : 'text-emerald-800']">
+            {{ activeReading.res > 0 ? '+' : '' }}{{ activeReading.res.toFixed(1) }} <span class="text-xs font-normal text-slate-600">kWh</span>
           </span>
         </div>
       </div>
     </div>
 
     <!-- Multi-Layer Supporting Evidence Checklist -->
-    <div class="space-y-2.5">
-      <h4 class="text-xs sm:text-sm font-bold text-surface-800 uppercase tracking-wider font-sans">
+    <div class="space-y-3">
+      <h4 class="text-xs sm:text-sm font-bold text-slate-900 uppercase tracking-wider font-sans">
         Supporting Evidence for Condition
       </h4>
 
-      <div class="space-y-2 text-xs sm:text-sm font-sans">
+      <div class="space-y-2.5 text-xs sm:text-sm font-sans">
         <!-- Evidence 1: Statistical Residual & Robust MAD -->
-        <div class="flex items-start space-x-2.5 bg-surface-50 p-3 rounded-lg border border-surface-200">
-          <div :class="['w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold', Math.abs(activeReading.z) > 3.0 ? 'bg-orange-100 text-orange-800' : 'bg-emerald-100 text-emerald-800']">
+        <div class="flex items-start space-x-3 bg-slate-50 p-3.5 rounded-lg border border-slate-300">
+          <div :class="['w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold', Math.abs(activeReading.z) > 3.0 ? 'bg-orange-100 text-orange-900 border border-orange-300' : 'bg-emerald-100 text-emerald-900 border border-emerald-300']">
             {{ Math.abs(activeReading.z) > 3.0 ? '!' : '✓' }}
           </div>
           <div class="flex-1">
             <div class="flex items-center justify-between">
-              <span class="font-semibold text-surface-900">Robust Residual MAD Score</span>
-              <span class="font-mono text-xs sm:text-sm font-bold" :class="Math.abs(activeReading.z) > 3.0 ? 'text-orange-700' : 'text-emerald-700'">
+              <span class="font-bold text-slate-900 text-sm">Robust Residual MAD Score</span>
+              <span class="font-mono text-sm font-bold" :class="Math.abs(activeReading.z) > 3.0 ? 'text-orange-800' : 'text-emerald-800'">
                 z = {{ activeReading.z.toFixed(2) }}
               </span>
             </div>
-            <p class="text-xs sm:text-sm text-surface-600 mt-0.5 leading-snug">
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed font-medium">
               {{ Math.abs(activeReading.z) > 3.0 ? 'Exceeds the 3.0 MAD threshold against 7-day rolling baseline.' : 'Within standard 3.0 MAD tolerance band of expected baseline.' }}
             </p>
           </div>
         </div>
 
         <!-- Evidence 2: Operating Envelope Check -->
-        <div class="flex items-start space-x-2.5 bg-surface-50 p-3 rounded-lg border border-surface-200">
-          <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold bg-emerald-100 text-emerald-800">
+        <div class="flex items-start space-x-3 bg-slate-50 p-3.5 rounded-lg border border-slate-300">
+          <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold bg-emerald-100 text-emerald-900 border border-emerald-300">
             ✓
           </div>
           <div class="flex-1">
             <div class="flex items-center justify-between">
-              <span class="font-semibold text-surface-900">Training Operating Envelope</span>
-              <span class="font-mono text-xs sm:text-sm text-emerald-700 font-bold">Valid Range</span>
+              <span class="font-bold text-slate-900 text-sm">Training Operating Envelope</span>
+              <span class="font-mono text-sm text-emerald-800 font-bold">Valid Range</span>
             </div>
-            <p class="text-xs sm:text-sm text-surface-600 mt-0.5 leading-snug">
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed font-medium">
               Ambient temperature ({{ activeReading.out_temp ?? 82 }}°F) and load ({{ activeReading.load ?? 450 }} RT) are within historical 1st–99th percentiles.
             </p>
           </div>
         </div>
 
         <!-- Evidence 3: Physical Telemetry Consistency -->
-        <div class="flex items-start space-x-2.5 bg-surface-50 p-3 rounded-lg border border-surface-200">
-          <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold bg-emerald-100 text-emerald-800">
+        <div class="flex items-start space-x-3 bg-slate-50 p-3.5 rounded-lg border border-slate-300">
+          <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold bg-emerald-100 text-emerald-900 border border-emerald-300">
             ✓
           </div>
           <div class="flex-1">
             <div class="flex items-center justify-between">
-              <span class="font-semibold text-surface-900">Physical Sensor Consistency</span>
-              <span class="font-mono text-xs sm:text-sm text-emerald-700 font-bold">Passed</span>
+              <span class="font-bold text-slate-900 text-sm">Physical Sensor Consistency</span>
+              <span class="font-mono text-sm text-emerald-800 font-bold">Passed</span>
             </div>
-            <p class="text-xs sm:text-sm text-surface-600 mt-0.5 leading-snug">
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed font-medium">
               Sensors show active variance with no frozen values; water flow rate of change is physically valid.
             </p>
           </div>
@@ -104,31 +104,31 @@
     </div>
 
     <!-- TreeSHAP Factor Attribution (Why did the model expect this baseline?) -->
-    <div class="space-y-2">
+    <div class="space-y-3">
       <div class="flex items-center justify-between">
-        <h4 class="text-xs sm:text-sm font-bold text-surface-800 uppercase tracking-wider font-sans">
+        <h4 class="text-xs sm:text-sm font-bold text-slate-900 uppercase tracking-wider font-sans">
           Baseline Context Factors (SHAP)
         </h4>
-        <span class="text-xs text-surface-500 font-mono">Factor Impact</span>
+        <span class="text-xs text-slate-600 font-mono font-semibold">Factor Impact</span>
       </div>
 
       <div class="space-y-2">
         <div
           v-for="contrib in contributors"
           :key="contrib.feature"
-          class="bg-surface-50 p-2.5 rounded-lg border border-surface-200 flex items-center justify-between text-xs sm:text-sm font-mono"
+          class="bg-slate-50 p-3 rounded-lg border border-slate-300 flex items-center justify-between text-xs sm:text-sm font-mono"
         >
           <div class="truncate max-w-[62%] flex items-center space-x-2">
-            <span :class="['w-2 h-2 rounded-full shrink-0', contrib.shap > 0 ? 'bg-brand-600' : 'bg-emerald-600']"></span>
-            <span class="text-surface-900 truncate font-semibold font-sans">{{ contrib.feature }}</span>
+            <span :class="['w-2 h-2 rounded-full shrink-0', contrib.shap > 0 ? 'bg-blue-600' : 'bg-emerald-600']"></span>
+            <span class="text-slate-950 truncate font-semibold font-sans">{{ contrib.feature }}</span>
           </div>
 
-          <div class="flex items-center space-x-2">
-            <span class="text-surface-500 text-xs font-sans">val: {{ contrib.value ?? '--' }}</span>
+          <div class="flex items-center space-x-2.5">
+            <span class="text-slate-600 text-xs font-sans font-medium">val: {{ contrib.value ?? '--' }}</span>
             <span
               :class="[
                 'font-bold px-2 py-0.5 rounded text-xs min-w-[70px] text-right',
-                contrib.shap > 0 ? 'text-brand-800 bg-brand-100' : 'text-emerald-800 bg-emerald-100'
+                contrib.shap > 0 ? 'text-blue-900 bg-blue-100 border border-blue-200' : 'text-emerald-900 bg-emerald-100 border border-emerald-200'
               ]"
             >
               {{ contrib.shap > 0 ? '+' : '' }}{{ contrib.shap.toFixed(1) }} kWh
@@ -138,13 +138,13 @@
       </div>
     </div>
 
-    <!-- Operational Recommendation Box -->
-    <div class="bg-amber-50 border border-amber-300/80 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm font-sans space-y-1.5">
-      <div class="flex items-center space-x-2 text-amber-900 font-bold">
-        <CheckCircle2 class="w-4 h-4 text-amber-700" />
+    <!-- Actionable Operational Recommendation Box -->
+    <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-4 sm:p-5 text-sm font-sans space-y-2">
+      <div class="flex items-center space-x-2 text-amber-900 font-bold text-sm sm:text-base">
+        <CheckCircle2 class="w-5 h-5 text-amber-800" />
         <span>Actionable Operational Recommendation</span>
       </div>
-      <p class="text-amber-950 leading-relaxed text-xs sm:text-sm font-normal">
+      <p class="text-amber-950 leading-relaxed text-sm font-medium">
         {{ operationalRecommendation }}
       </p>
     </div>

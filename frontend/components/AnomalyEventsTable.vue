@@ -1,54 +1,54 @@
 <template>
-  <div class="bg-white border border-surface-200 rounded-xl p-5 sm:p-6 shadow-card hover:border-surface-300 transition-colors">
+  <div class="card-solid bg-white border border-slate-300 rounded-xl p-5 sm:p-6 shadow-xs hover:border-slate-400 transition-colors">
     
     <!-- Table Header & Controls -->
-    <div class="-m-5 sm:-m-6 p-4 sm:p-5 mb-4 rounded-t-xl bg-surface-50 border-b border-surface-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+    <div class="-m-5 sm:-m-6 p-4 sm:p-5 mb-5 rounded-t-xl bg-slate-100 border-b border-slate-300 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
       <div>
         <div class="flex items-center space-x-2.5">
-          <h3 class="text-base sm:text-lg font-bold text-surface-900 font-sans tracking-tight">
+          <h3 class="text-base sm:text-xl font-bold text-slate-950 font-sans tracking-tight">
             Persistent Operational Anomaly Episodes
           </h3>
-          <span class="text-xs px-2.5 py-0.5 rounded font-mono font-semibold bg-white text-surface-800 border border-surface-200 shadow-xs">
+          <span class="text-xs px-2.5 py-0.5 rounded font-mono font-bold bg-white text-slate-800 border border-slate-300 shadow-xs">
             {{ filteredSortedEvents.length }} Consolidated Episodes
           </span>
         </div>
-        <p class="text-xs sm:text-sm text-surface-600 mt-0.5 font-sans">
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 font-sans font-medium">
           Consecutive sustained deviations grouped into consolidated maintenance events (avoids noisy point alerts).
         </p>
       </div>
 
       <!-- Search & Filter Bar -->
-      <div class="flex flex-wrap items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2.5">
         <!-- Quick Search -->
         <div class="relative">
-          <Search class="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-surface-400" />
+          <Search class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
           <input
             v-model="searchQuery"
             type="text"
             placeholder="Search #, date, severity..."
-            class="text-xs sm:text-sm pl-8 pr-7 py-1.5 rounded-lg border border-surface-200 bg-surface-50 focus:bg-white focus:outline-none focus:border-brand-500 font-sans w-48 sm:w-56 transition-colors"
+            class="text-sm pl-9 pr-8 py-1.5 rounded-lg border border-slate-300 bg-white focus:outline-none focus:border-blue-600 font-sans w-52 sm:w-60 text-slate-900 transition-colors"
           />
           <button
             v-if="searchQuery"
             @click="searchQuery = ''"
-            class="absolute right-2 top-1/2 -translate-y-1/2 text-surface-400 hover:text-surface-700 p-0.5 cursor-pointer"
+            class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-0.5 cursor-pointer"
             title="Clear search"
           >
-            <X class="w-3.5 h-3.5" />
+            <X class="w-4 h-4" />
           </button>
         </div>
 
         <!-- Filter Tabs -->
-        <div class="flex items-center bg-surface-100 p-1 rounded-lg border border-surface-200 text-xs sm:text-sm font-medium">
+        <div class="flex items-center bg-slate-200/80 p-1 rounded-lg border border-slate-300 text-xs sm:text-sm font-medium">
           <button
             v-for="filter in filters"
             :key="filter.id"
             @click="setFilter(filter.id)"
             :class="[
-              'px-2.5 py-1 rounded-md transition-colors cursor-pointer',
+              'px-3 py-1.5 rounded-md transition-colors cursor-pointer text-xs sm:text-sm',
               activeFilter === filter.id
-                ? 'bg-white text-surface-900 shadow-xs font-bold'
-                : 'text-surface-600 hover:text-surface-900'
+                ? 'bg-white text-slate-950 shadow-xs font-bold border border-slate-300'
+                : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
             ]"
           >
             {{ filter.label }}
@@ -60,94 +60,94 @@
     <!-- Interactive Event Table -->
     <div
       :class="[
-        'overflow-x-auto border border-surface-200 rounded-lg transition-all',
-        displayedEvents.length > 25 ? 'max-h-[560px] overflow-y-auto' : ''
+        'overflow-x-auto border border-slate-300 rounded-lg transition-all bg-white',
+        displayedEvents.length > 10 ? 'max-h-[580px] overflow-y-auto' : ''
       ]"
     >
-      <table class="w-full text-left text-xs sm:text-sm font-mono border-collapse">
+      <table class="w-full text-left text-sm font-mono border-collapse">
         <thead class="sticky top-0 z-20 font-sans shadow-xs">
-          <tr class="border-b border-surface-300">
+          <tr class="border-b-2 border-slate-300">
             <th
               @click="toggleSort('event_id')"
-              class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider cursor-pointer select-none hover:text-surface-950 transition-colors"
+              class="table-header-cell py-3.5 px-4 font-bold text-slate-800 uppercase text-xs tracking-wider cursor-pointer select-none hover:text-slate-950 transition-colors"
             >
               <div class="flex items-center space-x-1">
                 <span>Event</span>
-                <component :is="getSortIcon('event_id')" class="w-3 h-3 text-surface-500" />
+                <component :is="getSortIcon('event_id')" class="w-3.5 h-3.5 text-slate-600" />
               </div>
             </th>
-            <th class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider">Unit</th>
+            <th class="table-header-cell py-3.5 px-4 font-bold text-slate-800 uppercase text-xs tracking-wider">Unit</th>
             <th
               @click="toggleSort('start_time')"
-              class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider cursor-pointer select-none hover:text-surface-950 transition-colors"
+              class="table-header-cell py-3.5 px-4 font-bold text-slate-800 uppercase text-xs tracking-wider cursor-pointer select-none hover:text-slate-950 transition-colors"
             >
               <div class="flex items-center space-x-1">
                 <span>Start Time Window</span>
-                <component :is="getSortIcon('start_time')" class="w-3 h-3 text-surface-500" />
+                <component :is="getSortIcon('start_time')" class="w-3.5 h-3.5 text-slate-600" />
               </div>
             </th>
             <th
               @click="toggleSort('duration_minutes')"
-              class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider cursor-pointer select-none hover:text-surface-950 transition-colors"
+              class="table-header-cell py-3.5 px-4 font-bold text-slate-800 uppercase text-xs tracking-wider cursor-pointer select-none hover:text-slate-950 transition-colors"
             >
               <div class="flex items-center space-x-1">
                 <span>Duration</span>
-                <component :is="getSortIcon('duration_minutes')" class="w-3 h-3 text-surface-500" />
+                <component :is="getSortIcon('duration_minutes')" class="w-3.5 h-3.5 text-slate-600" />
               </div>
             </th>
             <th
               @click="toggleSort('max_residual')"
-              class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider text-right cursor-pointer select-none hover:text-surface-950 transition-colors"
+              class="table-header-cell py-3.5 px-4 font-bold text-slate-800 uppercase text-xs tracking-wider text-right cursor-pointer select-none hover:text-slate-950 transition-colors"
             >
               <div class="flex items-center justify-end space-x-1">
                 <span>Peak Dev</span>
-                <component :is="getSortIcon('max_residual')" class="w-3 h-3 text-surface-500" />
+                <component :is="getSortIcon('max_residual')" class="w-3.5 h-3.5 text-slate-600" />
               </div>
             </th>
-            <th class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider text-right">Mean Dev</th>
-            <th class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider text-center">Severity</th>
-            <th class="bg-surface-100 py-3 px-3.5 font-semibold text-surface-700 uppercase text-xs tracking-wider text-right">Action</th>
+            <th class="table-header-cell py-3.5 px-4 font-bold text-slate-800 uppercase text-xs tracking-wider text-right">Mean Dev</th>
+            <th class="table-header-cell py-3.5 px-4 font-bold text-slate-800 uppercase text-xs tracking-wider text-center">Severity</th>
+            <th class="table-header-cell py-3.5 px-4 font-bold text-slate-800 uppercase text-xs tracking-wider text-right">Action</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-surface-100 text-surface-800">
+        <tbody class="divide-y divide-slate-200 text-slate-800">
           <tr
             v-for="ev in displayedEvents"
             :key="ev.event_id"
             @click="$emit('select-event', ev)"
             :class="[
-              'transition-colors cursor-pointer text-xs sm:text-sm',
+              'transition-colors cursor-pointer text-sm',
               selectedEventId === ev.event_id
-                ? 'bg-brand-50 font-medium border-l-4 border-brand-600'
-                : 'hover:bg-surface-50'
+                ? 'bg-blue-50/90 font-medium border-l-4 border-blue-600'
+                : 'hover:bg-slate-50'
             ]"
           >
-            <td class="py-3 px-3.5 font-bold text-surface-900">#{{ String(ev.event_id).padStart(3, '0') }}</td>
-            <td class="py-3 px-3.5 text-surface-700 font-medium">{{ ev.equipment_id }}</td>
-            <td class="py-3 px-3.5 text-surface-700 font-sans text-xs sm:text-sm">
+            <td class="py-3 px-4 font-bold text-slate-950">#{{ String(ev.event_id).padStart(3, '0') }}</td>
+            <td class="py-3 px-4 text-slate-800 font-semibold">{{ ev.equipment_id }}</td>
+            <td class="py-3 px-4 text-slate-700 font-sans text-sm font-medium">
               {{ ev.start_time.replace('T', ' ').substring(0, 16) }}
             </td>
-            <td class="py-3 px-3.5 text-surface-700">
+            <td class="py-3 px-4 text-slate-800 font-medium">
               {{ formatDuration(ev.duration_minutes) }}
             </td>
-            <td class="py-3 px-3.5 text-right font-bold text-sm sm:text-base" :class="ev.max_residual > 30 ? 'text-red-700' : 'text-orange-700'">
+            <td class="py-3 px-4 text-right font-bold text-sm sm:text-base" :class="ev.max_residual > 30 ? 'text-red-700' : 'text-orange-700'">
               +{{ ev.max_residual.toFixed(1) }} kWh
             </td>
-            <td class="py-3 px-3.5 text-right text-surface-600 font-medium">
+            <td class="py-3 px-4 text-right text-slate-700 font-medium">
               +{{ ev.mean_residual.toFixed(1) }} kWh
             </td>
-            <td class="py-3 px-3.5 text-center">
+            <td class="py-3 px-4 text-center">
               <span
                 :class="[
-                  'px-2.5 py-1 rounded text-xs font-semibold tracking-wide uppercase',
+                  'px-2.5 py-1 rounded text-xs font-bold tracking-wide uppercase',
                   getSeverity(ev).badgeClass
                 ]"
               >
                 {{ getSeverity(ev).label }}
               </span>
             </td>
-            <td class="py-3 px-3.5 text-right">
+            <td class="py-3 px-4 text-right">
               <button
-                class="px-3 py-1.5 rounded-md bg-brand-50 text-brand-700 hover:bg-brand-100 text-xs font-bold border border-brand-200 transition-colors cursor-pointer"
+                class="px-3.5 py-1.5 rounded-md bg-blue-50 text-blue-700 hover:bg-blue-100 text-xs font-bold border border-blue-200 transition-colors cursor-pointer"
                 @click.stop="$emit('select-event', ev)"
               >
                 Inspect
@@ -156,13 +156,13 @@
           </tr>
 
           <tr v-if="displayedEvents.length === 0">
-            <td colspan="8" class="py-10 text-center text-surface-500 font-sans text-sm">
+            <td colspan="8" class="py-12 text-center text-slate-500 font-sans text-sm">
               <div class="space-y-2">
-                <p>No anomaly events match the selected criteria.</p>
+                <p class="font-medium">No anomaly events match the selected criteria.</p>
                 <button
                   v-if="searchQuery || activeFilter !== 'ALL'"
                   @click="resetFilters"
-                  class="text-xs font-semibold text-brand-600 hover:underline cursor-pointer"
+                  class="text-sm font-semibold text-blue-600 hover:underline cursor-pointer"
                 >
                   Reset filters & search
                 </button>
@@ -173,91 +173,66 @@
       </table>
     </div>
 
-    <!-- Table Footer: Progressive Disclosure ('See More') & Navigation -->
-    <div class="mt-4 pt-3.5 border-t border-surface-200">
+    <!-- Table Footer: Progressive Disclosure ('See More') -->
+    <div class="mt-4 pt-3.5 border-t border-slate-200">
       
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 bg-surface-50 p-3 rounded-lg border border-surface-200">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 bg-slate-100 p-3.5 rounded-lg border border-slate-300">
         
         <!-- Status Indicator -->
-        <div class="flex items-center space-x-3 text-xs sm:text-sm font-sans">
-          <span class="text-surface-700">
+        <div class="flex items-center space-x-3 text-sm font-sans font-medium">
+          <span class="text-slate-700">
             Showing
-            <strong class="font-mono text-surface-900 font-bold">{{ displayedRangeText }}</strong>
+            <strong class="font-mono text-slate-950 font-bold">{{ displayedRangeText }}</strong>
             of
-            <strong class="font-mono text-surface-900 font-bold">{{ filteredSortedEvents.length }}</strong>
+            <strong class="font-mono text-slate-950 font-bold">{{ filteredSortedEvents.length }}</strong>
             episodes
           </span>
           
           <span
             v-if="remainingCount > 0"
-            class="text-xs font-mono text-surface-700 bg-surface-200 px-2 py-0.5 rounded font-medium"
+            class="text-xs font-mono text-slate-800 bg-slate-200 border border-slate-300 px-2.5 py-0.5 rounded font-semibold"
           >
             {{ remainingCount }} remaining
           </span>
           <span
             v-else-if="filteredSortedEvents.length > 0"
-            class="text-xs font-mono text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded font-semibold"
+            class="text-xs font-mono text-emerald-900 bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 rounded font-bold"
           >
             All Loaded
           </span>
         </div>
 
-        <!-- Interactive See More & Quick Actions -->
-        <div class="flex flex-wrap items-center gap-2">
+        <!-- Interactive Progressive Disclosure Controls -->
+        <div class="flex flex-wrap items-center gap-2.5">
           
           <!-- See More Button (appends next 10 episodes in place) -->
           <button
             v-if="remainingCount > 0"
             @click="loadMore"
-            class="flex items-center space-x-1.5 px-3.5 py-1.5 bg-white hover:bg-surface-100 text-surface-900 font-semibold text-xs sm:text-sm rounded-md border border-surface-300 shadow-xs transition-colors cursor-pointer"
+            class="flex items-center space-x-1.5 px-4 py-2 bg-white hover:bg-slate-50 text-slate-950 font-bold text-sm rounded-md border border-slate-300 shadow-xs transition-colors cursor-pointer"
           >
             <span>See More (+{{ Math.min(10, remainingCount) }})</span>
-            <ChevronDown class="w-3.5 h-3.5 text-surface-600" />
+            <ChevronDown class="w-4 h-4 text-slate-700" />
           </button>
 
           <!-- See All Button -->
           <button
             v-if="remainingCount > 0"
             @click="showAll"
-            class="px-2.5 py-1.5 text-xs sm:text-sm font-medium text-brand-600 hover:text-brand-800 hover:underline cursor-pointer"
+            class="px-3 py-2 text-sm font-bold text-blue-700 hover:text-blue-900 hover:underline cursor-pointer"
           >
             See All ({{ filteredSortedEvents.length }})
           </button>
 
-          <!-- Collapse Button (when expanded beyond initial batch) -->
+          <!-- Collapse Button (when expanded beyond initial 10) -->
           <button
-            v-if="isExpandedBeyondInitial"
+            v-if="progressiveVisibleCount > 10"
             @click="collapseToInitial"
-            class="flex items-center space-x-1.5 px-3 py-1.5 bg-surface-200 hover:bg-surface-300 text-surface-800 font-semibold text-xs sm:text-sm rounded-md border border-surface-300 transition-colors cursor-pointer"
+            class="flex items-center space-x-1.5 px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-900 font-bold text-sm rounded-md border border-slate-300 transition-colors cursor-pointer"
           >
             <span>Collapse</span>
-            <ChevronUp class="w-3.5 h-3.5 text-surface-600" />
+            <ChevronUp class="w-4 h-4 text-slate-700" />
           </button>
-
-          <!-- Page Navigator (when navigating split pages) -->
-          <div v-if="totalPages > 1 && !isExpandedMode" class="flex items-center space-x-1 pl-2 border-l border-surface-300">
-            <button
-              @click="prevPage"
-              :disabled="currentPage === 1"
-              class="px-2 py-1 rounded border border-surface-200 bg-white text-surface-700 hover:bg-surface-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-xs font-medium flex items-center space-x-1 cursor-pointer"
-              title="Previous Page"
-            >
-              <ChevronLeft class="w-3.5 h-3.5" />
-            </button>
-
-            <span class="px-2 text-surface-700 font-mono text-xs">
-              {{ currentPage }}/{{ totalPages }}
-            </span>
-
-            <button
-              @click="nextPage"
-              :disabled="currentPage === totalPages"
-              class="px-2 py-1 rounded border border-surface-200 bg-white text-surface-700 hover:bg-surface-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-xs font-medium flex items-center space-x-1 cursor-pointer"
-              title="Next Page"
-            >
-              <ChevronRight class="w-3.5 h-3.5" />
-            </button>
-          </div>
 
         </div>
 
@@ -273,8 +248,6 @@ import { ref, computed, watch } from 'vue'
 import {
   ChevronDown,
   ChevronUp,
-  ChevronLeft,
-  ChevronRight,
   Search,
   X,
   ArrowUpDown,
@@ -330,29 +303,22 @@ const getSortIcon = (key: string) => {
   return sortOrder.value === 'asc' ? ArrowUp : ArrowDown
 }
 
-// Splitting & Progressive Disclosure ("See More") State
-const defaultBatchSize = ref(10)
-const currentPage = ref(1)
-const isExpandedMode = ref(false)
+// Progressive Disclosure ("See More") State - No split batch
 const progressiveVisibleCount = ref(10)
-const isViewingAll = ref(false)
 
 const setFilter = (id: string) => {
   activeFilter.value = id
-  resetPagination()
+  resetProgressive()
 }
 
 const resetFilters = () => {
   activeFilter.value = 'ALL'
   searchQuery.value = ''
-  resetPagination()
+  resetProgressive()
 }
 
-const resetPagination = () => {
-  currentPage.value = 1
-  isExpandedMode.value = false
-  isViewingAll.value = false
-  progressiveVisibleCount.value = defaultBatchSize.value
+const resetProgressive = () => {
+  progressiveVisibleCount.value = 10
 }
 
 // Formatters
@@ -360,18 +326,18 @@ const getSeverity = (ev: any) => {
   if (ev.max_residual > 30 || ev.duration_minutes >= 180) {
     return {
       label: 'High',
-      badgeClass: 'bg-red-50 text-red-800 border border-red-200'
+      badgeClass: 'bg-red-100 text-red-900 border border-red-300 font-bold'
     }
   }
   if (ev.max_residual > 15 || ev.duration_minutes >= 60) {
     return {
       label: 'Medium',
-      badgeClass: 'bg-amber-50 text-amber-800 border border-amber-200'
+      badgeClass: 'bg-amber-100 text-amber-900 border border-amber-300 font-bold'
     }
   }
   return {
     label: 'Low',
-    badgeClass: 'bg-surface-100 text-surface-700 border border-surface-200'
+    badgeClass: 'bg-slate-200 text-slate-800 border border-slate-300 font-bold'
   }
 }
 
@@ -427,91 +393,39 @@ const filteredSortedEvents = computed(() => {
   return sorted
 })
 
-// Total Pages based on current batch size
-const totalPages = computed(() => {
-  return Math.max(1, Math.ceil(filteredSortedEvents.value.length / defaultBatchSize.value))
-})
-
-// Computed: Final Displayed Events (either progressive 'See More' slice or Paginated slice)
+// Computed: Final Displayed Events (progressive 'See More' slice)
 const displayedEvents = computed(() => {
   const total = filteredSortedEvents.value.length
   if (total === 0) return []
-
-  if (isExpandedMode.value || isViewingAll.value) {
-    return filteredSortedEvents.value.slice(0, progressiveVisibleCount.value)
-  }
-
-  const start = (currentPage.value - 1) * defaultBatchSize.value
-  return filteredSortedEvents.value.slice(start, start + defaultBatchSize.value)
+  return filteredSortedEvents.value.slice(0, progressiveVisibleCount.value)
 })
 
 // Remaining items count
 const remainingCount = computed(() => {
-  const total = filteredSortedEvents.value.length
-  if (isExpandedMode.value || isViewingAll.value) {
-    return Math.max(0, total - progressiveVisibleCount.value)
-  }
-  return Math.max(0, total - (currentPage.value * defaultBatchSize.value))
+  return Math.max(0, filteredSortedEvents.value.length - progressiveVisibleCount.value)
 })
 
 // Range text (e.g. "1–10" or "1–30")
 const displayedRangeText = computed(() => {
   const count = displayedEvents.value.length
   if (count === 0) return '0'
-  if (isExpandedMode.value || isViewingAll.value) {
-    return `1–${count}`
-  }
-  const start = (currentPage.value - 1) * defaultBatchSize.value + 1
-  const end = Math.min(filteredSortedEvents.value.length, start + count - 1)
-  return `${start}–${end}`
-})
-
-const isExpandedBeyondInitial = computed(() => {
-  if (isExpandedMode.value || isViewingAll.value) {
-    return progressiveVisibleCount.value > defaultBatchSize.value
-  }
-  return false
+  return `1–${count}`
 })
 
 // User Actions
 const loadMore = () => {
-  if (!isExpandedMode.value) {
-    isExpandedMode.value = true
-    progressiveVisibleCount.value = Math.min(
-      filteredSortedEvents.value.length,
-      (currentPage.value * defaultBatchSize.value) + 10
-    )
-  } else {
-    progressiveVisibleCount.value = Math.min(
-      filteredSortedEvents.value.length,
-      progressiveVisibleCount.value + 10
-    )
-  }
+  progressiveVisibleCount.value = Math.min(
+    filteredSortedEvents.value.length,
+    progressiveVisibleCount.value + 10
+  )
 }
 
 const showAll = () => {
-  isViewingAll.value = true
-  isExpandedMode.value = true
   progressiveVisibleCount.value = filteredSortedEvents.value.length
 }
 
 const collapseToInitial = () => {
-  isViewingAll.value = false
-  isExpandedMode.value = false
-  progressiveVisibleCount.value = defaultBatchSize.value
-  currentPage.value = 1
-}
-
-const prevPage = () => {
-  if (currentPage.value > 1) {
-    currentPage.value--
-  }
-}
-
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
-    currentPage.value++
-  }
+  progressiveVisibleCount.value = 10
 }
 
 // Watchers: Keep selection in view when selectedEventId changes
@@ -520,30 +434,26 @@ watch(
   (newId) => {
     if (newId === undefined || newId === null) return
     const idx = filteredSortedEvents.value.findIndex((e) => e.event_id === newId)
-    if (idx >= 0) {
-      if (isExpandedMode.value) {
-        if (progressiveVisibleCount.value <= idx) {
-          progressiveVisibleCount.value = Math.ceil((idx + 1) / 10) * 10
-        }
-      } else {
-        currentPage.value = Math.floor(idx / defaultBatchSize.value) + 1
-      }
+    if (idx >= 0 && progressiveVisibleCount.value <= idx) {
+      progressiveVisibleCount.value = Math.ceil((idx + 1) / 10) * 10
     }
   }
 )
 
-// Reset pagination when raw equipment events prop changes
+// Reset when raw equipment events prop changes
 watch(
   () => props.events,
   () => {
-    resetPagination()
+    resetProgressive()
   }
 )
 </script>
 
 <style scoped>
-thead th {
-  background-color: #f1f5f9 !important;
+thead th,
+.table-header-cell {
+  background-color: #e2e8f0 !important;
   opacity: 1 !important;
+  color: #0f172a !important;
 }
 </style>

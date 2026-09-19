@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base App Surface & Contrast Guarantees */
+html, body {
+  background-color: #EDF2F7;
+  color: #0F172A;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Force solid card rendering so no card ever looks transparent */
+.card-solid {
+  background-color: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.08), 0 1px 2px -1px rgba(15, 23, 42, 0.08) !important;
+  opacity: 1 !important;
+}
+
+/* Sticky table headers must always be 100% solid */
+thead th {
+  background-color: #F1F5F9 !important;
+  opacity: 1 !important;
+  color: #334155 !important;
+}
