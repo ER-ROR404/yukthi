@@ -173,10 +173,9 @@
       </table>
     </div>
 
-    <!-- Table Footer: Progressive Disclosure ('See More') & Splitting (Pagination) -->
-    <div class="mt-4 pt-3.5 border-t border-surface-200 space-y-3">
+    <!-- Table Footer: Progressive Disclosure ('See More') & Navigation -->
+    <div class="mt-4 pt-3.5 border-t border-surface-200">
       
-      <!-- Primary Action Bar: 'See More' & Progressive Status -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-3 bg-surface-50 p-3 rounded-lg border border-surface-200">
         
         <!-- Status Indicator -->
@@ -204,7 +203,7 @@
         </div>
 
         <!-- Interactive See More & Quick Actions -->
-        <div class="flex items-center space-x-2">
+        <div class="flex flex-wrap items-center gap-2">
           
           <!-- See More Button (appends next 10 episodes in place) -->
           <button
@@ -231,65 +230,35 @@
             @click="collapseToInitial"
             class="flex items-center space-x-1.5 px-3 py-1.5 bg-surface-200 hover:bg-surface-300 text-surface-800 font-semibold text-xs sm:text-sm rounded-md border border-surface-300 transition-colors cursor-pointer"
           >
-            <span>Collapse to {{ defaultBatchSize }}</span>
+            <span>Collapse</span>
             <ChevronUp class="w-3.5 h-3.5 text-surface-600" />
           </button>
 
-        </div>
-
-      </div>
-
-      <!-- Secondary Controls: Batch Size & Page Switching -->
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm font-sans pt-0.5">
-        
-        <!-- Batch Size Selector -->
-        <div class="flex items-center space-x-2 text-surface-600">
-          <span>Split batch:</span>
-          <div class="inline-flex rounded-md border border-surface-200 bg-surface-100 p-0.5 font-mono text-xs">
+          <!-- Page Navigator (when navigating split pages) -->
+          <div v-if="totalPages > 1 && !isExpandedMode" class="flex items-center space-x-1 pl-2 border-l border-surface-300">
             <button
-              v-for="size in [10, 25, 50]"
-              :key="size"
-              @click="setBatchSize(size)"
-              :class="[
-                'px-2.5 py-1 rounded transition-colors cursor-pointer',
-                defaultBatchSize === size && !isViewingAll
-                  ? 'bg-white text-surface-900 shadow-xs font-bold'
-                  : 'text-surface-600 hover:text-surface-900'
-              ]"
+              @click="prevPage"
+              :disabled="currentPage === 1"
+              class="px-2 py-1 rounded border border-surface-200 bg-white text-surface-700 hover:bg-surface-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-xs font-medium flex items-center space-x-1 cursor-pointer"
+              title="Previous Page"
             >
-              {{ size }}
+              <ChevronLeft class="w-3.5 h-3.5" />
+            </button>
+
+            <span class="px-2 text-surface-700 font-mono text-xs">
+              {{ currentPage }}/{{ totalPages }}
+            </span>
+
+            <button
+              @click="nextPage"
+              :disabled="currentPage === totalPages"
+              class="px-2 py-1 rounded border border-surface-200 bg-white text-surface-700 hover:bg-surface-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-xs font-medium flex items-center space-x-1 cursor-pointer"
+              title="Next Page"
+            >
+              <ChevronRight class="w-3.5 h-3.5" />
             </button>
           </div>
-        </div>
 
-        <!-- Page Navigator (when navigating split pages) -->
-        <div v-if="totalPages > 1 && !isExpandedMode" class="flex items-center space-x-1">
-          <button
-            @click="prevPage"
-            :disabled="currentPage === 1"
-            class="px-2.5 py-1 rounded border border-surface-200 bg-white text-surface-700 hover:bg-surface-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-xs font-medium flex items-center space-x-1 cursor-pointer"
-          >
-            <ChevronLeft class="w-3.5 h-3.5" />
-            <span>Prev</span>
-          </button>
-
-          <span class="px-2.5 py-1 text-surface-700 font-mono text-xs sm:text-sm">
-            Page <strong class="text-surface-900 font-bold">{{ currentPage }}</strong> of <strong class="text-surface-900 font-bold">{{ totalPages }}</strong>
-          </span>
-
-          <button
-            @click="nextPage"
-            :disabled="currentPage === totalPages"
-            class="px-2.5 py-1 rounded border border-surface-200 bg-white text-surface-700 hover:bg-surface-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-xs font-medium flex items-center space-x-1 cursor-pointer"
-          >
-            <span>Next</span>
-            <ChevronRight class="w-3.5 h-3.5" />
-          </button>
-        </div>
-
-        <!-- Footnote trigger -->
-        <div class="text-xs text-surface-500 font-mono">
-          Trigger: Robust MAD > 3.0 (7-day baseline)
         </div>
 
       </div>
@@ -531,14 +500,6 @@ const collapseToInitial = () => {
   isExpandedMode.value = false
   progressiveVisibleCount.value = defaultBatchSize.value
   currentPage.value = 1
-}
-
-const setBatchSize = (size: number) => {
-  defaultBatchSize.value = size
-  progressiveVisibleCount.value = size
-  currentPage.value = 1
-  isExpandedMode.value = false
-  isViewingAll.value = false
 }
 
 const prevPage = () => {
