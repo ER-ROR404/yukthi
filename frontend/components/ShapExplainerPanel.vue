@@ -212,7 +212,7 @@ const activeStatusClass = computed(() => {
     return 'bg-orange-100 text-orange-900 border border-orange-300'
   }
   if (s === 'LOW CONFIDENCE') {
-    return 'bg-amber-100 text-amber-900 border border-amber-300'
+    return 'bg-purple-100 text-purple-900 border border-purple-300'
   }
   if (s === 'DATA + ENERGY ISSUE') {
     return 'bg-red-100 text-red-900 border border-red-300'

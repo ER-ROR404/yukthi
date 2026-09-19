@@ -89,7 +89,7 @@
                 <strong class="text-slate-950 font-bold">Operating Principle:</strong> Rather than applying static energy thresholds that cause false alarms during peak summer heat, this system learns expected power from simultaneous environmental and operating telemetry.
               </p>
               <p>
-                The residual between measured and expected power identifies true energy inefficiency. Sensor faults and extreme weather trigger a <strong class="text-amber-900 font-bold">Low Confidence</strong> state rather than false mechanical alerts.
+                The residual between measured and expected power identifies true energy inefficiency. Sensor faults and extreme weather trigger a <strong class="text-purple-900 font-bold">Low Confidence</strong> state rather than false mechanical alerts.
               </p>
             </div>
           </div>

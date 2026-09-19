@@ -2,76 +2,84 @@
   <div class="card-solid bg-white border border-slate-300 rounded-xl p-5 sm:p-6 shadow-xs hover:border-slate-400 transition-colors">
     
     <!-- Top Bar: Title, Context Toggles, Range Presets, Legend -->
-    <div class="-m-5 sm:-m-6 p-4 sm:p-5 mb-5 rounded-t-xl bg-slate-100 border-b border-slate-300 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
-      <div>
-        <div class="flex items-center space-x-2.5">
-          <h3 class="text-base sm:text-xl font-bold text-slate-950 font-sans tracking-tight">
+    <div class="-m-5 sm:-m-6 p-4 sm:p-5 mb-5 rounded-t-xl bg-slate-100 border-b border-slate-300 space-y-3.5">
+      
+      <!-- Top Title Row: Guaranteed 1 Line with Badge -->
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
+        <div class="flex items-center space-x-2.5 min-w-0">
+          <h3 class="text-base sm:text-lg xl:text-xl font-bold text-slate-950 font-sans tracking-tight whitespace-nowrap">
             Time-Series Telemetry & Contextual Energy Baseline
           </h3>
-          <span class="text-xs px-2.5 py-0.5 rounded font-mono font-bold bg-white text-slate-800 border border-slate-300 shadow-xs">
+          <span class="text-xs px-2.5 py-0.5 rounded font-mono font-bold bg-white text-slate-800 border border-slate-300 shadow-xs whitespace-nowrap hidden sm:inline-block">
             Actual vs Expected kWh
           </span>
         </div>
-        <p class="text-xs sm:text-sm text-slate-600 mt-1 font-sans font-medium">
-          Scrub the timeline or select any observation point to isolate contextual residuals and examine model factors.
+        <p class="text-xs sm:text-sm text-slate-600 font-sans font-medium whitespace-nowrap">
+          Scrub the timeline or select any point to isolate contextual residuals.
         </p>
       </div>
 
-      <!-- Controls: Context Overlays + Range Presets -->
-      <div class="flex flex-wrap items-center gap-2.5 text-xs sm:text-sm">
+      <!-- Controls Row: Context Overlays + Range Presets -->
+      <div class="pt-2.5 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
         
         <!-- Context Sensor Toggle Buttons -->
-        <div class="flex items-center bg-slate-200/80 p-1 rounded-lg border border-slate-300">
-          <button
-            @click="toggleOverlay('load')"
-            :class="[
-              'px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors cursor-pointer',
-              activeOverlay === 'load'
-                ? 'bg-white text-slate-950 shadow-xs border border-slate-300 font-bold'
-                : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
-            ]"
-          >
-            Overlay Load (RT)
-          </button>
-          <button
-            @click="toggleOverlay('flow')"
-            :class="[
-              'px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors cursor-pointer',
-              activeOverlay === 'flow'
-                ? 'bg-white text-slate-950 shadow-xs border border-slate-300 font-bold'
-                : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
-            ]"
-          >
-            Overlay Flow (L/s)
-          </button>
-          <button
-            @click="toggleOverlay('none')"
-            :class="[
-              'px-2.5 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors cursor-pointer',
-              activeOverlay === 'none'
-                ? 'bg-white text-slate-950 shadow-xs border border-slate-300 font-bold'
-                : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
-            ]"
-          >
-            Off
-          </button>
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-600 font-sans hidden sm:inline-block">Overlay:</span>
+          <div class="flex items-center bg-slate-200/80 p-1 rounded-lg border border-slate-300">
+            <button
+              @click="toggleOverlay('load')"
+              :class="[
+                'px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors cursor-pointer',
+                activeOverlay === 'load'
+                  ? 'bg-white text-slate-950 shadow-xs border border-slate-300 font-bold'
+                  : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
+              ]"
+            >
+              Overlay Load (RT)
+            </button>
+            <button
+              @click="toggleOverlay('flow')"
+              :class="[
+                'px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors cursor-pointer',
+                activeOverlay === 'flow'
+                  ? 'bg-white text-slate-950 shadow-xs border border-slate-300 font-bold'
+                  : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
+              ]"
+            >
+              Overlay Flow (L/s)
+            </button>
+            <button
+              @click="toggleOverlay('none')"
+              :class="[
+                'px-2.5 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors cursor-pointer',
+                activeOverlay === 'none'
+                  ? 'bg-white text-slate-950 shadow-xs border border-slate-300 font-bold'
+                  : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
+              ]"
+            >
+              Off
+            </button>
+          </div>
         </div>
 
         <!-- Quick Range Presets -->
-        <div class="flex items-center bg-slate-200/80 p-1 rounded-lg border border-slate-300 font-mono text-xs sm:text-sm">
-          <button
-            v-for="preset in ['7D', '30D', '90D', 'ALL']"
-            :key="preset"
-            @click="setZoomPreset(preset)"
-            :class="[
-              'px-3 py-1.5 rounded-md transition-colors cursor-pointer font-bold',
-              activeRangePreset === preset
-                ? 'bg-blue-600 text-white shadow-xs'
-                : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
-            ]"
-          >
-            {{ preset }}
-          </button>
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-600 font-sans hidden sm:inline-block">Range:</span>
+          <div class="flex items-center bg-slate-200/80 p-1 rounded-lg border border-slate-300 font-mono text-xs sm:text-sm">
+            <button
+              v-for="preset in ['7D', '30D', '90D', 'ALL']"
+              :key="preset"
+              @click="setZoomPreset(preset)"
+              :class="[
+                'px-3 py-1.5 rounded-md transition-colors cursor-pointer font-bold',
+                activeRangePreset === preset
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'text-slate-700 hover:text-slate-950 hover:bg-slate-300/60'
+              ]"
+            >
+              {{ preset }}
+            </button>
+          </div>
         </div>
 
       </div>
@@ -93,7 +101,7 @@
           <span class="text-slate-800 font-medium">Abnormal Energy (|z| > 3.0)</span>
         </span>
         <span class="flex items-center space-x-2">
-          <span class="w-3 h-3 rounded-full bg-amber-600 border-2 border-white shadow-xs"></span>
+          <span class="w-2.5 h-2.5 rotate-45 bg-purple-600 border border-white shadow-xs"></span>
           <span class="text-slate-800 font-medium">Low Confidence / Envelope Flag</span>
         </span>
       </div>
@@ -242,11 +250,13 @@ const chartOption = computed(() => {
       type: 'scatter',
       data: lowConfMarkers,
       symbol: 'diamond',
-      symbolSize: 8,
+      symbolSize: 10,
       itemStyle: {
-        color: '#D97706',
+        color: '#7C3AED',
         borderColor: '#FFFFFF',
-        borderWidth: 1.5
+        borderWidth: 2,
+        shadowColor: 'rgba(124, 58, 237, 0.4)',
+        shadowBlur: 6
       },
       z: 4
     },
@@ -354,7 +364,7 @@ const chartOption = computed(() => {
         if (statusLabel === 'ABNORMAL ENERGY') {
           statusBadge = `<span style="background: #FFF7ED; color: #9A3412; border: 1px solid #FED7AA; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">ABNORMAL ENERGY</span>`
         } else if (statusLabel === 'LOW CONFIDENCE') {
-          statusBadge = `<span style="background: #FFFBEB; color: #92400E; border: 1px solid #FDE68A; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">LOW CONFIDENCE</span>`
+          statusBadge = `<span style="background: #F3E8FF; color: #6B21A8; border: 1px solid #D8B4FE; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">LOW CONFIDENCE</span>`
         } else if (statusLabel === 'DATA + ENERGY ISSUE') {
           statusBadge = `<span style="background: #FEF2F2; color: #991B1B; border: 1px solid #FECACA; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">DATA + ENERGY ISSUE</span>`
         }
